@@ -6,7 +6,7 @@ package dk.group_02.TestSprintOne;
  * and open the template in the editor.
  */
 import dk.group_02.Entity.Partner;
-import dk.group_02.view.Create_Project_Servlet;
+import dk.group_02.data.DataHandler;
 import java.io.File;
 import java.sql.SQLException;
 
@@ -30,24 +30,24 @@ public class TestofCreateProject {
     @Test
     public void testOpretTrue() throws ClassNotFoundException, SQLException {
 
-        assertTrue(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertTrue(DataHandler.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
     }
     @Test
     public void testOpretMedFileTrue(){
      File file = new File("C:\\Users\\steffen\\Documents\\NetBeansProjects\\eksamensProjectDell\\group_02_2sem\\task liste.jpg");
-     assertTrue(Create_Project_Servlet.makeProject("1","LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, file , "Jeg vil gerne være første kvinde på mars"));
+     assertTrue(DataHandler.makeProject("1","LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, file , "Jeg vil gerne være første kvinde på mars"));
      
     }
 
     @Test
     public void testOpretFalse() throws ClassNotFoundException, SQLException {
-        assertFalse(Create_Project_Servlet.makeProject(null,"LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(Create_Project_Servlet.makeProject("1", null, "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", null, 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, null, "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, null));
-        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", null,partner, "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",null, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(DataHandler.makeProject(null,"LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(DataHandler.makeProject("1", null, "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(DataHandler.makeProject("1", "LlamaCreame", null, 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(DataHandler.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, null, "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(DataHandler.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, null));
+        assertFalse(DataHandler.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", null,partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(DataHandler.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",null, "Jeg vil gerne være første kvinde på mars"));
         
 
     }
