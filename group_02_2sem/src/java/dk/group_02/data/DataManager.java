@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  *
@@ -102,7 +103,7 @@ public class DataManager {
 
     }
 
-    public static void SaveProject(Project project) throws ClassNotFoundException, SQLException {
+    public static void SaveProject(Project project) throws ClassNotFoundException,NullPointerException, SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -117,18 +118,20 @@ public class DataManager {
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             //Til senere brug, når vi kommer over skal bruge den i en muligvis servlet med bruger input.
-            String query1 = "select * from partners";
-            statement = connection.prepareStatement(query1);
-            rs = statement.executeQuery(query1);
-            int partnerid = 0;
-            while (rs.next()) {
-                if (rs.getString("partnerName") == project.getPartner().getPartnerName() && rs.getString("country") == project.getPartner().getCountry()) {
-                    partnerid = Integer.parseInt(rs.getString("partnerId"));
-                }
-            }
+//            String query1 = "select * from partners";
+//            statement = connection.prepareStatement(query1);
+//            rs = statement.executeQuery(query1);
+//            int partnerId = 0;
+//            while (rs.next()) {
+//                if (rs.getString("partnerName").equals(project.getPartner().getPartnerName()) && rs.getString("country").equals(project.getPartner().getCountry())) {
+//                    partnerId = Integer.parseInt(rs.getString("partnerId"));
+//                }
+//            }
 
             //=== Build an SQL-query-statement
-            String query = "insert into projects (projectid,startdate,projectname,cost,status,description,goal,partnerid) values (?,?,?,?,?,?,?,?)";
+            String query = "insert into projects (PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID) values (?,to_date('?','YYYY MM DD'),?,?,?,?,?,?)";
+            statement = connection.prepareStatement(query);
+            
             statement.setString(1, project.getPROJECT_ID());
             statement.setString(2, project.getStartDate());
             statement.setString(3, project.getProjectName());
@@ -136,9 +139,9 @@ public class DataManager {
             statement.setString(5, project.getStatus());
             statement.setString(6, project.getDescription());
             statement.setString(7, project.getGoal());
-            statement.setString(8, "" + partnerid);
+            statement.setInt(8,Integer.parseInt(project.getPartner().getPARTNER_ID()));
             //==== Instantiate a statement object 
-            statement = connection.prepareStatement(query);
+            
 
             //=== Execute the query and receive the result
             statement.executeUpdate();

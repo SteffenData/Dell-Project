@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author steffen
  */
-public class DataHandler {
+public class DataValidator {
             //The cost is not controlled as any negative value means that Dell is being paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
     public static boolean makeProject(String startDate, String id, String projectName, double cost, String status, String description, Partner partner, String goal) throws ClassNotFoundException, SQLException
     {   
