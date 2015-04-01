@@ -6,6 +6,7 @@
 package dk.group_02.Entity;
 
 import java.awt.Image;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -15,36 +16,37 @@ import java.util.Date;
  */
 public class Project {
     private String startDate;
-    private LocalDate localdate;
-    private String projectId;
+    private final String PROJECT_ID;
     private String projectName;
     private double cost;
     private String status;
     private String description;
     private Partner partner;
-//  private Image files;
+    private File upload;
     private String goal;
 
-//    public Project(Date startDate, String projectId, String projectName, double cost, String status, String description, Partner partner, Image files, String goal) {
-//        this.projectId = projectId;
-//        this.projectName = projectName;
-//        this.cost = cost;
-//        this.status = status;
-//        this.description = description;
-//        this.partner = partner;
-//        this.files = files;
-//        this.goal = goal;
-//        this.startDate = startDate;
-//    }
 
-    public Project(String id, String projectName, double cost, String status, String description, Partner partner, String goal) {
-        this.startDate = "" + localdate.now();
-        this.projectId = id;
+
+    public Project(String startDate, String id, String projectName, double cost,String status, String description, Partner partner, File upload, String goal) {
+        this.startDate = startDate;
+        this.PROJECT_ID = id;
         this.projectName = projectName;
         this.cost = cost;
         this.status = status;
         this.description = description;
         this.partner = partner;
+        this.upload = upload;
+        this.goal = goal;
+    }
+    public Project(String startDate, String id, String projectName, double cost,String status, String description, Partner partner, String goal) {
+        this.startDate = startDate;
+        this.PROJECT_ID = id;
+        this.projectName = projectName;
+        this.cost = cost;
+        this.status = status;
+        this.description = description;
+        this.partner = partner;
+        this.upload = null;
         this.goal = goal;
     }
 
@@ -56,12 +58,12 @@ public class Project {
 //        this.startDate = startDate;
 //    }
 
-    public String getProjectId() {
-        return projectId;
+    public String getPROJECT_ID() {
+        return PROJECT_ID;
     }
 
-//    public void setId(String projectId) {
-//        this.projectId = projectId;
+//    public void setId(String PROJECT_ID) {
+//        this.PROJECT_ID = PROJECT_ID;
 //    }
 
     public String getProjectName() {
@@ -110,6 +112,14 @@ public class Project {
 
     public void setGoal(String goal) {
         this.goal = goal;
+    }
+
+    public File getUpload() {
+        return upload;
+    }
+
+    public void setUpload(File upload) {
+        this.upload = upload;
     }
     
 }

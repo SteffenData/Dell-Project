@@ -12,6 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Start side</h1>
+        
+        <form action="create_project" method="get">
+            
+            Projectname   <input type="text" name="projectname">
+            </br>
+            Cost <input type="text" name="cost"> 
+            </br>
+            Description <input type="text" name="description"
+            </br>                   
+            <button type="submit"> Next </button>
+ 
+        </form>
+        
     </body>
 </html>

@@ -6,6 +6,7 @@
 package dk.group_02.Entity;
 
 import java.awt.Image;
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -13,42 +14,26 @@ import java.util.Date;
  * @author steffen
  */
 public class Partner {
-    private String name;
+    
+    private String partnerName;
+    private String country;
+    private final String PARTNER_ID;
 
-    public String getName() {
-        return name;
+    public Partner(String name, String country, String partnerId) {
+        this.partnerName = name;
+        this.country = country;
+        this.PARTNER_ID = partnerId;
+    }
+
+    public String getPartnerName() {
+        return partnerName;
+    }
+
+    public String getPARTNER_ID() {
+        return PARTNER_ID;
     }
 
     public String getCountry() {
         return country;
     }
-    private String country;
-
-    public Partner(String name, String country) {
-        this.name = name;
-        this.country = country;
-    }
-    
-//    public boolean makeProjet(Date startDate, String id, String projectName, double cost, String Status, String description, Image files, String goal)
-//    {
-//        return true;
-//    }
-    //The cost is not controlled as any negative value means that Dell is bein paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
-    public boolean makeProject(String id, String projectName, double cost, String status, String description, String goal)
-    {   
-        if(id == null || projectName == null || status == null || description == null || goal == null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-    
-    public Project viewProject(String id)
-    {
-        return null;
-    }
-    
 }

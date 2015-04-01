@@ -6,7 +6,9 @@ package dk.group_02.TestSprintOne;
  * and open the template in the editor.
  */
 import dk.group_02.Entity.Partner;
-import java.awt.Image;
+import dk.group_02.view.Create_Project_Servlet;
+import java.io.File;
+import java.sql.SQLException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,24 +24,33 @@ public class TestofCreateProject {
 
     @Before
     public void setUp() {
-        partner = new Partner("ElGigantos", "Danmark");
+        partner = new Partner("ElGigantos", "Danmark", "10");
     }
 
     @Test
-    public void testOpretTrue() {
+    public void testOpretTrue() throws ClassNotFoundException, SQLException {
 
-        assertTrue(partner.makeProject("LlamaCreame", "Bente LLama", 1.0, "AOK MFUcKER", "Jeg er ironman", "Jeg vil gerne være første kvinde på mars"));
+        assertTrue(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+    }
+    @Test
+    public void testOpretMedFileTrue(){
+     File file = new File("C:\\Users\\steffen\\Documents\\NetBeansProjects\\eksamensProjectDell\\group_02_2sem\\task liste.jpg");
+     assertTrue(Create_Project_Servlet.makeProject("1","LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, file , "Jeg vil gerne være første kvinde på mars"));
+     
     }
 
     @Test
-    public void testOpretFalse() {
-
-        assertFalse(partner.makeProject( null, "Bente LLama", 1.0, "AOK MFUcKER", "Jeg er ironman", "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(partner.makeProject( "LlamaCreame", null, 1.0, "AOK MFUcKER", "Jeg er ironman", "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(partner.makeProject( "LlamaCreame", "Bente LLama", 1.0, null, "Jeg er ironman", "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(partner.makeProject( "LlamaCreame", "Bente LLama", 1.0, "AOK MFUcKER", null, "Jeg vil gerne være første kvinde på mars"));
-        assertFalse(partner.makeProject( "LlamaCreame", "Bente LLama", 1.0, "AOK MFUcKER", "Jeg er ironman", null));
+    public void testOpretFalse() throws ClassNotFoundException, SQLException {
+        assertFalse(Create_Project_Servlet.makeProject(null,"LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(Create_Project_Servlet.makeProject("1", null, "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", null, 1.0, "AOK STATUS", "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, null, "Jeg er ironman",partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",partner, null));
+        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", null,partner, "Jeg vil gerne være første kvinde på mars"));
+        assertFalse(Create_Project_Servlet.makeProject("1", "LlamaCreame", "Bente LLama", 1.0, "AOK STATUS", "Jeg er ironman",null, "Jeg vil gerne være første kvinde på mars"));
+        
 
     }
+    
 
 }
