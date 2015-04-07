@@ -26,7 +26,7 @@ public class TestofCreateProject {
 
     @Before
     public void setUp() {
-        partner = new Partner("Dell", "Denmark", "1");
+        partner = new Partner("Delli", "Denmark", "1");
     }
 
     @Test

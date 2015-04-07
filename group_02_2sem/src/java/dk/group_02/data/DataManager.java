@@ -129,7 +129,7 @@ public class DataManager {
 //            }
 
             //=== Build an SQL-query-statement
-            String query = "insert into projects (PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID) values (?,to_date('?','YYYY MM DD'),?,?,?,?,?,?)";
+            String query = "insert into projects (PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID) values (?,to_date(?,'YYYY MM DD'),?,?,?,?,?,?)";
             statement = connection.prepareStatement(query);
             
             statement.setString(1, project.getPROJECT_ID());
@@ -139,27 +139,27 @@ public class DataManager {
             statement.setString(5, project.getStatus());
             statement.setString(6, project.getDescription());
             statement.setString(7, project.getGoal());
-            statement.setInt(8,Integer.parseInt(project.getPartner().getPARTNER_ID()));
+            statement.setString(8,project.getPartner().getPARTNER_ID());
             //==== Instantiate a statement object 
             
 
             //=== Execute the query and receive the result
             statement.executeUpdate();
-            FileInputStream in;
-            try {
-                in = new FileInputStream(project.getUpload());
-
-                String query2 = "insert into files (projectid,upload) values (?,?)";
-
-                statement = connection.prepareStatement(query);
-                statement.setString(1, project.getPROJECT_ID());
-                statement.setBinaryStream(2, in);
-
-                //=== Execute the query and receive the result
-                statement.executeUpdate();
-            } catch (FileNotFoundException e) {
-
-            }
+//            FileInputStream in;
+//            try {
+//                in = new FileInputStream(project.getUpload());
+//
+//                String query2 = "insert into files (projectid,upload) values (?,?)";
+//
+//                statement = connection.prepareStatement(query);
+//                statement.setString(1, project.getPROJECT_ID());
+//                statement.setBinaryStream(2, in);
+//
+//                //=== Execute the query and receive the result
+//                statement.executeUpdate();
+//            } catch (FileNotFoundException e) {
+//
+//            }
             //=== read the result
 
         } finally {
