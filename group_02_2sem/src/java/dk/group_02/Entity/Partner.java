@@ -17,20 +17,16 @@ public class Partner {
     
     private String partnerName;
     private String country;
-    private final String PARTNER_ID;
+    
 
-    public Partner(String name, String country, String partnerId) {
+    public Partner(String name, String country) {
         this.partnerName = name;
         this.country = country;
-        this.PARTNER_ID = partnerId;
+        
     }
 
     public String getPartnerName() {
         return partnerName;
-    }
-
-    public String getPARTNER_ID() {
-        return PARTNER_ID;
     }
 
     public String getCountry() {

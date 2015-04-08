@@ -25,17 +25,20 @@ import static org.junit.Assert.*;
 public class TestofCreateProject {
 
     Partner partner;
+    Project project;
 
     @Before
     public void setUp() {
       
         partner = new Partner ("Dell","Denmark");
-        
+        project = new Project ("1992-10-10","huli",1.0,"gold","silver","mikkel");
     }
 
     @Test
     public void testOpretTrue() throws ClassNotFoundException, SQLException {
-
+        
+        DataManager.SaveProject(project, partner);
+        assertTrue(project.getProjectName().equals( DataManager.getProject(project, partner).getProjectName()));
        
         
     }

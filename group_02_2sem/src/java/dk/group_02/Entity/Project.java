@@ -35,7 +35,7 @@ public class Project {
         this.upload = upload;
         this.goal = goal;
     }
-    public Project(String startDate, String projectName, double cost,String status, String description, Partner partner, String goal) {
+    public Project(String startDate, String projectName, double cost,String status, String description, String goal) {
         this.startDate = startDate;
         this.projectName = projectName;
         this.cost = cost;

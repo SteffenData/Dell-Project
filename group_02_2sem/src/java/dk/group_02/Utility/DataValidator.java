@@ -23,8 +23,8 @@ public class DataValidator {
         {
             return false;
         }
-        Project project = new Project(startDate, projectName,cost,status,description,partner,goal);
-        DataManager.SaveProject(project);
+        Project project = new Project(startDate, projectName,cost,status,description,goal);
+        DataManager.SaveProject(project,partner);
             return true;
     }
     
@@ -35,7 +35,7 @@ public class DataValidator {
     // vi overloader make project med et ekstra parameter(file)
      public static boolean makeProject(String startDate, String projectName, double cost, String status, String description,Partner partner, File upload, String goal)
     {   
-        if(startDate == null || projectName == null || description == null || goal == null)
+        if(startDate == null || projectName == null || description == null || goal == null || partner == null )
         {
             return false;
         }

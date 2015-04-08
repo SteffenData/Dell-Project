@@ -22,13 +22,13 @@ import java.util.Date;
  */
 public class DataManager {
 
-    public static Project getProject(Project project) throws ClassNotFoundException, SQLException {
+    public static Project getProject(Project project, Partner partner) throws ClassNotFoundException, SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         Project finalProject = null;
-        
+
         try {
             //=== Load the JDBC-driver
             Class.forName(DataOracleAccessor.DRIVER);
@@ -36,21 +36,21 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String partnerID = DataManager.getPartnerID(project.getPartner().getPartnerName(),project.getPartner().getCountry());
+            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
             //==== Instantiate a statement object 
-            
+
             //=== Build an SQL-query-statement
             String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
-            
-            
+
             statement = connection.prepareStatement(query);
             //=== Execute the query and receive the result
             statement.setString(1, project.getProjectName());
-            statement.setString(2, partnerID);  
-            rs = statement.executeQuery(query);
-            if(rs.next()){
-           
-            finalProject = new Project(rs.getString("startDate"), rs.getString("projectName"), rs.getDouble("cost"), rs.getString("status"), rs.getString("description"),null, rs.getString("goal"));
+            statement.setString(2, partnerID);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+
+                finalProject = new Project(rs.getString("startDate"), rs.getString("projectName"),
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"));
             }
         } //=== If database driver is unavailable or query fails
         //=== Always close the statement and connection
@@ -78,24 +78,24 @@ public class DataManager {
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             //=== Build an SQL-query-statement
-            String query = "SELECT * FROM partner where partnerName = ? and country = ? ";
+            String query = "SELECT * FROM partners where partnerName = ? and country = ?";
 
             //==== Instantiate a statement object 
-            statement = connection.prepareStatement(country);
+            statement = connection.prepareStatement(query);
             statement.setString(1, partnerName);
             statement.setString(2, country);
 
             //=== Execute the query and receive the result
-            rs = statement.executeQuery(query);
+            rs = statement.executeQuery();
+            
             
             if (rs.next()) {
 
-                partnerId = rs.getString("partnerid");
+                partnerId = rs.getString("PARTNERID");
 
             }
 
-        }
-        //=== If database driver is unavailable or query fails
+        } //=== If database driver is unavailable or query fails
         //=== Always close the statement and connection
         finally {
             statement.close();
@@ -106,12 +106,12 @@ public class DataManager {
 
     }
 
-    public static void SaveProject(Project project) throws ClassNotFoundException,NullPointerException, SQLException {
+    public static void SaveProject(Project project,Partner partner) throws ClassNotFoundException, NullPointerException, SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        Partner partner = null;
+       
 
         try {
             //=== Load the JDBC-driver
@@ -130,11 +130,14 @@ public class DataManager {
 //                    partnerId = Integer.parseInt(rs.getString("partnerId"));
 //                }
 //            }
-
             //=== Build an SQL-query-statement
-            String query = "insert into projects (PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID) values (seq_id_project.nextval,to_date(?,'YYYY MM DD'),?,?,?,?,?,?)";
-            statement = connection.prepareStatement(query);
+            String query = "insert into projects "
+//                    + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID)"
+//                    + " values (seq_id_project.nextval,?,?,?,?,?,?,?)";
             
+            + " values (seq_id_project.nextval,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,?)";
+            statement = connection.prepareStatement(query);
+
 //            statement.setString(1, project.getPROJECT_ID());
             statement.setString(1, project.getStartDate());
             statement.setString(2, project.getProjectName());
@@ -142,9 +145,8 @@ public class DataManager {
             statement.setString(4, project.getStatus());
             statement.setString(5, project.getDescription());
             statement.setString(6, project.getGoal());
-            statement.setString(7,project.getPartner().getPARTNER_ID());
+            statement.setString(7, getPartnerID(partner.getPartnerName(), partner.getCountry()));
             //==== Instantiate a statement object 
-            
 
             //=== Execute the query and receive the result
             statement.executeUpdate();
