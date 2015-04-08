@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.view;
+package dk.group_02.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author steffen
  */
-@WebServlet(name = "View_Project_Servlet", urlPatterns = {"/View_Project_Servlet"})
-public class View_Project_Servlet extends HttpServlet {
+@WebServlet(name = "Index_Servlet", urlPatterns = {"/Index_Servlet"})
+public class Index_Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,6 +32,15 @@ public class View_Project_Servlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
+        if(request.getParameter("View Project")!=null){
+        request.getRequestDispatcher("view_project.jsp").forward(request, response);
+        }
+         if(request.getParameter("Create Project")!=null){
+        request.getRequestDispatcher("create_project.jsp").forward(request, response);
+        }
+       
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -19,7 +19,7 @@
                 <strong>Name of the Project:</strong><br>
                 <input type="text" name="projectName">
                 <br>
-                <strong>Budget:</strong><br>
+                <strong>Cost:</strong><br>
                 <input type="text" name="cost">
                 <br>
                 <br>

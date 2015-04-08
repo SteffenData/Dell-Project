@@ -36,4 +36,5 @@ public class Partner {
     public String getCountry() {
         return country;
     }
+    
 }

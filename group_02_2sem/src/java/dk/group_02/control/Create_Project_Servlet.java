@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.view;
+package dk.group_02.control;
 
+import dk.group_02.Entity.Partner;
+import dk.group_02.Entity.Project;
+import dk.group_02.data.DataManager;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author steffen
  */
-@WebServlet(name = "Index_Servlet", urlPatterns = {"/Index_Servlet"})
-public class Index_Servlet extends HttpServlet {
+@WebServlet(name = "Create_Project_Servlet", urlPatterns = {"/Create_Project_Servlet"})
+public class Create_Project_Servlet extends HttpServlet {
 
+        
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,18 +35,18 @@ public class Index_Servlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        if(request.getParameter("View Project")!=null){
-        request.getRequestDispatcher("view_project.jsp").forward(request, response);
-        }
-         if(request.getParameter("Create Project")!=null){
-        request.getRequestDispatcher("create_project.jsp").forward(request, response);
-        }
-       
+        String ProjectName = request.getParameter("projetName");
         
+      
         
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+      
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

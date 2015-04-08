@@ -8,9 +8,11 @@ package dk.group_02.TestSprintOne;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;
-import dk.group_02.data.DataValidator;
+import dk.group_02.Utility.DataValidator;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +28,13 @@ public class TestofCreateProject {
 
     @Before
     public void setUp() {
-        partner = new Partner("Delli", "Denmark", "1");
+        try {
+            partner = DataManager.getPartner("Dell", "Denmark");
+        } catch (ClassNotFoundException ex) {
+            System.err.println("partner not found");
+        } catch (SQLException ex) {
+            System.err.println("partner not found");
+        }
     }
 
     @Test

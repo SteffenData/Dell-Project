@@ -36,19 +36,21 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
+            String partnerID = DataManager.getPartnerID(project.getPartner().getPartnerName(),project.getPartner().getCountry());
             //==== Instantiate a statement object 
             
             //=== Build an SQL-query-statement
             String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
             
+            
             statement = connection.prepareStatement(query);
             //=== Execute the query and receive the result
             statement.setString(1, project.getProjectName());
-            statement.setString(2, project.getPartner().getPARTNER_ID());
+            statement.setString(2, partnerID);  
             rs = statement.executeQuery(query);
             if(rs.next()){
-            Partner finalPartner = DataManager.getPartner(project.getPartner().getPartnerName(),project.getPartner().getCountry());
-            finalProject = new Project(rs.getString("startDate"), rs.getString("projectId"), rs.getString("projectName"), rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), finalPartner,null, rs.getString("goal"));
+           
+            finalProject = new Project(rs.getString("startDate"), rs.getString("projectName"), rs.getDouble("cost"), rs.getString("status"), rs.getString("description"),null, rs.getString("goal"));
             }
         } //=== If database driver is unavailable or query fails
         //=== Always close the statement and connection
@@ -61,12 +63,12 @@ public class DataManager {
 
     }
 
-    public static Partner getPartner(String partnerName, String country) throws ClassNotFoundException, SQLException {
+    public static String getPartnerID(String partnerName, String country) throws ClassNotFoundException, SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        Partner partner = null;
+        String partnerId = null;
         try {
 
             //=== Load the JDBC-driver
@@ -88,18 +90,19 @@ public class DataManager {
             
             if (rs.next()) {
 
-                partner = new Partner(rs.getString("partnerName"), rs.getString("country"), rs.getString("partnerId"));
+                partnerId = rs.getString("partnerid");
 
             }
 
-        } //=== If database driver is unavailable or query fails
+        }
+        //=== If database driver is unavailable or query fails
         //=== Always close the statement and connection
         finally {
             statement.close();
             connection.close();
 
         }
-        return partner;
+        return partnerId;
 
     }
 
@@ -129,17 +132,17 @@ public class DataManager {
 //            }
 
             //=== Build an SQL-query-statement
-            String query = "insert into projects (PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID) values (?,to_date(?,'YYYY MM DD'),?,?,?,?,?,?)";
+            String query = "insert into projects (PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID) values (seq_id_project.nextval,to_date(?,'YYYY MM DD'),?,?,?,?,?,?)";
             statement = connection.prepareStatement(query);
             
-            statement.setString(1, project.getPROJECT_ID());
-            statement.setString(2, project.getStartDate());
-            statement.setString(3, project.getProjectName());
-            statement.setDouble(4, project.getCost());
-            statement.setString(5, project.getStatus());
-            statement.setString(6, project.getDescription());
-            statement.setString(7, project.getGoal());
-            statement.setString(8,project.getPartner().getPARTNER_ID());
+//            statement.setString(1, project.getPROJECT_ID());
+            statement.setString(1, project.getStartDate());
+            statement.setString(2, project.getProjectName());
+            statement.setDouble(3, project.getCost());
+            statement.setString(4, project.getStatus());
+            statement.setString(5, project.getDescription());
+            statement.setString(6, project.getGoal());
+            statement.setString(7,project.getPartner().getPARTNER_ID());
             //==== Instantiate a statement object 
             
 
