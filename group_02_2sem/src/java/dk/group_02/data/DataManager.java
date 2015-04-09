@@ -10,12 +10,13 @@ import dk.group_02.Entity.Project;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.websocket.Encoder.BinaryStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,82 @@ import javax.websocket.Encoder.BinaryStream;
  */
 public class DataManager {
 
+     public static ArrayList<Project> getDellProjects(Partner partner) throws ClassNotFoundException, SQLException{
+    ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        ArrayList<Project> dellProjects = null;
+
+        try {
+            //=== Load the JDBC-driver
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            //=== Connect to the database
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
+            //==== Instantiate a statement object 
+
+            //=== Build an SQL-query-statement
+            String query = "SELECT * FROM projects order by Startdate";
+
+            statement = connection.prepareStatement(query);
+            //=== Execute the query and receive the result
+            statement.setString(1, partnerID);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+
+                dellProjects.add(new Project(rs.getString("startDate"), rs.getString("projectName"),
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal")));
+            }
+        } //=== If database driver is unavailable or query fails
+        //=== Always close the statement and connection
+        finally {
+            statement.close();
+            connection.close();
+
+        }
+        return dellProjects;
+
+    }
+    public static ArrayList<Project> getPartnerProjects(Partner partner) throws ClassNotFoundException, SQLException{
+    ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        ArrayList<Project> partnerProjects = null;
+
+        try {
+            //=== Load the JDBC-driver
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            //=== Connect to the database
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
+            //==== Instantiate a statement object 
+
+            //=== Build an SQL-query-statement
+            String query = "SELECT * FROM projects where partnerId = ? order by Startdate";
+
+            statement = connection.prepareStatement(query);
+            //=== Execute the query and receive the result
+            statement.setString(1, partnerID);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+
+                partnerProjects.add(new Project(rs.getString("startDate"), rs.getString("projectName"),
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal")));
+            }
+        } //=== If database driver is unavailable or query fails
+        //=== Always close the statement and connection
+        finally {
+            statement.close();
+            connection.close();
+
+        }
+        return partnerProjects;
+
+    }
     public static Project getProject(Project project, Partner partner) throws ClassNotFoundException, SQLException {
 
         ResultSet rs = null;
@@ -89,9 +166,12 @@ public class DataManager {
             statement.setInt(1, projectId);
             rs = statement.executeQuery();
             if (rs.next()) {
-
-                upload = new FileInputStream(rs.getBinaryStream("upload").toString());
+                Blob blob = rs.getBlob("upload");
+                InputStream input = blob.getBinaryStream();
                 
+                
+//                upload = new FileInputStream(rs.getBinaryStream("upload").toString());
+                  
             }
         } //=== If database driver is unavailable or query fails
         //=== Always close the statement and connection
