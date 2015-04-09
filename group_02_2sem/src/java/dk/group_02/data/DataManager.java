@@ -9,12 +9,13 @@ import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import javax.websocket.Encoder.BinaryStream;
 
 /**
  *
@@ -62,6 +63,91 @@ public class DataManager {
         return finalProject;
 
     }
+    
+    public static InputStream getUpload(Project project,Partner partner) throws ClassNotFoundException, SQLException, FileNotFoundException{
+    
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        InputStream upload = null;
+
+        try {
+            //=== Load the JDBC-driver
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            //=== Connect to the database
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+            int projectId = getProjectId(project, partner);
+           
+            //==== Instantiate a statement object 
+
+            //=== Build an SQL-query-statement
+            String query = "SELECT upload FROM files where projectid = ?";
+
+            statement = connection.prepareStatement(query);
+            //=== Execute the query and receive the result
+            statement.setInt(1, projectId);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+
+                upload = new FileInputStream(rs.getBinaryStream("upload").toString());
+                
+            }
+        } //=== If database driver is unavailable or query fails
+        //=== Always close the statement and connection
+        finally {
+            statement.close();
+            connection.close();
+
+        }
+    
+    return upload;
+    
+    }
+    
+    
+    
+    public static int getProjectId (Project project,Partner partner) throws ClassNotFoundException, SQLException {
+
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        int projectId = 0;
+
+        try {
+            //=== Load the JDBC-driver
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            //=== Connect to the database
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
+            //==== Instantiate a statement object 
+
+            //=== Build an SQL-query-statement
+            String query = "SELECT projectid FROM projects where projectname = ? and partnerId = ?";
+
+            statement = connection.prepareStatement(query);
+            //=== Execute the query and receive the result
+            statement.setString(1, project.getProjectName());
+            statement.setString(2, partnerID);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+
+               projectId = rs.getInt("projectId");
+            }
+        } //=== If database driver is unavailable or query fails
+        //=== Always close the statement and connection
+        finally {
+            statement.close();
+            connection.close();
+
+        }
+      
+        return projectId;
+    }
+    
+    
 
     public static String getPartnerID(String partnerName, String country) throws ClassNotFoundException, SQLException {
 
@@ -106,7 +192,7 @@ public class DataManager {
 
     }
 
-    public static void SaveProject(Project project,Partner partner) throws ClassNotFoundException, NullPointerException, SQLException {
+    public static void SaveProject(Project project,Partner partner) throws ClassNotFoundException, NullPointerException, SQLException, FileNotFoundException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -150,6 +236,19 @@ public class DataManager {
 
             //=== Execute the query and receive the result
             statement.executeUpdate();
+            
+            if(project.getUpload() != null)
+            {
+                FileInputStream file = new FileInputStream(project.getUpload());
+                String query2 = "insert into files values (seq_id_files.nextval,?,?)";
+                statement = connection.prepareStatement(query2);
+                statement.setBinaryStream(1,file,(int)project.getUpload().length());
+                statement.setInt(2,getProjectId(project,partner));
+//                statement.setBinaryStream(2, project.getUpload());
+                statement.executeUpdate();
+            }
+                
+            
 //            FileInputStream in;
 //            try {
 //                in = new FileInputStream(project.getUpload());
