@@ -5,10 +5,9 @@
  */
 package dk.group_02.Entity;
 
-import java.awt.Image;
 import java.io.File;
-import java.time.LocalDate;
-import java.util.Date;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  *

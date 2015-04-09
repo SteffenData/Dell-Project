@@ -48,7 +48,7 @@ public class TestofCreateProject {
 
     @Test
     public void testOpretMedFileTrue() throws ClassNotFoundException, SQLException, FileNotFoundException {
-        File file = new File("C:\\Users\\noncowi\\Documents\\NetBeansProjects\\hej.txt");
+        File file = new File("C:\\Users\\steffen\\Documents\\NetBeansProjects\\eksamensProjectDell\\group_02_2sem\\task liste.jpg");
         project.setUpload(file);
         DataManager.SaveProject(project, partner);
         
@@ -57,8 +57,13 @@ public class TestofCreateProject {
     }
     
     @Test
-    public void testOpretFalse() throws ClassNotFoundException, SQLException {
-        
+    public void testOpretFalse() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
+        assertFalse(DataValidator.makeProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(DataValidator.makeProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
+        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
+        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
+        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
     }
     
 }

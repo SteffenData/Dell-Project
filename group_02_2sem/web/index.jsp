@@ -1,6 +1,6 @@
 <%-- 
     Document   : index
-    Created on : 07-04-2015, 15:11:57
+    Created on : 09-04-2015, 14:10:03
     Author     : steffen
 --%>
 
@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-          <form action="Index_Servlet" method="get" > 
+        
+      <form action="Index_Servlet" method="get" > 
         
         
             <button type="submit" name="View Project" value="View Project"> view project </button>
@@ -20,5 +21,7 @@
             <button type="submit" name="Create Project" value="Create Project" > Create Project </button>
          
         </form> 
+        
+        
     </body>
 </html>

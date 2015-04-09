@@ -1,3 +1,8 @@
+<%-- 
+    Document   : view
+    Created on : 09-04-2015, 09:45:26
+    Author     : steffen
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <p> hej </p>
+        
+        <p>hej</p>
     </body>
 </html>

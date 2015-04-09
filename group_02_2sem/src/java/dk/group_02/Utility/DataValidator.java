@@ -23,7 +23,7 @@ public class DataValidator
 
     public static boolean makeProject(String startDate, String projectName, double cost, String status, String description, Partner partner, String goal) throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException
     {
-        if (startDate == null || projectName == null || description == null || goal == null || partner == null)
+        if (startDate == null || projectName == null || description == null || goal == null || partner == null || status ==null )
         {
             return false;
         }
@@ -51,12 +51,5 @@ public class DataValidator
     }
      // Her tjecker vi for om projektet er rigtigt oprettet.
 
-    public boolean projectValidation(Project p)
-    {
-        if (p.getProjectName().equals("") || (p.getDescription().equals("")) || (p.getGoal().equals("")))
-        {
-            return false;
-        }
-        return true;
-    }
+   
 }
