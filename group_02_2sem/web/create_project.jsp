@@ -44,21 +44,21 @@
             <div id="kasse">
                 <p>Type in the required information (fields marked with "*") and click Submit</p>
                 <br>
-                <form action="SERVLETNAVN" method="post">
+                <form action="Create_Project_Servlet" method="post">
 
                     <strong>Name of the Project: *</strong><br>
-                    <input type="text" name="projectName">
+                    <input type="text" name="projectName" required="">
                     <br>
                     <strong>Budget: *</strong><br>
                     <input type="text" name="cost">
                     <br>
                     <br>
                     <strong>Describe the Project: *</strong><br>
-                    <textarea cols="40" rows="6" name="description">                    </textarea>
+                    <textarea type="text" cols="40" rows="6" name="description" required="">                    </textarea>
                     <br>
                     <br>
                     <strong>Goal of the Project: *</strong><br>
-                    <textarea cols="40" rows="6" name="goal">                    </textarea>
+                    <textarea type="text" cols="40" rows="6" name="goal" required="">                    </textarea>
                     <br>
                     
                     <p><strong>Attach file:</strong></p>
@@ -66,7 +66,7 @@
                     <br>
                         
                     <div id="msgDiv" style="display:inline-block">    
-                        <button type="submit" formaction="SERVLETNAVN" style="float: left;"><strong>Submit</strong></button>   
+                        <button type="submit" style="float: left;"><strong>Submit</strong></button>   
                         <p style="color: red; float: left;">${MSG_NO}</p>
                         <p style="color: green; float: left; ">${MSG_YES}</p>
                     </div>

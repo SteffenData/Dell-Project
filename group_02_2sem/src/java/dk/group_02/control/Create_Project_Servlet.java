@@ -26,29 +26,31 @@ public class Create_Project_Servlet extends HttpServlet
 {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NullPointerException, SQLException
+            throws ServletException, IOException
     {
 
         //-- Establish or reestablish application context
         Controller con = setApplicationContext(request, response);
 
       // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
-        try (PrintWriter out = response.getWriter())
-        {
+//        try (PrintWriter out = response.getWriter())
+//        {
             String partnerName = "Dell";
             String contry = "Denmark";
             Partner partner = new Partner(partnerName, contry);
 
             LocalDate today = LocalDate.now();
             String startDate = today.toString();
-            String projectName = request.getParameter("projetName");
-            Double cost = Double.parseDouble(request.getParameter("cost"));
+            String projectName = request.getParameter("projetName")+"";
+            Double cost = Double.parseDouble(request.getParameter("cost")+"");
             String status = "awaiting approval";
-            String description = request.getParameter("description");
+            String description = request.getParameter("description")+"";
             File upload = null;
-            String goal = request.getParameter("goal");
-            
-            if (con.makeProject(startDate, projectName, cost, status, description, partner, goal) == true)
+            String goal = request.getParameter("goal")+"";
+            try{
+                if (con.makeProject(startDate,projectName, 
+                        cost, status, description, partner, 
+                        goal))
             {
                 request.setAttribute("MSG_YES", "Your project has been saved!");
                 RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
@@ -59,12 +61,21 @@ public class Create_Project_Servlet extends HttpServlet
                 RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
                 rd.forward(request, response);
             }
+            }catch(ClassNotFoundException e){
+                
+            }catch(NullPointerException e){
+                    
+            }catch(SQLException e){
+                
+            }
+            
 
-        }
+        
     }
 
     private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
     {
+
         HttpSession sessionObj = request.getSession();
         Controller con = (Controller) sessionObj.getAttribute("Controller");
         if (con == null)
@@ -74,6 +85,7 @@ public class Create_Project_Servlet extends HttpServlet
             sessionObj.setAttribute("Controller", con);
         }
         return con;
+        
     }
 private void endSession(HttpServletRequest request, HttpServletResponse response, Controller con) throws ServletException, IOException
     {
@@ -101,19 +113,9 @@ private void endSession(HttpServletRequest request, HttpServletResponse response
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        try
-        {
+       
             processRequest(request, response);
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NullPointerException ex)
-        {
-            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
 
     /**
@@ -128,19 +130,9 @@ private void endSession(HttpServletRequest request, HttpServletResponse response
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        try
-        {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NullPointerException ex)
-        {
-            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+         processRequest(request, response);
+        
     }
 
     /**
