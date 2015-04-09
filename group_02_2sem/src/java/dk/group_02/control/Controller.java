@@ -20,8 +20,10 @@ public class Controller
         if (!DataValidator.makeProject(startDate, projectName, cost, status, description, partner, goal))
         {
             return false;
-        }
+        }else{
+        DataValidator.makeProject(startDate, projectName, cost, status, description, partner, goal);
         return true;
+        }
     }
 
 }

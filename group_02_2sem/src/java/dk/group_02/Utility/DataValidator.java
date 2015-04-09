@@ -26,10 +26,11 @@ public class DataValidator
         if (startDate == null || projectName == null || description == null || goal == null || partner == null || status ==null )
         {
             return false;
-        }
+        }else{
         Project project = new Project(startDate, projectName, cost, status, description, goal);
         DataManager.SaveProject(project, partner);
         return true;
+        }
     }
 
     public Project viewProject(String id)
