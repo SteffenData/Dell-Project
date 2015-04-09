@@ -4,6 +4,7 @@ import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.Utility.DataValidator;
 import dk.group_02.data.DataManager;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
@@ -11,25 +12,16 @@ import java.sql.SQLException;
  *
  * @author steffen
  */
-public class Controller {
+public class Controller
+{
 
-DataValidator dv;
-
-public boolean projectValidation(Project p)
+    public boolean makeProject(String startDate, String projectName, double cost, String status, String description, Partner partner, String goal) throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException
     {
-    dv = new DataValidator();
-    if (dv.projectValidation(p)== false){
-        return false;
+        if (!DataValidator.makeProject(startDate, projectName, cost, status, description, partner, goal))
+        {
+            return false;
+        }
+        return true;
     }
-    return true;
+
 }
- public static void SaveProject(Project project,Partner partner) throws ClassNotFoundException, NullPointerException, SQLException, FileNotFoundException 
-     {
-      DataManager.SaveProject(project, partner);   
-     }
-}
- 
- 
- 
- 
- 

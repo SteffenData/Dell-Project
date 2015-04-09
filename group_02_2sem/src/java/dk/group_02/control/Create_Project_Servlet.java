@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dk.group_02.control;
 
 import dk.group_02.Entity.Partner;
@@ -13,6 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,61 +18,51 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author steffen
- */
-@WebServlet(name = "Create_Project_Servlet", urlPatterns = {"/Create_Project_Servlet"})
-public class Create_Project_Servlet extends HttpServlet {
-
-        
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-            
-        }
-        
-        response.setContentType("text/html;charset=UTF-8");
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "Create_Project_Servlet", urlPatterns =
+{
+    "/Create_Project_Servlet"
+})
+public class Create_Project_Servlet extends HttpServlet
+{
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NullPointerException, SQLException {
-       
+            throws ServletException, IOException, ClassNotFoundException, NullPointerException, SQLException
+    {
+
         //-- Establish or reestablish application context
-            Controller con = setApplicationContext(request, response);
-        
-        // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
-        String partnerName = "Dell"; 
-        String contry = "Denmark";
-        Partner partner = new Partner(partnerName, contry);
-        
-        LocalDate today = LocalDate.now();
-        String startDate = today.toString();
-        String projectName = request.getParameter("projetName");
-        Double cost = Double.parseDouble(request.getParameter("cost"));
-        String status = "awaiting approval";
-        String description = request.getParameter("description");
-        File upload = null;
-        String goal = request.getParameter("goal");
-        Project p = new Project(startDate,projectName,cost,status,description,upload,goal);
-        
-        if (con.projectValidation(p)== true)
+        Controller con = setApplicationContext(request, response);
+
+      // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
+        try (PrintWriter out = response.getWriter())
         {
-        con.SaveProject(p, partner);
-        
-        
-        }
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-      
+            String partnerName = "Dell";
+            String contry = "Denmark";
+            Partner partner = new Partner(partnerName, contry);
+
+            LocalDate today = LocalDate.now();
+            String startDate = today.toString();
+            String projectName = request.getParameter("projetName");
+            Double cost = Double.parseDouble(request.getParameter("cost"));
+            String status = "awaiting approval";
+            String description = request.getParameter("description");
+            File upload = null;
+            String goal = request.getParameter("goal");
+            
+            if (con.makeProject(startDate, projectName, cost, status, description, partner, goal) == true)
+            {
+                request.setAttribute("MSG_YES", "Your project has been saved!");
+                RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                request.setAttribute("MSG_NO", "Please type in the required fields");
+                RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
+                rd.forward(request, response);
+            }
+
         }
     }
+
     private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
     {
         HttpSession sessionObj = request.getSession();
@@ -84,9 +72,21 @@ public class Create_Project_Servlet extends HttpServlet {
             // Start new session
             con = new Controller();
             sessionObj.setAttribute("Controller", con);
-        } 
+        }
         return con;
     }
+private void endSession(HttpServletRequest request, HttpServletResponse response, Controller con) throws ServletException, IOException
+    {
+        // End session
+        HttpSession sessionObj = request.getSession();
+        sessionObj.invalidate();
+
+        // show information
+        request.setAttribute("message", "Session ended!");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Message.jsp");
+        dispatcher.forward(request, response);
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -99,8 +99,21 @@ public class Create_Project_Servlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException
+    {
+        try
+        {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex)
+        {
+            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -113,8 +126,21 @@ public class Create_Project_Servlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException
+    {
+        try
+        {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex)
+        {
+            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(Create_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -123,7 +149,8 @@ public class Create_Project_Servlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 
