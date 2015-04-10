@@ -47,18 +47,18 @@
                 <form action="Create_Project_Servlet" method="post">
 
                     <strong>Name of the Project: *</strong><br>
-                    <input type="text" name="projectName" required="">
+                    <input type="text" name="projectName" required="" autofocus>
                     <br>
                     <strong>Budget: *</strong><br>
-                    <input type="text" name="cost">
+                    <input type="number" name="cost" pattern="[0-9]" min="-1000000" max="1000000">
                     <br>
                     <br>
                     <strong>Describe the Project: *</strong><br>
-                    <textarea type="text" cols="40" rows="6" name="description" required="">                    </textarea>
+                    <textarea type="text" cols="40" rows="6" name="description" required=""></textarea>
                     <br>
                     <br>
                     <strong>Goal of the Project: *</strong><br>
-                    <textarea type="text" cols="40" rows="6" name="goal" required="">                    </textarea>
+                    <textarea type="text" cols="40" rows="6" name="goal" required=""></textarea>
                     <br>
                     
                     <p><strong>Attach file:</strong></p>
