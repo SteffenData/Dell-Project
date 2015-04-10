@@ -21,9 +21,9 @@ public class DataValidator
 
     //The cost is not controlled as any negative value means that Dell is being paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
 
-    public static boolean makeProject(String startDate, String projectName, double cost, String status, String description, Partner partner, String goal) throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException
+    public static boolean makeProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException
     {
-        if (startDate == null || projectName == null || description == null || goal == null || partner == null || status ==null )
+        if (startDate == null || projectName == null || cost== null ||  description == null || goal == null || partner == null || status ==null )
         {
             return false;
         }else{
@@ -40,9 +40,9 @@ public class DataValidator
 
     // vi overloader make project med et ekstra parameter(file)
 
-    public static boolean makeProject(String startDate, String projectName, double cost, String status, String description, Partner partner, File upload, String goal)
+    public static boolean makeProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, File upload, String goal)
     {
-        if (startDate == null || projectName == null || description == null || goal == null || partner == null)
+        if (startDate == null || projectName == null || cost== null || description == null || goal == null || partner == null)
         {
             return false;
         } else
