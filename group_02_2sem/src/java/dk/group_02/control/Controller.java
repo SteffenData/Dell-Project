@@ -17,11 +17,12 @@ public class Controller
 
     public boolean makeProject(String startDate, String projectName, double cost, String status, String description, Partner partner, String goal) throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException
     {
-        if (!DataValidator.makeProject(startDate, projectName, cost, status, description, partner, goal))
+        boolean valid = DataValidator.makeProject(startDate, projectName, cost, status, description, partner, goal);
+        if (!valid)
         {
             return false;
         }else{
-        DataValidator.makeProject(startDate, projectName, cost, status, description, partner, goal);
+        
         return true;
         }
     }

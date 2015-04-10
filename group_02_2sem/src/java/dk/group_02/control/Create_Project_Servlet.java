@@ -41,12 +41,12 @@ public class Create_Project_Servlet extends HttpServlet
 
             LocalDate today = LocalDate.now();
             String startDate = today.toString();
-            String projectName = request.getParameter("projetName")+"";
-            Double cost = Double.parseDouble(request.getParameter("cost")+"");
+            String projectName = request.getParameter("projectName");
+            Double cost = Double.parseDouble(request.getParameter("cost"));
             String status = "awaiting approval";
-            String description = request.getParameter("description")+"";
+            String description = request.getParameter("description");
             File upload = null;
-            String goal = request.getParameter("goal")+"";
+            String goal = request.getParameter("goal");
             try{
                 if (con.makeProject(startDate,projectName, 
                         cost, status, description, partner, 
@@ -62,7 +62,7 @@ public class Create_Project_Servlet extends HttpServlet
                 rd.forward(request, response);
             }
             }catch(ClassNotFoundException e){
-                
+                    
             }catch(NullPointerException e){
                     
             }catch(SQLException e){
