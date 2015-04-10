@@ -126,8 +126,9 @@ public class DataManager {
             statement.setString(2, partnerID);
             rs = statement.executeQuery();
             if (rs.next()) {
-
-                finalProject = new Project(rs.getString("startDate"), rs.getString("projectName"),
+                String startDate = rs.getString("startDate");
+                
+                finalProject = new Project(startDate.substring(0,10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"));
             }
         } //=== If database driver is unavailable or query fails

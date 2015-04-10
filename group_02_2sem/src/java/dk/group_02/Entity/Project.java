@@ -17,7 +17,7 @@ public class Project {
     private String startDate;
 //    private final String PROJECT_ID;
     private String projectName;
-    private double cost;
+    private Double cost;
     private String status;
     private String description;
     private File upload;
@@ -25,7 +25,7 @@ public class Project {
 
 
 
-    public Project(String startDate, String projectName, double cost,String status, String description, File upload, String goal) {
+    public Project(String startDate, String projectName, Double cost,String status, String description, File upload, String goal) {
         this.startDate = startDate;
         this.projectName = projectName;
         this.cost = cost;
@@ -34,7 +34,7 @@ public class Project {
         this.upload = upload;
         this.goal = goal;
     }
-    public Project(String startDate, String projectName, double cost,String status, String description, String goal) {
+    public Project(String startDate, String projectName, Double cost,String status, String description, String goal) {
         this.startDate = startDate;
         this.projectName = projectName;
         this.cost = cost;
@@ -67,7 +67,7 @@ public class Project {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 

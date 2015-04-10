@@ -1,15 +1,11 @@
 package dk.group_02.control;
 
 import dk.group_02.Entity.Partner;
-import dk.group_02.Entity.Project;
-import dk.group_02.data.DataManager;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,15 +30,17 @@ public class Create_Project_Servlet extends HttpServlet
 
       // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
 //        try (PrintWriter out = response.getWriter())
-//        {
+//        {   
+            
             String partnerName = "Dell";
             String contry = "Denmark";
             Partner partner = new Partner(partnerName, contry);
-
-            LocalDate today = LocalDate.now();
-            String startDate = today.toString();
+            
+            String startDate = LocalDate.now().toString();
             String projectName = request.getParameter("projectName");
             Double cost = Double.parseDouble(request.getParameter("cost"));
+            
+            
             String status = "awaiting approval";
             String description = request.getParameter("description");
             File upload = null;
@@ -87,19 +85,6 @@ public class Create_Project_Servlet extends HttpServlet
         return con;
         
     }
-private void endSession(HttpServletRequest request, HttpServletResponse response, Controller con) throws ServletException, IOException
-    {
-        // End session
-        HttpSession sessionObj = request.getSession();
-        sessionObj.invalidate();
-
-        // show information
-        request.setAttribute("message", "Session ended!");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Message.jsp");
-        dispatcher.forward(request, response);
-    }
-
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

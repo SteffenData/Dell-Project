@@ -43,6 +43,12 @@ public class TestofCreateProject {
         
         DataManager.SaveProject(project, partner);
         assertTrue(project.getProjectName().equals(DataManager.getProject(project, partner).getProjectName()));
+        assertTrue(project.getGoal().equals(DataManager.getProject(project, partner).getGoal()));
+        assertTrue(project.getDescription().equals(DataManager.getProject(project, partner).getDescription()));
+        assertTrue(project.getProjectName().equals(DataManager.getProject(project, partner).getProjectName()));
+        assertTrue(project.getStartDate().equals(DataManager.getProject(project, partner).getStartDate()));
+        assertTrue(project.getStatus().equals(DataManager.getProject(project, partner).getStatus()));
+        
         
     }
 
@@ -65,6 +71,10 @@ public class TestofCreateProject {
         assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
         assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
         assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
+        assertFalse(DataValidator.makeProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
+        
+        
+        
     }
     
 }

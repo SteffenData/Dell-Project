@@ -51,6 +51,11 @@ public class DataValidator
         }
     }
      // Her tjecker vi for om projektet er rigtigt oprettet.
-
+    
+    private boolean ValidateProjectInfo (String projectName, Double cost, String status, String description, String goal){
+        
+        if(projectName.length() > 30 || status.length() > 30 || cost > 10000000 || description.length() > 250 || goal.length() > 250) return false;
+        else return true;
+    }
    
 }

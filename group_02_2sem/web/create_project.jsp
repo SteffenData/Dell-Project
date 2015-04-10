@@ -49,8 +49,9 @@
                     <strong>Name of the Project: *</strong><br>
                     <input type="text" name="projectName" required="" autofocus>
                     <br>
+                    <p> Use the format . to separate numbers </p>
                     <strong>Budget: *</strong><br>
-                    <input type="number" name="cost" pattern="[0-9]" min="-1000000" max="1000000">
+                    <input type="number" name="cost" step="any"  min="-9999999" max="9999999">
                     <br>
                     <br>
                     <strong>Describe the Project: *</strong><br>
