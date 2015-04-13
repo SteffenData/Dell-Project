@@ -2,10 +2,13 @@ package dk.group_02.control;
 
 import dk.group_02.Entity.Partner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,20 +21,14 @@ import javax.servlet.http.HttpSession;
 {
     "/Create_Project_Servlet"
 })
-public class Create_Project_Servlet extends HttpServlet
+public class Create_Project_Servlet extends ManagerServlet
 {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-
-        //-- Establish or reestablish application context
-        Controller con = setApplicationContext(request, response);
-
       // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
-//        try (PrintWriter out = response.getWriter())
-//        {   
-            
+           
             String partnerName = "Dell";
             String contry = "Denmark";
             Partner partner = new Partner(partnerName, contry);
@@ -45,8 +42,8 @@ public class Create_Project_Servlet extends HttpServlet
             String description = request.getParameter("description");
             File upload = null;
             String goal = request.getParameter("goal");
-            try{
-                if (con.makeProject(startDate,projectName, 
+
+                if (getDataValidator().SaveProject(startDate,projectName, 
                         cost, status, description, partner, 
                         goal))
             {
@@ -58,33 +55,10 @@ public class Create_Project_Servlet extends HttpServlet
                 request.setAttribute("MSG_NO", "Please type in the required fields");
                 RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
                 rd.forward(request, response);
-            }
-            }catch(ClassNotFoundException e){
-                    
-            }catch(NullPointerException e){
-                    
-            }catch(SQLException e){
-                
-            }
-            
-
-        
-    }
-
-    private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
-    {
-
-        HttpSession sessionObj = request.getSession();
-        Controller con = (Controller) sessionObj.getAttribute("Controller");
-        if (con == null)
-        {
-            // Start new session
-            con = new Controller();
-            sessionObj.setAttribute("Controller", con);
+            } 
         }
-        return con;
-        
-    }
+
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

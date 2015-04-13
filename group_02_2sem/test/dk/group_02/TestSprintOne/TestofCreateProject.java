@@ -65,13 +65,13 @@ public class TestofCreateProject {
     
     @Test
     public void testOpretFalse() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
-        assertFalse(DataValidator.makeProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
-        assertFalse(DataValidator.makeProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
-        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
-        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
-        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
-        assertFalse(DataValidator.makeProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
-        assertFalse(DataValidator.makeProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
+        assertFalse(DataValidator.SaveProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(DataValidator.SaveProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
+        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
+        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
+        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
+        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
         
         
         

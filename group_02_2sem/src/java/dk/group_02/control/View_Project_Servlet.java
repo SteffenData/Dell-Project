@@ -5,48 +5,38 @@
  */
 package dk.group_02.control;
 
-import dk.group_02.data.DataManager;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author steffen
  */
 @WebServlet(name = "View_Project_Servlet", urlPatterns = {"/View_Project_Servlet"})
-public class View_Project_Servlet extends HttpServlet {
+public class View_Project_Servlet extends ManagerServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try{
-            
-            
+
           
-           request.setAttribute("projets",DataManager.getDellProjects(project));
-        }
-       catch(NullPointerException e){
+ 
+         request.setAttribute("projects",getDataValidator());
+      
        
-       }
-        
-        RequestDispatcher rd=request.getRequestDispatcher("view_Project_Servlet");
+        RequestDispatcher rd = request.getRequestDispatcher("view_Project_Servlet");
         rd.forward(request, response);
     }
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -87,4 +77,19 @@ public class View_Project_Servlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+     private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
+    {
+        ServletContext application = getServletContext();
+        Controller ctrl = (Controller) application.getAttribute("Controller");
+        if (ctrl == null)
+        {
+            // Start new session
+            ctrl = new Controller();
+            application.setAttribute("Controller", ctrl);
+            
+        }
+        return ctrl;
+        
+    }
+    
 }
