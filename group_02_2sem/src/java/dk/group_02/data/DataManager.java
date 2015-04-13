@@ -70,10 +70,10 @@ public class DataManager implements Manager{
         Connection connection = null;
 
         try {
-            //=== Load the JDBC-driver
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+            
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String partnerID = getPartnerID(partner.getPartnerName(), partner.getCountry());
@@ -109,10 +109,10 @@ public class DataManager implements Manager{
         Project finalProject = null;
 
         try {
-            //=== Load the JDBC-driver
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+            
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String partnerID = getPartnerID(project.getPartner().getPartnerName(), project.getPartner().getCountry());
@@ -147,10 +147,10 @@ public class DataManager implements Manager{
         InputStream upload = null;
 
         try {
-            //=== Load the JDBC-driver
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+            
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
             int projectId = getProjectId(project);
 
@@ -185,10 +185,10 @@ public class DataManager implements Manager{
         int projectId = 0;
 
         try {
-            //=== Load the JDBC-driver
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+           
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String partnerID = getPartnerID(project.getPartner().getPartnerName(), project.getPartner().getCountry());
@@ -221,10 +221,10 @@ public class DataManager implements Manager{
         String partnerId = null;
         try {
 
-            //=== Load the JDBC-driver
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+           
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String query = "SELECT * FROM partners where partnerName = ? and country = ?";
@@ -254,10 +254,10 @@ public class DataManager implements Manager{
         Partner partner = null;
         try {
 
-            //=== Load the JDBC-driver
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+            
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String query = "SELECT partnername,country FROM partners where partnerId=?";
@@ -288,10 +288,10 @@ public class DataManager implements Manager{
         Connection connection = null;
 
         try {
-            //=== Load the JDBC-driver
+           
             Class.forName(DataOracleAccessor.DRIVER);
 
-            //=== Connect to the database
+        
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             //Til senere brug, når vi kommer over skal bruge den i en muligvis servlet med bruger input.
