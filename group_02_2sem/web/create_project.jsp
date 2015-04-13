@@ -10,13 +10,13 @@
         <div id="1">
             <div class="topBox"> 
 
-                <a href="view_projects.jsp">
+                <a href="view_project.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View project</h3>
                     </div>
                 </a>
 
-                <a href="create projects">
+                <a href="create_project.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">Create project</h3>
                     </div>

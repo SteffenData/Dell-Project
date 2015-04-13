@@ -5,8 +5,10 @@
  */
 package dk.group_02.control;
 
+import dk.group_02.data.DataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,19 @@ public class View_Project_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try{
+            
+            
+          
+           request.setAttribute("projets",DataManager.getDellProjects(project));
+        }
+       catch(NullPointerException e){
        
+       }
+        
+        RequestDispatcher rd=request.getRequestDispatcher("view_Project_Servlet");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
