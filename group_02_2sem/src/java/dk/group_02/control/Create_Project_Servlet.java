@@ -43,7 +43,7 @@ public class Create_Project_Servlet extends ManagerServlet
             File upload = null;
             String goal = request.getParameter("goal");
 
-                if (getDataValidator().SaveProject(startDate,projectName, 
+                if (getDataValidator().saveProject(startDate,projectName, 
                         cost, status, description, partner, 
                         goal))
             {

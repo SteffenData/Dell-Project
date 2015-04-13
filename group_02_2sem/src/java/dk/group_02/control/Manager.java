@@ -21,14 +21,14 @@ public interface Manager {
 
     public Collection<Project> getPartnerProjects(Partner partner) throws SQLException;
     
-    public Project getProject(Project project, Partner partner) throws SQLException;
+    public Project getProject(Project project) throws SQLException;
     
-    public InputStream getUpload(Project project, Partner partner) throws SQLException;
+    public InputStream getUpload(Project project) throws SQLException;
     
-    public int getProjectId(Project project, Partner partner) throws SQLException;
+    public int getProjectId(Project project) throws SQLException;
 
     public String getPartnerID(String partnerName, String country) throws SQLException;
     
-    public void SaveProject(Project project, Partner partner) throws SQLException;
+    public void SaveProject(Project project) throws SQLException;
             
    }

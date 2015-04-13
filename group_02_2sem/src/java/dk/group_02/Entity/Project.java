@@ -15,26 +15,27 @@ import java.io.InputStream;
  */
 public class Project {
     private String startDate;
-//    private final String PROJECT_ID;
     private String projectName;
     private Double cost;
     private String status;
     private String description;
     private File upload;
     private String goal;
+    private Partner partner;
 
+    
 
-
-    public Project(String startDate, String projectName, Double cost,String status, String description, File upload, String goal) {
-        this.startDate = startDate;
-        this.projectName = projectName;
-        this.cost = cost;
-        this.status = status;
-        this.description = description;
-        this.upload = upload;
-        this.goal = goal;
-    }
-    public Project(String startDate, String projectName, Double cost,String status, String description, String goal) {
+  /**** Til senere brug når fil er lavet færdigt, ***/
+//    public Project(String startDate, String projectName, Double cost,String status, String description, File upload, String goal) {
+//        this.startDate = startDate;
+//        this.projectName = projectName;
+//        this.cost = cost;
+//        this.status = status;
+//        this.description = description;
+//        this.upload = upload;
+//        this.goal = goal;
+//    }
+    public Project(String startDate, String projectName, Double cost,String status, String description, String goal,Partner partner) {
         this.startDate = startDate;
         this.projectName = projectName;
         this.cost = cost;
@@ -42,6 +43,7 @@ public class Project {
         this.description = description;
         this.upload = null;
         this.goal = goal;
+        this.partner = partner;
     }
 
     public String getStartDate() {
@@ -103,4 +105,8 @@ public class Project {
         this.upload = upload;
     }
     
+
+    public Partner getPartner() {
+        return partner;
+    }
 }

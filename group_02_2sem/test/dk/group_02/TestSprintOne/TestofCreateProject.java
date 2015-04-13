@@ -9,13 +9,10 @@ import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;
 import dk.group_02.Utility.DataValidator;
+import dk.group_02.control.Manager;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,25 +26,29 @@ public class TestofCreateProject {
     
     Partner partner;
     Project project;
+    Manager manager;
+    DataValidator validator;
     
     @Before
     public void setUp() {
         
         partner = new Partner("Dell", "Denmark");
-        project = new Project("1992-10-10", "huli", 1.0, "gold", "silver", "mikkel");
+        project = new Project("1992-10-10", "huli", 1.0, "gold", "silver", "mikkel", partner);
+        manager = new DataManager();
+        validator = new DataValidator();
         
     }
     
     @Test
     public void testOpretTrue() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
         
-        DataManager.SaveProject(project, partner);
-        assertTrue(project.getProjectName().equals(DataManager.getProject(project, partner).getProjectName()));
-        assertTrue(project.getGoal().equals(DataManager.getProject(project, partner).getGoal()));
-        assertTrue(project.getDescription().equals(DataManager.getProject(project, partner).getDescription()));
-        assertTrue(project.getProjectName().equals(DataManager.getProject(project, partner).getProjectName()));
-        assertTrue(project.getStartDate().equals(DataManager.getProject(project, partner).getStartDate()));
-        assertTrue(project.getStatus().equals(DataManager.getProject(project, partner).getStatus()));
+        manager.SaveProject(project);
+        assertTrue(project.getProjectName().equals(manager.getProject(project).getProjectName()));
+        assertTrue(project.getGoal().equals(manager.getProject(project).getGoal()));
+        assertTrue(project.getDescription().equals(manager.getProject(project).getDescription()));
+        assertTrue(project.getProjectName().equals(manager.getProject(project).getProjectName()));
+        assertTrue(project.getStartDate().equals(manager.getProject(project).getStartDate()));
+        assertTrue(project.getStatus().equals(manager.getProject(project).getStatus()));
         
         
     }
@@ -57,7 +58,7 @@ public class TestofCreateProject {
     public void testOpretMedFileTrue() throws ClassNotFoundException, SQLException, FileNotFoundException {
         File file = new File("C:\\Users\\steffen\\Documents\\NetBeansProjects\\eksamensProjectDell\\group_02_2sem\\task liste.jpg");
         project.setUpload(file);
-        DataManager.SaveProject(project, partner);
+        manager.SaveProject(project);
         
 //        assertTrue(project.getUpload().equals(DataManager.getUpload(project, partner)));
         
@@ -65,13 +66,13 @@ public class TestofCreateProject {
     
     @Test
     public void testOpretFalse() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
-        assertFalse(DataValidator.SaveProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
-        assertFalse(DataValidator.SaveProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
-        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
-        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
-        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
-        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
-        assertFalse(DataValidator.SaveProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
+        assertFalse(validator.saveProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(validator.saveProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
+        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
+        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
+        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
+        assertFalse(validator.saveProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
         
         
         
