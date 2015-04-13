@@ -7,6 +7,7 @@ package dk.group_02.data;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
+import dk.group_02.control.Manager;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -17,18 +18,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
  * @author steffen
  */
-public class DataManager {
+public class DataManager implements Manager{
 
-     public static ArrayList<Project> getDellProjects(Partner partner) throws ClassNotFoundException, SQLException{
-    ResultSet rs = null;
+    public Collection<Project> getDellProjects() throws SQLException {
+
+        Collection<Project> dellProjects = new ArrayList<>();
+
+        ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        ArrayList<Project> dellProjects = null;
 
         try {
             //=== Load the JDBC-driver
@@ -37,23 +41,18 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
-            //==== Instantiate a statement object 
-
-            //=== Build an SQL-query-statement
             String query = "SELECT * FROM projects order by Startdate";
 
             statement = connection.prepareStatement(query);
-            //=== Execute the query and receive the result
-            statement.setString(1, partnerID);
             rs = statement.executeQuery();
             while (rs.next()) {
 
                 dellProjects.add(new Project(rs.getString("startDate"), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal")));
             }
-        } //=== If database driver is unavailable or query fails
-        //=== Always close the statement and connection
+        }  catch(ClassNotFoundException ex){}
+        
+        
         finally {
             statement.close();
             connection.close();
@@ -62,11 +61,14 @@ public class DataManager {
         return dellProjects;
 
     }
-    public static ArrayList<Project> getPartnerProjects(Partner partner) throws ClassNotFoundException, SQLException{
-    ResultSet rs = null;
+
+    public  Collection<Project> getPartnerProjects(Partner partner) throws SQLException {
+
+        Collection<Project> partnerProjects = new ArrayList<>();
+
+        ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        ArrayList<Project> partnerProjects = null;
 
         try {
             //=== Load the JDBC-driver
@@ -75,14 +77,11 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
-            //==== Instantiate a statement object 
-
-            //=== Build an SQL-query-statement
+            String partnerID = getPartnerID(partner.getPartnerName(), partner.getCountry());
+        
             String query = "SELECT * FROM projects where partnerId = ? order by Startdate";
 
             statement = connection.prepareStatement(query);
-            //=== Execute the query and receive the result
             statement.setString(1, partnerID);
             rs = statement.executeQuery();
             while (rs.next()) {
@@ -90,8 +89,10 @@ public class DataManager {
                 partnerProjects.add(new Project(rs.getString("startDate"), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal")));
             }
-        } //=== If database driver is unavailable or query fails
-        //=== Always close the statement and connection
+        } catch(ClassNotFoundException | SQLException ex){
+        
+        
+        }
         finally {
             statement.close();
             connection.close();
@@ -100,7 +101,8 @@ public class DataManager {
         return partnerProjects;
 
     }
-    public static Project getProject(Project project, Partner partner) throws ClassNotFoundException, SQLException {
+
+    public Project getProject(Project project, Partner partner) throws SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -114,25 +116,21 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
-            //==== Instantiate a statement object 
-
-            //=== Build an SQL-query-statement
+            String partnerID = getPartnerID(partner.getPartnerName(), partner.getCountry());
+         
             String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
 
             statement = connection.prepareStatement(query);
-            //=== Execute the query and receive the result
             statement.setString(1, project.getProjectName());
             statement.setString(2, partnerID);
             rs = statement.executeQuery();
             if (rs.next()) {
                 String startDate = rs.getString("startDate");
-                
-                finalProject = new Project(startDate.substring(0,10), rs.getString("projectName"),
+
+                finalProject = new Project(startDate.substring(0, 10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"));
             }
-        } //=== If database driver is unavailable or query fails
-        //=== Always close the statement and connection
+        } catch(ClassNotFoundException | SQLException ex){}
         finally {
             statement.close();
             connection.close();
@@ -141,9 +139,9 @@ public class DataManager {
         return finalProject;
 
     }
-    
-    public static InputStream getUpload(Project project,Partner partner) throws ClassNotFoundException, SQLException, FileNotFoundException{
-    
+
+    public InputStream getUpload(Project project, Partner partner) throws SQLException{
+
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
@@ -156,39 +154,31 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
             int projectId = getProjectId(project, partner);
-           
-            //==== Instantiate a statement object 
 
-            //=== Build an SQL-query-statement
             String query = "SELECT upload FROM files where projectid = ?";
 
             statement = connection.prepareStatement(query);
-            //=== Execute the query and receive the result
             statement.setInt(1, projectId);
             rs = statement.executeQuery();
             if (rs.next()) {
                 Blob blob = rs.getBlob("upload");
                 InputStream input = blob.getBinaryStream();
-                
-                
+
 //                upload = new FileInputStream(rs.getBinaryStream("upload").toString());
-                  
             }
-        } //=== If database driver is unavailable or query fails
-        //=== Always close the statement and connection
+        } catch(ClassNotFoundException ex ){}
+  
         finally {
             statement.close();
             connection.close();
 
         }
-    
-    return upload;
-    
+
+        return upload;
+
     }
-    
-    
-    
-    public static int getProjectId (Project project,Partner partner) throws ClassNotFoundException, SQLException {
+
+    public int getProjectId(Project project, Partner partner) throws SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -202,35 +192,29 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String partnerID = DataManager.getPartnerID(partner.getPartnerName(), partner.getCountry());
-            //==== Instantiate a statement object 
-
-            //=== Build an SQL-query-statement
+            String partnerID = getPartnerID(partner.getPartnerName(), partner.getCountry());
+           
             String query = "SELECT projectid FROM projects where projectname = ? and partnerId = ?";
 
             statement = connection.prepareStatement(query);
-            //=== Execute the query and receive the result
             statement.setString(1, project.getProjectName());
             statement.setString(2, partnerID);
             rs = statement.executeQuery();
             if (rs.next()) {
 
-               projectId = rs.getInt("projectId");
+                projectId = rs.getInt("projectId");
             }
-        } //=== If database driver is unavailable or query fails
-        //=== Always close the statement and connection
+        } catch(ClassNotFoundException ex){}
         finally {
             statement.close();
             connection.close();
 
         }
-      
+
         return projectId;
     }
-    
-    
 
-    public static String getPartnerID(String partnerName, String country) throws ClassNotFoundException, SQLException {
+    public String getPartnerID(String partnerName, String country) throws SQLException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -244,26 +228,18 @@ public class DataManager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            //=== Build an SQL-query-statement
             String query = "SELECT * FROM partners where partnerName = ? and country = ?";
 
-            //==== Instantiate a statement object 
             statement = connection.prepareStatement(query);
             statement.setString(1, partnerName);
             statement.setString(2, country);
-
-            //=== Execute the query and receive the result
             rs = statement.executeQuery();
-            
-            
+
             if (rs.next()) {
 
-                partnerId = rs.getString("PARTNERID");
-
+           partnerId = rs.getString("PARTNERID");
             }
-
-        } //=== If database driver is unavailable or query fails
-        //=== Always close the statement and connection
+        } catch(ClassNotFoundException ex){}
         finally {
             statement.close();
             connection.close();
@@ -273,12 +249,11 @@ public class DataManager {
 
     }
 
-    public static void SaveProject(Project project,Partner partner) throws ClassNotFoundException, NullPointerException, SQLException, FileNotFoundException {
+    public void SaveProject(Project project, Partner partner) throws SQLException{
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-       
 
         try {
             //=== Load the JDBC-driver
@@ -297,15 +272,14 @@ public class DataManager {
 //                    partnerId = Integer.parseInt(rs.getString("partnerId"));
 //                }
 //            }
-            //=== Build an SQL-query-statement
+
             String query = "insert into projects "
-//                    + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID)"
-//                    + " values (seq_id_project.nextval,?,?,?,?,?,?,?)";
-            
-            + " values (seq_id_project.nextval,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,?)";
+                    //                    + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID)"
+
+                    + " values (seq_id_project.nextval,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,?)";
             statement = connection.prepareStatement(query);
 
-//            statement.setString(1, project.getPROJECT_ID());
+//          statement.setString(1, project.getPROJECT_ID());
             statement.setString(1, project.getStartDate());
             statement.setString(2, project.getProjectName());
             statement.setDouble(3, project.getCost());
@@ -313,23 +287,19 @@ public class DataManager {
             statement.setString(5, project.getDescription());
             statement.setString(6, project.getGoal());
             statement.setString(7, getPartnerID(partner.getPartnerName(), partner.getCountry()));
-            //==== Instantiate a statement object 
 
-            //=== Execute the query and receive the result
             statement.executeUpdate();
-            
-            if(project.getUpload() != null)
-            {
+
+            if (project.getUpload() != null) {
                 FileInputStream file = new FileInputStream(project.getUpload());
                 String query2 = "insert into files values (seq_id_files.nextval,?,?)";
                 statement = connection.prepareStatement(query2);
-                statement.setBinaryStream(1,file,(int)project.getUpload().length());
-                statement.setInt(2,getProjectId(project,partner));
+                statement.setBinaryStream(1, file, (int) project.getUpload().length());
+                statement.setInt(2, getProjectId(project, partner));
 //                statement.setBinaryStream(2, project.getUpload());
                 statement.executeUpdate();
             }
-                
-            
+//                   -----til senere brug (mis)------
 //            FileInputStream in;
 //            try {
 //                in = new FileInputStream(project.getUpload());
@@ -345,9 +315,10 @@ public class DataManager {
 //            } catch (FileNotFoundException e) {
 //
 //            }
-            //=== read the result
-
-        } finally {
+        } 
+        catch(ClassNotFoundException | NullPointerException | FileNotFoundException ex){}
+        
+        finally {
             statement.close();
             connection.close();
 

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author steffen
  */
-public class DataValidator
+public class DataValidator 
 {
 
     
