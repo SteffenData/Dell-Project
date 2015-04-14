@@ -5,11 +5,11 @@
  */
 package dk.group_02.control;
 
+import dk.group_02.Entity.Partner;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author steffen
  */
 @WebServlet(name = "Index_Servlet", urlPatterns = {"/Index_Servlet"})
-public class Index_Servlet extends HttpServlet {
+public class Index_Servlet extends ManagerServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +31,19 @@ public class Index_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        if(request.getParameter("View Project")!=null){
-        request.getRequestDispatcher("view_project.jsp").forward(request, response);
+        Partner partner = new Partner("Dell", "Denmark");
+        try {
+            if (request.getParameter("dellView") != null) {
+                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
+                request.getRequestDispatcher("view_project.jsp").forward(request, response);
+            }
+            if (request.getParameter("partnerView") != null) {
+                request.setAttribute("projects", getDataValidator().getDellProjects());
+                request.getRequestDispatcher("view_project.jsp").forward(request, response);
+            }
+        } catch (SQLException e) {
         }
-         if(request.getParameter("Create Project")!=null){
-        request.getRequestDispatcher("create_project.jsp").forward(request, response);
-        }
-       
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
