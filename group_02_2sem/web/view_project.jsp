@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,25 +47,32 @@
                 </a>
             </div>
         </div>
-        <div class="centerBox" style="background-color: green"> 
-            <table border="1">
+        <div class="centerBox" > 
+
+            <table border="4" style="border-color: blue; margin: auto;">
                 <thead>
                     <tr>
-                        <th>c</th>
-                        <th>c</th>
+                        <th>Start date</th>
+                        <th>Project name</th>
+                        <th>Status</th>
+                        <th>Partner name</th>
+                        <th>Country</th>
                     </tr>
-                </thead>
+                </thead>          
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>4</td>
-                    </tr>
+                    <c:forEach var="p" items="${project}">
+                        <tr>
+                            <td>${p.startDate}</td>
+                            <td>${p.projectName}</td>
+                            <td>${p.status}</td>
+                            <td>${p.partner}</td>
+                            <td>${p.country}</td>
+                        </tr>
+                    </c:forEach>
+
                 </tbody>
-            </table>        
-          </div>
+            </table>
+
+        </div>
     </body>
 </html>
