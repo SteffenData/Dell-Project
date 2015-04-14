@@ -46,7 +46,7 @@
                 <br>
                 <form action="Create_Project_Servlet" method="post">
                     <select name="partnerSelect" size="3">
-                        <option>El giganten</option>
+                        <option>Elgiganten</option>
                         <option>Wupti</option>
                         <option>Komplett</option>
                     </select>

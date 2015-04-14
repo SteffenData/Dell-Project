@@ -23,25 +23,34 @@ public class Index_Servlet extends ManagerServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            if (request.getParameter("partnerElgigantView") != null) {
-                Partner partner = new Partner("Elgiganten", "Denmark");
-                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
-                request.getRequestDispatcher("view_project.jsp").forward(request, response);
+            Partner partner = null;
+            String inSwitch = request.getParameter("hej");
+            switch (inSwitch) {
+                case "ElgigantDk":
+                    partner = new Partner("Elgiganten", "Denmark");
+                    break;
+                case "ElgigantNor":
+                    partner = new Partner("Elgiganten", "Norway");
+                    break;
+                case "WuptiDk": 
+                    partner = new Partner("Wupti","Denmark");
+                    break;
+                case "WuptiNor":
+                    partner = new Partner("Wupti","Norway");
+                    break;
+                case "KomplettDk":
+                    partner = new Partner("Komplett","Denmark");
+                    break;
+                case "KomplettNor":
+                    partner = new Partner("Komplett","Norway");
+                    break;
+                case "Dell":
+                    request.setAttribute("projects",getDataValidator().getDellProjects());
+                    request.getRequestDispatcher("view_project.jsp").forward(request, response);
+                    break;
             }
-            if (request.getParameter("dellView") != null) {
-                request.setAttribute("projects", getDataValidator().getDellProjects());
-                request.getRequestDispatcher("view_project.jsp").forward(request, response);
-            }
-            if (request.getParameter("partnerKomplettView") != null) {
-                Partner partner = new Partner("Komplett", "Norway");
-                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
-                request.getRequestDispatcher("view_project.jsp").forward(request, response);
-            }
-            if (request.getParameter("partnerWuptiView") != null) {
-                Partner partner = new Partner("Wupti", "Denmark");
-                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
-                request.getRequestDispatcher("view_project.jsp").forward(request, response);
-            }
+            request.setAttribute("projects",getDataValidator().getPartnerProjects(partner));
+            request.getRequestDispatcher("view_project.jsp").forward(request, response);
         } catch (SQLException e) {
         }
 

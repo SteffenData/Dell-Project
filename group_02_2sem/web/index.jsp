@@ -42,19 +42,24 @@
     <div class="centerBox"> 
 
         <form action="Index_Servlet" method="get" > 
-
             <div style="width: 600px; height: 200px; margin: auto; margin-top: 200px; background-color: green;">
-                <button type="submit" name="dellView" value="dellView" style="width: 300px; height: 200px; float: left;"> <h1>View as Dell</h1> </button>
-                
+                <button type="submit" name="hej" value="Dell" style="width: 300px; height: 200px; float: left;"> <h1>View as Dell</h1> </button>
 
-                <button type="submit" name="partnerElgigantView" value="partnerView" style="width: 300px; height: 200px; float: right;"> <h1>View Elgiganten Projects</h1> </button>
+                <button type="submit" name="hej" value="ElgigantDk" style="width: 300px; height: 200px; float: right;"> <h1>View ElgigantenDk Projects</h1> </button>
             </div>
-            
-            <div style="width: 600px; height: 200px; margin: auto; margin-top: 200px; background-color: green;">
-                <button type="submit" name="partnerWuptiView" value="dellView" style="width: 300px; height: 200px; float: left;"> <h1>View Wupti Projects</h1> </button>
-                
 
-                <button type="submit" name="partnerKomplettView" value="partnerView" style="width: 300px; height: 200px; float: right;"> <h1>View Komplett Projects</h1> </button>
+            <div style="width: 600px; height: 200px; margin: auto; margin-top: 200px; background-color: green;">
+                <button type="submit" name="hej" value="WuptiDk" style="width: 300px; height: 200px; float: left;"> <h1>View WuptiDk Projects</h1> </button>
+
+                <button type="submit" name="hej" value="KomplettNor" style="width: 300px; height: 200px; float: right;"> <h1>View KomplettNor Projects</h1> </button>
+            </div>
+            <div style="width: 600px; height: 200px; margin: auto; margin-top: 200px; background-color: green;">
+                <button type="submit" name="hej" value="KomplettDk" style="width: 300px; height: 200px; float: left;"> <h1>View KomplettDk Projects</h1> </button>
+
+                <button type="submit" name="hej" value="ElgigantNor" style="width: 300px; height: 200px; float: right;"> <h1>View ElgigantenNor Projects</h1> </button>
+            </div>
+            <div style="width: 600px; height: 200px; margin: auto; margin-top: 200px; background-color: green;">
+                <button type="submit" name="hej" value="WuptiNor" style="width: 300px; height: 200px; float: left;"> <h1>View WuptiNor Projects</h1> </button>
             </div>
         </form> 
     </div>

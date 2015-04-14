@@ -29,8 +29,8 @@ public class Create_Project_Servlet extends ManagerServlet
     {
       // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
            
-            String partnerName = "Dell";
-            String contry = "Denmark";
+            String partnerName = request.getParameter("partnerSelect");
+            String contry = request.getParameter("countrySelect");
             Partner partner = new Partner(partnerName, contry);
             
             String startDate = LocalDate.now().toString();
