@@ -24,11 +24,11 @@ public class Index_Servlet extends ManagerServlet {
             throws ServletException, IOException {
         Partner partner = new Partner("Dell", "Denmark");
         try {
-            if (request.getParameter("dellView") != null) {
+            if (request.getParameter("partnerView") != null) {
                 request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
                 request.getRequestDispatcher("view_project.jsp").forward(request, response);
             }
-            if (request.getParameter("partnerView") != null) {
+            if (request.getParameter("dellView") != null) {
                 request.setAttribute("projects", getDataValidator().getDellProjects());
                 request.getRequestDispatcher("view_project.jsp").forward(request, response);
             }
