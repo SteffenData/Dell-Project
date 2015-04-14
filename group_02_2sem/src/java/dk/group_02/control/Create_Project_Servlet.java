@@ -37,13 +37,12 @@ public class Create_Project_Servlet extends ManagerServlet
             String projectName = request.getParameter("projectName");
             Double cost = Double.parseDouble(request.getParameter("cost"));
             
-            
             String status = "awaiting approval";
             String description = request.getParameter("description");
             File upload = null;
             String goal = request.getParameter("goal");
 
-                if (getDataValidator().SaveProject(startDate,projectName, 
+                if (getDataValidator().saveProject(startDate,projectName, 
                         cost, status, description, partner, 
                         goal))
             {
