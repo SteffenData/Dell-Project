@@ -10,7 +10,7 @@
         <div id="1">
             <div class="topBox"> 
 
-                <a href="view_project.jsp">
+                <a href="index.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View project</h3>
                     </div>
