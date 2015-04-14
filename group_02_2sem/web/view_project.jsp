@@ -5,11 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="css/viewCss.css">
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,8 +68,8 @@
                             <td><p class="tableText">${p.startDate}</p></td>
                             <td><p class="tableText">${p.projectName}</p></td>
                             <td><p class="tableText">${p.status}</p></td>
-                            <td><p class="tableText">${p.partner}</p></td>
-                            <td><p class="tableText">${p.country}</p></td>
+                            <td><p class="tableText">${p.partner.partnerName}</p></td>
+                            <td><p class="tableText">${p.partner.country}</p></td>
                         </tr>
                     </c:forEach>
 
