@@ -45,7 +45,11 @@
                 <p>Type in the required information (fields marked with "*") and click Submit</p>
                 <br>
                 <form action="Create_Project_Servlet" method="post">
-
+                    <select name="partnerSelect" size="3">
+                        <option>El giganten</option>
+                        <option>Wupti</option>
+                        <option>Komplett</option>
+                    </select>
                     <strong>Name of the Project: *</strong><br>
                     <input type="text" name="projectName" required="" autofocus>
                     <br>
