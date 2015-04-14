@@ -50,6 +50,10 @@
                         <option>Wupti</option>
                         <option>Komplett</option>
                     </select>
+                    <select name="countrySelect" size="2">
+                        <option>Denmark</option>
+                        <option>Norway</option>
+                    </select>
                     <strong>Name of the Project: *</strong><br>
                     <input type="text" name="projectName" required="" autofocus>
                     <br>
