@@ -18,25 +18,16 @@ import javax.servlet.http.HttpServletResponse;
  * @author steffen
  */
 @WebServlet(name = "Index_Servlet", urlPatterns = {"/Index_Servlet"})
-public class Index_Servlet extends HttpServlet {
+public class Index_Servlet extends ManagerServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
         if(request.getParameter("View Project")!=null){
-        request.getRequestDispatcher("view_project.jsp").forward(request, response);
+        request.getRequestDispatcher("dellView").forward(request, response);
         }
-         if(request.getParameter("Create Project")!=null){
-        request.getRequestDispatcher("create_project.jsp").forward(request, response);
+         if(request.getParameter("Create Project.jsp")!=null){
+        request.getRequestDispatcher("partnerView.jsp").forward(request, response);
         }
        
         
