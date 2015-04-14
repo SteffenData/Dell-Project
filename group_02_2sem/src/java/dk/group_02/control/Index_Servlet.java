@@ -22,14 +22,24 @@ public class Index_Servlet extends ManagerServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Partner partner = new Partner("Dell", "Denmark");
         try {
-            if (request.getParameter("partnerView") != null) {
+            if (request.getParameter("partnerElgigantView") != null) {
+                Partner partner = new Partner("Elgiganten", "Denmark");
                 request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
                 request.getRequestDispatcher("view_project.jsp").forward(request, response);
             }
             if (request.getParameter("dellView") != null) {
                 request.setAttribute("projects", getDataValidator().getDellProjects());
+                request.getRequestDispatcher("view_project.jsp").forward(request, response);
+            }
+            if (request.getParameter("partnerKomplettView") != null) {
+                Partner partner = new Partner("Komplett", "Norway");
+                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
+                request.getRequestDispatcher("view_project.jsp").forward(request, response);
+            }
+            if (request.getParameter("partnerWuptiView") != null) {
+                Partner partner = new Partner("Wupti", "Denmark");
+                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
                 request.getRequestDispatcher("view_project.jsp").forward(request, response);
             }
         } catch (SQLException e) {
