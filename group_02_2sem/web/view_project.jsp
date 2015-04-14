@@ -60,13 +60,14 @@
                     </tr>
                 </thead>          
                 <tbody>
-                    <c:forEach var="p" items="${project}">
+                    <tr></tr>
+                    <c:forEach var="p" items="${projects}">
                         <tr>
-                            <td>${p.startDate}</td>
-                            <td>${p.projectName}</td>
-                            <td>${p.status}</td>
-                            <td>${p.partner}</td>
-                            <td>${p.country}</td>
+                            <td><p class="tableText">${p.startDate}</p></td>
+                            <td><p class="tableText">${p.projectName}</p></td>
+                            <td><p class="tableText">${p.status}</p></td>
+                            <td><p class="tableText">${p.partner}</p></td>
+                            <td><p class="tableText">${p.country}</p></td>
                         </tr>
                     </c:forEach>
 
