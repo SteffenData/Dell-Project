@@ -75,7 +75,7 @@
                     <br>
                         
                     <div id="msgDiv" style="display:inline-block">    
-                        <button type="submit" style="float: left;"><strong>Submit</strong></button>   
+                        <button type="submit" style="float: left;" onclick="break"><strong>Submit</strong></button>   
                         <p style="color: red; float: left;">${MSG_NO}</p>
                         <p style="color: green; float: left; ">${MSG_YES}</p>
                     </div>

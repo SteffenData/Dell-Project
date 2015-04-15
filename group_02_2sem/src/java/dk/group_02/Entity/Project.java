@@ -109,4 +109,10 @@ public class Project {
     public Partner getPartner() {
         return partner;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" + "startDate=" + startDate + ", projectName=" + projectName + ", cost=" + cost + ", status=" + status + ", description=" + description + ", upload=" + upload + ", goal=" + goal + ", partner=" + partner + '}';
+    }
+    
 }

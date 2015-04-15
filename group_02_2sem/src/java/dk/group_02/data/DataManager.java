@@ -41,7 +41,7 @@ public class DataManager implements Manager {
             //=== Connect to the database
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String query = "SELECT * FROM projects order by Startdate";
+            String query = "SELECT * FROM projects order by projectName";
 
             statement = connection.prepareStatement(query);
             rs = statement.executeQuery();
@@ -63,21 +63,21 @@ public class DataManager implements Manager {
 
     public Collection<Project> getPartnerProjects(Partner partner) throws SQLException {
 
-        Collection<Project> partnerProjects = new ArrayList<>();
+        Collection<Project> partnerProjects  = new ArrayList<>();
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
 
         try {
-
+            
             Class.forName(DataOracleAccessor.DRIVER);
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String partnerID = getPartnerID(partner.getPartnerName(), partner.getCountry());
 
-            String query = "SELECT * FROM projects where partnerId = ? order by Startdate";
+            String query = "SELECT * FROM projects where partnerId = ? order by projectName";
 
             statement = connection.prepareStatement(query);
             statement.setString(1, partnerID);
@@ -121,7 +121,6 @@ public class DataManager implements Manager {
             rs = statement.executeQuery();
             if (rs.next()) {
                 String startDate = rs.getString("startDate");
-
                 finalProject = new Project(startDate.substring(0, 10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId")));
             }

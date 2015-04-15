@@ -24,8 +24,8 @@ public class Index_Servlet extends ManagerServlet {
             throws ServletException, IOException {
         try {
             Partner partner = null;
-            String inSwitch = request.getParameter("hej");
-            switch (inSwitch) {
+            String findPartner = request.getParameter("hej");
+            switch (findPartner) {
                 case "ElgigantDk":
                     partner = new Partner("Elgiganten", "Denmark");
                     break;

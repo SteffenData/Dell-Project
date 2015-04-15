@@ -5,24 +5,20 @@
  */
 package dk.group_02.Entity;
 
-import java.awt.Image;
-import java.io.File;
-import java.util.Date;
 
 /**
  *
  * @author steffen
  */
 public class Partner {
+
     
     private String partnerName;
     private String country;
     
-
     public Partner(String name, String country) {
         this.partnerName = name;
         this.country = country;
-        
     }
 
     public String getPartnerName() {
@@ -31,6 +27,10 @@ public class Partner {
 
     public String getCountry() {
         return country;
+    }
+    @Override
+    public String toString() {
+        return "Partner{" + "partnerName=" + partnerName + ", country=" + country + '}';
     }
     
 }
