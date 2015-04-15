@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import static sun.security.jgss.GSSUtil.login;
 
 /**
  *
@@ -63,14 +64,14 @@ public class DataManager implements Manager {
 
     public Collection<Project> getPartnerProjects(Partner partner) throws SQLException {
 
-        Collection<Project> partnerProjects  = new ArrayList<>();
+        Collection<Project> partnerProjects = new ArrayList<>();
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
 
         try {
-            
+
             Class.forName(DataOracleAccessor.DRIVER);
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
@@ -258,7 +259,14 @@ public class DataManager implements Manager {
             if (rs.next()) {
                 String name = rs.getString("partnername");
                 String Country = rs.getString("country");
-                partner = new Partner(name, Country);
+
+                /*
+                 **************************************************************OBS***************************************************************************
+                 * Vær obs på at denne partner (nedenunder) altid bliver lavet som om den ikke er del
+                 * dette skyldes at den er konstrueret med et et-tal som sidste argument.
+                 * 
+                 */
+                partner = new Partner(name, Country, 1);
             }
         } catch (ClassNotFoundException ex) {
         } finally {
@@ -340,6 +348,63 @@ public class DataManager implements Manager {
             connection.close();
 
         }
+
+    }
+
+    public Partner getLogin(String usrName, String password) throws SQLException {
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        Partner partner = null;
+        int partnerDell = 0;
+        String name = null;
+        String country = null;
+        int temp;
+        try {
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            temp = password.hashCode();
+            password = temp + "";
+
+            String query = "SELECT partnerOrDell FROM USERS where username =? and password =?";
+
+            statement = connection.prepareStatement(query);
+            rs = statement.executeQuery();
+
+            if (rs.next()) {
+
+                partnerDell = rs.getInt("partnerordell");
+
+            }
+
+            if (partnerDell == 0) {
+                return new Partner("Dell", "Dellland", 1);
+            }
+
+            String query1 = "SELECT partnername,country FROM partners where username=?";
+
+            statement = connection.prepareStatement(query1);
+            statement.setString(1, usrName);
+            rs = statement.executeQuery();
+
+            if (rs.next()) {
+
+                name = rs.getString("partnerName");
+                country = rs.getString("country");
+            }
+
+            partner = new Partner(name, country, partnerDell);
+
+        } catch (ClassNotFoundException ex) {
+        } finally {
+            statement.close();
+            connection.close();
+
+        }
+        return partner;
 
     }
 }

@@ -30,5 +30,7 @@ public interface Manager {
     public String getPartnerID(String partnerName, String country) throws SQLException;
     
     public void SaveProject(Project project) throws SQLException;
+    
+     public Partner getLogin(String usrName, String password) throws SQLException;
             
    }

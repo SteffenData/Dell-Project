@@ -27,22 +27,22 @@ public class Index_Servlet extends ManagerServlet {
             String findPartner = request.getParameter("hej");
             switch (findPartner) {
                 case "ElgigantDk":
-                    partner = new Partner("Elgiganten", "Denmark");
+                    partner = new Partner("Elgiganten", "Denmark", 1);
                     break;
                 case "ElgigantNor":
-                    partner = new Partner("Elgiganten", "Norway");
+                    partner = new Partner("Elgiganten", "Norway", 1);
                     break;
                 case "WuptiDk": 
-                    partner = new Partner("Wupti","Denmark");
+                    partner = new Partner("Wupti","Denmark", 1);
                     break;
                 case "WuptiNor":
-                    partner = new Partner("Wupti","Norway");
+                    partner = new Partner("Wupti","Norway", 1);
                     break;
                 case "KomplettDk":
-                    partner = new Partner("Komplett","Denmark");
+                    partner = new Partner("Komplett","Denmark", 1);
                     break;
                 case "KomplettNor":
-                    partner = new Partner("Komplett","Norway");
+                    partner = new Partner("Komplett","Norway", 1);
                     break;
                 case "Dell":
                     request.setAttribute("projects",getDataValidator().getDellProjects());

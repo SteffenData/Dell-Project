@@ -15,11 +15,22 @@ public class Partner {
     
     private String partnerName;
     private String country;
+    private int partnerOrDell;
     
-    public Partner(String name, String country) {
+    public Partner(String name, String country, int partnerOrDell) {
         this.partnerName = name;
         this.country = country;
+        this.partnerOrDell = partnerOrDell;
     }
+
+    public int getPartnerOrDell() {
+        return partnerOrDell;
+    }
+
+    public void setPartnerOrDell(int partnerOrDell) {
+        this.partnerOrDell = partnerOrDell;
+    }
+
 
     public String getPartnerName() {
         return partnerName;

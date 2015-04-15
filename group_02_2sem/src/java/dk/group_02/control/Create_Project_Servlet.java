@@ -31,7 +31,7 @@ public class Create_Project_Servlet extends ManagerServlet
            
             String partnerName = request.getParameter("partnerSelect");
             String contry = request.getParameter("countrySelect");
-            Partner partner = new Partner(partnerName, contry);
+            Partner partner = new Partner(partnerName, contry, 1);
             
             String startDate = LocalDate.now().toString();
             String projectName = request.getParameter("projectName");
