@@ -8,10 +8,14 @@ package dk.group_02.control;
 import dk.group_02.Entity.Partner;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,37 +26,35 @@ public class Index_Servlet extends ManagerServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Partner partner = null;
+        
         try {
-            Partner partner = null;
-            String findPartner = request.getParameter("hej");
-            switch (findPartner) {
-                case "ElgigantDk":
-                    partner = new Partner("Elgiganten", "Denmark");
-                    break;
-                case "ElgigantNor":
-                    partner = new Partner("Elgiganten", "Norway");
-                    break;
-                case "WuptiDk": 
-                    partner = new Partner("Wupti","Denmark");
-                    break;
-                case "WuptiNor":
-                    partner = new Partner("Wupti","Norway");
-                    break;
-                case "KomplettDk":
-                    partner = new Partner("Komplett","Denmark");
-                    break;
-                case "KomplettNor":
-                    partner = new Partner("Komplett","Norway");
-                    break;
-                case "Dell":
-                    request.setAttribute("projects",getDataValidator().getDellProjects());
-                    request.getRequestDispatcher("view_project.jsp").forward(request, response);
-                    break;
-            }
-            request.setAttribute("projects",getDataValidator().getPartnerProjects(partner));
-            request.getRequestDispatcher("view_project.jsp").forward(request, response);
-        } catch (SQLException e) {
+            partner = getDataValidator().getLogin(username, password);
+        } catch (SQLException ex) {
+            request.setAttribute("message", "Incorrect username or password.");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
         }
+        
+        HttpSession s = request.getSession();
+        s.setMaxInactiveInterval(60*60);
+        
+        if (partner != null){
+            s.setAttribute("partner", partner);
+            RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
+            rd.forward(request, response);
+            
+        } else {
+            s.setAttribute("partner", partner);
+            RequestDispatcher rd = request.getRequestDispatcher("dellHome.jsp");
+            rd.forward(request, response);
+        }
+            
+        
+         
 
     }
 

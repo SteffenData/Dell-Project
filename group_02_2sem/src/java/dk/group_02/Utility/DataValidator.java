@@ -74,5 +74,11 @@ public class DataValidator {
         return outproject;
 
     }
+    
+    public Partner getLogin(String usrName, String password) throws SQLException {
+    
+        Partner p = manager.getLogin(usrName, password);
+        return p;
+    }
 
 }
