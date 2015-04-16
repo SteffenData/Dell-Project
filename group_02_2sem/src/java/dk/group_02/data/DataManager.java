@@ -19,15 +19,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static sun.security.jgss.GSSUtil.login;
 
 /**
  *
  * @author steffen
  */
-public class DataManager implements Manager {
+public class DataManager implements Manager
+{
 
-    public Collection<Project> getDellProjects() throws SQLException {
+    public Collection<Project> getDellProjects() throws SQLException
+    {
 
         Collection<Project> dellProjects = new ArrayList<>();
 
@@ -35,7 +39,8 @@ public class DataManager implements Manager {
         PreparedStatement statement = null;
         Connection connection = null;
 
-        try {
+        try
+        {
             //=== Load the JDBC-driver
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -46,14 +51,17 @@ public class DataManager implements Manager {
 
             statement = connection.prepareStatement(query);
             rs = statement.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 dellProjects.add(new Project(
                         subStartDate, rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId"))));
             }
-        } catch (ClassNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -62,7 +70,8 @@ public class DataManager implements Manager {
 
     }
 
-    public Collection<Project> getPartnerProjects(Partner partner) throws SQLException {
+    public Collection<Project> getPartnerProjects(Partner partner) throws SQLException
+    {
 
         Collection<Project> partnerProjects = new ArrayList<>();
 
@@ -70,7 +79,8 @@ public class DataManager implements Manager {
         PreparedStatement statement = null;
         Connection connection = null;
 
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -83,14 +93,17 @@ public class DataManager implements Manager {
             statement = connection.prepareStatement(query);
             statement.setString(1, partnerID);
             rs = statement.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 partnerProjects.add(new Project(subStartDate, rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId"))));
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex)
+        {
 
-        } finally {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -99,14 +112,16 @@ public class DataManager implements Manager {
 
     }
 
-    public Project getProject(Project project) throws SQLException {
+    public Project getProject(Project project) throws SQLException
+    {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         Project finalProject = null;
 
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -120,13 +135,16 @@ public class DataManager implements Manager {
             statement.setString(1, project.getProjectName());
             statement.setString(2, partnerID);
             rs = statement.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
+            {
                 String startDate = rs.getString("startDate");
                 finalProject = new Project(startDate.substring(0, 10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId")));
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-        } finally {
+        } catch (ClassNotFoundException | SQLException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -135,14 +153,16 @@ public class DataManager implements Manager {
 
     }
 
-    public InputStream getUpload(Project project) throws SQLException {
+    public InputStream getUpload(Project project) throws SQLException
+    {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         InputStream upload = null;
 
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -154,14 +174,17 @@ public class DataManager implements Manager {
             statement = connection.prepareStatement(query);
             statement.setInt(1, projectId);
             rs = statement.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
+            {
                 Blob blob = rs.getBlob("upload");
                 InputStream input = blob.getBinaryStream();
 
 //                upload = new FileInputStream(rs.getBinaryStream("upload").toString());
             }
-        } catch (ClassNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -171,14 +194,16 @@ public class DataManager implements Manager {
 
     }
 
-    public int getProjectId(Project project) throws SQLException {
+    public int getProjectId(Project project) throws SQLException
+    {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         int projectId = 0;
 
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -192,12 +217,15 @@ public class DataManager implements Manager {
             statement.setString(1, project.getProjectName());
             statement.setString(2, partnerID);
             rs = statement.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
+            {
 
                 projectId = rs.getInt("projectId");
             }
-        } catch (ClassNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -206,13 +234,15 @@ public class DataManager implements Manager {
         return projectId;
     }
 
-    public String getPartnerID(String partnerName, String country) throws SQLException {
+    public String getPartnerID(String partnerName, String country) throws SQLException
+    {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         String partnerId = null;
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -225,12 +255,15 @@ public class DataManager implements Manager {
             statement.setString(2, country);
             rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next())
+            {
 
                 partnerId = rs.getString("PARTNERID");
             }
-        } catch (ClassNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -239,12 +272,14 @@ public class DataManager implements Manager {
 
     }
 
-    public Partner getPartner(String id) throws SQLException {
+    public Partner getPartner(String id) throws SQLException
+    {
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         Partner partner = null;
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -256,20 +291,17 @@ public class DataManager implements Manager {
             statement.setString(1, id);
             rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next())
+            {
                 String name = rs.getString("partnername");
                 String Country = rs.getString("country");
 
-                /*
-                 **************************************************************OBS***************************************************************************
-                 * Vær obs på at denne partner (nedenunder) altid bliver lavet som om den ikke er del
-                 * dette skyldes at den er konstrueret med et et-tal som sidste argument.
-                 * 
-                 */
                 partner = new Partner(name, Country);
             }
-        } catch (ClassNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -278,13 +310,15 @@ public class DataManager implements Manager {
 
     }
 
-    public void SaveProject(Project project) throws SQLException {
+    public void SaveProject(Project project) throws SQLException
+    {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
 
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -317,7 +351,8 @@ public class DataManager implements Manager {
 
             statement.executeUpdate();
 
-            if (project.getUpload() != null) {
+            if (project.getUpload() != null)
+            {
                 FileInputStream file = new FileInputStream(project.getUpload());
                 String query2 = "insert into files values (seq_id_files.nextval,?,?)";
                 statement = connection.prepareStatement(query2);
@@ -342,8 +377,10 @@ public class DataManager implements Manager {
 //            } catch (FileNotFoundException e) {
 //
 //            }
-        } catch (ClassNotFoundException | NullPointerException | FileNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException | NullPointerException | FileNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
@@ -351,7 +388,8 @@ public class DataManager implements Manager {
 
     }
 
-    public Partner getLogin(String usrName, String password) throws SQLException {
+    public Partner getLogin(String usrName, String password) throws SQLException
+    {
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
@@ -360,7 +398,8 @@ public class DataManager implements Manager {
         String name = null;
         String country = null;
         int temp;
-        try {
+        try
+        {
 
             Class.forName(DataOracleAccessor.DRIVER);
 
@@ -372,40 +411,81 @@ public class DataManager implements Manager {
             String query = "SELECT partnerOrDell FROM USERS where username =? and password =?";
 
             statement = connection.prepareStatement(query);
+            statement.setString(1, usrName);
+            statement.setString(2, password);
             rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next())
+            {
 
                 partnerDell = rs.getInt("partnerordell");
 
             }
 
-            if (partnerDell == 0) 
+            if (partnerDell == 1)
             {
-                return null;
+
+                String query1 = "SELECT partnername,country FROM partners where username=?";
+
+                statement = connection.prepareStatement(query1);
+                statement.setString(1, usrName);
+                rs = statement.executeQuery();
+
+                if (rs.next())
+                {
+
+                    name = rs.getString("partnerName");
+                    country = rs.getString("country");
+                }
+
+                partner = new Partner(name, country);
             }
-
-            String query1 = "SELECT partnername,country FROM partners where username=?";
-
-            statement = connection.prepareStatement(query1);
-            statement.setString(1, usrName);
-            rs = statement.executeQuery();
-
-            if (rs.next()) {
-
-                name = rs.getString("partnerName");
-                country = rs.getString("country");
-            }
-
-            partner = new Partner(name, country);
-
-        } catch (ClassNotFoundException ex) {
-        } finally {
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
             statement.close();
             connection.close();
 
         }
         return partner;
+
+    }
+
+    public void SaveLogin(Project project) throws SQLException
+    {
+
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        try
+        {
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            String query = "insert into users values (?,?,?)";
+           
+            statement = connection.prepareStatement(query);
+
+
+
+            statement.setString(1, project.getStartDate());
+            statement.setString(2, project.getProjectName());
+            statement.setDouble(3, project.getCost());
+
+
+            statement.executeUpdate();
+
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally
+        {
+            statement.close();
+            connection.close();
+        }
 
     }
 }
