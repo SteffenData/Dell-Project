@@ -266,7 +266,7 @@ public class DataManager implements Manager {
                  * dette skyldes at den er konstrueret med et et-tal som sidste argument.
                  * 
                  */
-                partner = new Partner(name, Country, 1);
+                partner = new Partner(name, Country);
             }
         } catch (ClassNotFoundException ex) {
         } finally {
@@ -380,8 +380,9 @@ public class DataManager implements Manager {
 
             }
 
-            if (partnerDell == 0) {
-                return new Partner("Dell", "Dellland", 1);
+            if (partnerDell == 0) 
+            {
+                return null;
             }
 
             String query1 = "SELECT partnername,country FROM partners where username=?";
@@ -396,7 +397,7 @@ public class DataManager implements Manager {
                 country = rs.getString("country");
             }
 
-            partner = new Partner(name, country, partnerDell);
+            partner = new Partner(name, country);
 
         } catch (ClassNotFoundException ex) {
         } finally {

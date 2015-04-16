@@ -17,7 +17,7 @@ public class Partner {
     private String country;
     private int partnerOrDell;
     
-    public Partner(String name, String country, int partnerOrDell) {
+    public Partner(String name, String country) {
         this.partnerName = name;
         this.country = country;
         this.partnerOrDell = partnerOrDell;
