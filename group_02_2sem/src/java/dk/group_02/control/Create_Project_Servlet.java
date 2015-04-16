@@ -1,6 +1,7 @@
 package dk.group_02.control;
 
 import dk.group_02.Entity.Partner;
+import dk.group_02.control.ManagerServlet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,8 +31,8 @@ public class Create_Project_Servlet extends ManagerServlet
       // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
            
             String partnerName = request.getParameter("partnerSelect");
-            String contry = request.getParameter("countrySelect");
-            Partner partner = new Partner(partnerName, contry);
+            String country = request.getParameter("countrySelect");
+            Partner partner = new Partner(partnerName, country);
             
             String startDate = LocalDate.now().toString();
             String projectName = request.getParameter("projectName");

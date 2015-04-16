@@ -7,6 +7,7 @@ package dk.group_02.data;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
+import dk.group_02.Utility.HashMaker;
 import dk.group_02.control.Manager;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -397,7 +398,9 @@ public class DataManager implements Manager
         int partnerDell = 0;
         String name = null;
         String country = null;
-        int temp;
+        String encryptedPassword = null;
+        HashMaker hasher;
+
         try
         {
 
@@ -405,8 +408,9 @@ public class DataManager implements Manager
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            temp = password.hashCode();
-            password = temp + "";
+            hasher = new HashMaker();
+            encryptedPassword = hasher.hasher(password);
+            Class.forName(DataOracleAccessor.DRIVER);
 
             String query = "SELECT partnerOrDell FROM USERS where username =? and password =?";
 
@@ -452,29 +456,29 @@ public class DataManager implements Manager
 
     }
 
-    public void SaveLogin(Project project) throws SQLException
+    public void SaveLogin(String username, String password, int partnerOrDel) throws SQLException
     {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
+        HashMaker hasher;
+        String encryptedPassword;
         try
         {
-
+            hasher = new HashMaker();
+            encryptedPassword = hasher.hasher(password);
             Class.forName(DataOracleAccessor.DRIVER);
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             String query = "insert into users values (?,?,?)";
-           
+
             statement = connection.prepareStatement(query);
 
-
-
-            statement.setString(1, project.getStartDate());
-            statement.setString(2, project.getProjectName());
-            statement.setDouble(3, project.getCost());
-
+            statement.setString(1, username);
+            statement.setString(2, encryptedPassword);
+            statement.setDouble(3, partnerOrDel);
 
             statement.executeUpdate();
 
