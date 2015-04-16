@@ -389,7 +389,7 @@ public class DataManager implements Manager
 
     }
 
-    public Partner getLogin(String usrName, String password) throws SQLException
+    public boolean getLogin(String usrName, String password) throws SQLException
     {
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -400,6 +400,7 @@ public class DataManager implements Manager
         String country = null;
         String encryptedPassword = null;
         HashMaker hasher;
+        boolean returnVariable  = false;
 
         try
         {
@@ -416,12 +417,12 @@ public class DataManager implements Manager
 
             statement = connection.prepareStatement(query);
             statement.setString(1, usrName);
-            statement.setString(2, password);
+            statement.setString(2, encryptedPassword);
             rs = statement.executeQuery();
 
             if (rs.next())
             {
-
+                returnVariable = true;
                 partnerDell = rs.getInt("partnerordell");
 
             }
@@ -452,7 +453,7 @@ public class DataManager implements Manager
             connection.close();
 
         }
-        return partner;
+        return returnVariable;
 
     }
 

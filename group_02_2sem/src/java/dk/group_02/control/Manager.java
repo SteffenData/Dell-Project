@@ -32,7 +32,7 @@ public interface Manager
 
     public void SaveProject(Project project) throws SQLException;
 
-    public Partner getLogin(String usrName, String password) throws SQLException;
+    public boolean getLogin(String usrName, String password) throws SQLException;
 
     public void SaveLogin(String username, String password, int partnerOrDel) throws SQLException;
     
