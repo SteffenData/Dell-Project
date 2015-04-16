@@ -273,7 +273,7 @@ public class DataManager implements Manager
 
     }
 
-    public Partner getPartner(String id) throws SQLException
+    public Partner getPartner(String userName) throws SQLException
     {
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -286,18 +286,17 @@ public class DataManager implements Manager
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String query = "SELECT partnername,country FROM partners where partnerId=?";
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            String query = "SELECT partnername,country FROM partners where username =?";
 
             statement = connection.prepareStatement(query);
-            statement.setString(1, id);
+            statement.setString(1, userName);
             rs = statement.executeQuery();
 
             if (rs.next())
             {
-                String name = rs.getString("partnername");
-                String Country = rs.getString("country");
-
-                partner = new Partner(name, Country);
+                partner = new Partner(rs.getString("partnerName"),rs.getString("country"));
             }
         } catch (ClassNotFoundException ex)
         {
@@ -394,10 +393,6 @@ public class DataManager implements Manager
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        Partner partner = null;
-        int partnerDell = 0;
-        String name = null;
-        String country = null;
         String encryptedPassword = null;
         HashMaker hasher;
         boolean returnVariable  = false;
@@ -409,11 +404,12 @@ public class DataManager implements Manager
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
+            Class.forName(DataOracleAccessor.DRIVER);
+            
             hasher = new HashMaker();
             encryptedPassword = hasher.hasher(password);
-            Class.forName(DataOracleAccessor.DRIVER);
 
-            String query = "SELECT partnerOrDell FROM USERS where username =? and password =?";
+            String query = "SELECT * FROM USERS where username =? and password =?";
 
             statement = connection.prepareStatement(query);
             statement.setString(1, usrName);
@@ -423,28 +419,8 @@ public class DataManager implements Manager
             if (rs.next())
             {
                 returnVariable = true;
-                partnerDell = rs.getInt("partnerordell");
-
             }
-
-            if (partnerDell == 1)
-            {
-
-                String query1 = "SELECT partnername,country FROM partners where username=?";
-
-                statement = connection.prepareStatement(query1);
-                statement.setString(1, usrName);
-                rs = statement.executeQuery();
-
-                if (rs.next())
-                {
-
-                    name = rs.getString("partnerName");
-                    country = rs.getString("country");
-                }
-
-                partner = new Partner(name, country);
-            }
+           
         } catch (ClassNotFoundException ex)
         {
         } finally

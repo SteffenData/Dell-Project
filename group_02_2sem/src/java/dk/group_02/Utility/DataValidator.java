@@ -75,10 +75,12 @@ public class DataValidator {
 
     }
     
-    public Partner getLogin(String usrName, String password) throws SQLException {
-    
-        Partner p = manager.getLogin(usrName, password);
-        return p;
+    public boolean getLogin(String usrName, String password) throws SQLException {
+        if(usrName.isEmpty() || password.isEmpty())
+            return false;
+        if(usrName == null|| password == null)
+            return false;
+       return manager.getLogin(usrName, password);        
     }
 
 }
