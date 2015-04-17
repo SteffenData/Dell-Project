@@ -7,37 +7,35 @@
         <style type="text/css"></style>
     </head>
     <body>
-        <div id="1">
-            <div class="topBox"> 
+        <div class="topBox"> 
 
-                <a href="index.jsp">
+                <a href="partnerHome.jsp">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">View project</h3>
+                        <h3 class="menu" style="color: black">Home</h3>
                     </div>
                 </a>
 
+                <a href="viewProjectPartner.jsp">
+                    <div class="menuButtons">
+                        <h3 class="menu" style="color: black">View Projects</h3>
+                    </div>
+                </a>
                 <a href="create_project.jsp">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Create project</h3>
-                    </div>
-                </a>
-                <a href="https://www.google.dk/">
-                    <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Coming soon</h3>
+                        <h3 class="menu" style="color: black">Create Project</h3>
                     </div>
                 </a> 
                 <a href="https://www.google.dk/">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Coming soon</h3>
+                        <h3 class="menu" style="color: black">#4</h3>
                     </div>
                 </a> 
                 <a href="https://www.google.dk/">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Coming soon</h3>
+                        <h3 class="menu" style="color: black">#5</h3>
                     </div>
                 </a>
             </div>
-        </div>
         <div class="centerBox"> 
             <div id="overskrift"><strong>New Project</strong></div>
           

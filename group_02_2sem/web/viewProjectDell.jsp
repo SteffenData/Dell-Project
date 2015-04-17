@@ -12,33 +12,34 @@
     <head>
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/viewCss.css">
-        <title>View projects Partner</title>
+        <title>View projects Dell</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css"></style>
     </head>
     <body>
-        <div class="topBox"> 
+        
+            <div class="topBox"> 
 
-                <a href="partnerHome.jsp">
+                <a href="dellHome.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">Home</h3>
                     </div>
                 </a>
 
-                <a href="viewProjectPartner.jsp">
+                <a href="https://www.google.dk/">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">View Projects</h3>
+                        <h3 class="menu" style="color: black">Dashboard</h3>
                     </div>
                 </a>
-                <a href="create_project.jsp">
+                <a href="viewProjectDell.jsp">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Create Project</h3>
+                        <h3 class="menu" style="color: black">View Projects</h3>
                     </div>
                 </a> 
                 <a href="https://www.google.dk/">
                     <div class="menuButtons">
-                        <h3 class="menu" style="color: black">#4</h3>
+                        <h3 class="menu" style="color: black">Budget</h3>
                     </div>
                 </a> 
                 <a href="https://www.google.dk/">
@@ -47,6 +48,7 @@
                     </div>
                 </a>
             </div>
+        
         <div class="centerBox" > 
 
             <table border="4" style="border-color: blue; margin: auto;">

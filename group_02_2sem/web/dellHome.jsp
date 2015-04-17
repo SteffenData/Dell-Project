@@ -13,21 +13,21 @@
         <title>Dell homepage</title>
     </head>
     <body>
-        <div id="1">
+        
             <div class="topBox"> 
 
-                <a href="index.jsp">
+                <a href="dellHome.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">Home</h3>
                     </div>
                 </a>
 
-                <a href="create_project.jsp">
+                <a href="https://www.google.dk/">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">Dashboard</h3>
                     </div>
                 </a>
-                <a href="https://www.google.dk/">
+                <a href="viewProjectDell.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>
@@ -43,7 +43,7 @@
                     </div>
                 </a>
             </div>
-        </div>
+        
         
         <div class="centerBox" > 
             <br><br>
