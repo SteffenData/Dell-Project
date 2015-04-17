@@ -28,12 +28,8 @@ public class Create_Project_Servlet extends ManagerServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-      // Dette er en dummi partner, idet vi på dette tidspunkt ikke har noget login og man dermed kun kan være en partner.    
-           
-            String partnerName = request.getParameter("partnerSelect");
-            String country = request.getParameter("countrySelect");
-            Partner partner = new Partner(partnerName, country);
-            
+            Partner partner = (Partner) request.getSession().getAttribute("partner");
+  
             String startDate = LocalDate.now().toString();
             String projectName = request.getParameter("projectName");
             Double cost = Double.parseDouble(request.getParameter("cost"));
