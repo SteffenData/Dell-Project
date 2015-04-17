@@ -23,7 +23,7 @@
                     </div>
                 </a>
 
-                <a href="/View_Project_Servlet">
+                <a href="${pageContext.request.contextPath}/View_Project_Servlet">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>
