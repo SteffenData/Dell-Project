@@ -7,6 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page import = "javax.servlet.RequestDispatcher" %>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +31,7 @@
                     </div>
                 </a>
 
-                <a href="/View_Project_Servlet">
+                <a href="${pageContext.request.contextPath}/View_Project_Servlet">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>

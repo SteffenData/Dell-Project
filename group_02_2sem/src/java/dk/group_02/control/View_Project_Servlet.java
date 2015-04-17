@@ -5,6 +5,7 @@
  */
 package dk.group_02.control;
 
+import dk.group_02.Entity.Partner;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -28,14 +29,29 @@ public class View_Project_Servlet extends ManagerServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-          
+          Partner partner = (Partner) request.getSession().getAttribute("partner");
+
+        if (partner != null) {
+            try {
+                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
+            } catch (SQLException ex) {
+                Logger.getLogger(View_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
+            rd.forward(request, response);
+
+        } else {
+            try {
+                request.setAttribute("projects", getDataValidator().getDellProjects());
+            } catch (SQLException ex) {
+                Logger.getLogger(View_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
+            rd.forward(request, response);
+        }
  
-         request.setAttribute("projects",getDataValidator());
-      
-       
-        RequestDispatcher rd = request.getRequestDispatcher("view_Project_Servlet");
-        rd.forward(request, response);
-    }
+
+        }
    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,6 +68,8 @@ public class View_Project_Servlet extends ManagerServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+    
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -77,19 +95,19 @@ public class View_Project_Servlet extends ManagerServlet {
         return "Short description";
     }// </editor-fold>
 
-     private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
-    {
-        ServletContext application = getServletContext();
-        Controller ctrl = (Controller) application.getAttribute("Controller");
-        if (ctrl == null)
-        {
-            // Start new session
-            ctrl = new Controller();
-            application.setAttribute("Controller", ctrl);
-            
-        }
-        return ctrl;
-        
-    }
+//     private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
+//    {
+//        ServletContext application = getServletContext();
+//        Controller ctrl = (Controller) application.getAttribute("Controller");
+//        if (ctrl == null)
+//        {
+//            // Start new session
+//            ctrl = new Controller();
+//            application.setAttribute("Controller", ctrl);
+//            
+//        }
+//        return ctrl;
+//        
+//    }
     
 }
