@@ -26,35 +26,41 @@ public class Index_Servlet extends ManagerServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Partner partner = null;
-        
+
         try {
-            partner = getDataValidator().getLogin(username, password);
+            if (getDataValidator().getLogin(username, password)) {
+            partner = getDataValidator().getPartner(username);
+            request.setAttribute("message", "hej");
+            RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
+            rd.forward(request, response);
+            } else {
+                request.setAttribute("message", "Incorrect username or password.");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
+            }
         } catch (SQLException ex) {
             request.setAttribute("message", "Incorrect username or password.");
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
-        
+
         HttpSession s = request.getSession();
-        s.setMaxInactiveInterval(60*60);
-        
-        if (partner != null){
+        s.setMaxInactiveInterval(60 * 60);
+
+        if (partner != null) {
             s.setAttribute("partner", partner);
             RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
             rd.forward(request, response);
-            
+
         } else {
             s.setAttribute("partner", partner);
             RequestDispatcher rd = request.getRequestDispatcher("dellHome.jsp");
             rd.forward(request, response);
         }
-            
-        
-         
 
     }
 
