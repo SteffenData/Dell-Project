@@ -2,12 +2,12 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ */ 
 package dk.group_02.data;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
-import dk.group_02.Utility.HashMaker;
+
 import dk.group_02.control.Manager;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -393,8 +393,6 @@ public class DataManager implements Manager
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        String encryptedPassword = null;
-        HashMaker hasher;
         boolean returnVariable  = false;
 
         try
@@ -405,15 +403,14 @@ public class DataManager implements Manager
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
             Class.forName(DataOracleAccessor.DRIVER);
-            
-            hasher = new HashMaker();
-            encryptedPassword = hasher.hasher(password);
+
 
             String query = "SELECT * FROM USERS where username =? and password =?";
+            
 
             statement = connection.prepareStatement(query);
             statement.setString(1, usrName);
-            statement.setString(2, encryptedPassword);
+            statement.setString(2, password);
             rs = statement.executeQuery();
 
             if (rs.next())
@@ -439,12 +436,10 @@ public class DataManager implements Manager
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        HashMaker hasher;
-        String encryptedPassword;
+
         try
         {
-            hasher = new HashMaker();
-            encryptedPassword = hasher.hasher(password);
+
             Class.forName(DataOracleAccessor.DRIVER);
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
@@ -454,7 +449,7 @@ public class DataManager implements Manager
             statement = connection.prepareStatement(query);
 
             statement.setString(1, username);
-            statement.setString(2, encryptedPassword);
+            statement.setString(2, password);
             statement.setDouble(3, partnerOrDel);
 
             statement.executeUpdate();
