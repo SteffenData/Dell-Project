@@ -297,6 +297,7 @@ public class DataManager implements Manager
             if (rs.next())
             {
                 partner = new Partner(rs.getString("partnerName"),rs.getString("country"));
+                System.out.println("$$$$$$$$ partner - datamanager" + partner);
             }
         } catch (ClassNotFoundException ex)
         {

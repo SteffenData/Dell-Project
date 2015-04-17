@@ -33,10 +33,24 @@ public class Index_Servlet extends ManagerServlet {
 
         try {
             if (getDataValidator().getLogin(username, password)) {
-            partner = getDataValidator().getPartner(username);
-            request.setAttribute("message", "hej");
-            RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
-            rd.forward(request, response);
+//              System.out.println("11111" + getDataValidator());
+                partner = getDataValidator().getPartner(username);
+                System.out.println("$$$$$$$$$  hej ----------$$$$$$$$$$" + partner);
+               
+                HttpSession s = request.getSession();
+                s.setMaxInactiveInterval(60 * 60);
+
+                if (partner != null) {
+                    s.setAttribute("partner", partner);
+                    RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
+                    rd.forward(request, response);
+
+                } else {
+                    s.setAttribute("partner", partner);
+                    RequestDispatcher rd = request.getRequestDispatcher("dellHome.jsp");
+                    rd.forward(request, response);
+                }
+
             } else {
                 request.setAttribute("message", "Incorrect username or password.");
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
@@ -47,21 +61,6 @@ public class Index_Servlet extends ManagerServlet {
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
-
-        HttpSession s = request.getSession();
-        s.setMaxInactiveInterval(60 * 60);
-
-        if (partner != null) {
-            s.setAttribute("partner", partner);
-            RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
-            rd.forward(request, response);
-
-        } else {
-            s.setAttribute("partner", partner);
-            RequestDispatcher rd = request.getRequestDispatcher("dellHome.jsp");
-            rd.forward(request, response);
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

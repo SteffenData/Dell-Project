@@ -32,7 +32,7 @@ public class TestofCreateProject {
     @Before
     public void setUp() {
         
-        partner = new Partner("Dell", "Denmark", 0);
+        partner = new Partner("Dell", "Denmark");
         project = new Project("1992-10-10", "huli", 1.0, "gold", "silver", "mikkel", partner);
         manager = new DataManager();
         validator = new DataValidator();
