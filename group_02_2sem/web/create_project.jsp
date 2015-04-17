@@ -15,7 +15,7 @@
                     </div>
                 </a>
 
-                <a href="viewProjectPartner.jsp">
+                <a href="/View_Project_Servlet">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>
@@ -40,23 +40,15 @@
             <div id="overskrift"><strong>New Project</strong></div>
           
             <div id="kasse">
-                <p>Type in the required information (fields marked with "*") and click Submit</p>
+                <p>Type in the required information (fields marked with *) and click Submit</p>
                 <br>
                 <form action="Create_Project_Servlet" method="post">
-                    <select name="partnerSelect" size="3">
-                        <option>Elgiganten</option>
-                        <option>Wupti</option>
-                        <option>Komplett</option>
-                    </select>
-                    <select name="countrySelect" size="2">
-                        <option>Denmark</option>
-                        <option>Norway</option>
-                    </select>
+                    
                     <strong>Name of the Project: *</strong><br>
                     <input type="text" name="projectName" required="" autofocus>
-                    <br>
-                    <p> Use the format . to separate numbers </p>
+                    <br><br>
                     <strong>Budget: *</strong><br>
+                    <p>Use the format . to separate numbers</p>
                     <input type="number" name="cost" step="any"  min="-9999999" max="9999999">
                     <br>
                     <br>

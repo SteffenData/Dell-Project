@@ -32,7 +32,7 @@
                         <h3 class="menu" style="color: black">Dashboard</h3>
                     </div>
                 </a>
-                <a href="viewProjectDell.jsp">
+                <a href="/View_Project_Servlet">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>

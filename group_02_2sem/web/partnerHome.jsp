@@ -23,7 +23,7 @@
                     </div>
                 </a>
 
-                <a href="viewProjectPartner.jsp">
+                <a href="/View_Project_Servlet">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>
