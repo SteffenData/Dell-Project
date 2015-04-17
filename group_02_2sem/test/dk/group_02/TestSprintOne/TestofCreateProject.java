@@ -73,9 +73,7 @@ public class TestofCreateProject {
         assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
         assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
         assertFalse(validator.saveProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
-        
-        
-        
+         
     }
     
 }

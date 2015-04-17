@@ -7,13 +7,13 @@
         <style type="text/css"></style>
     </head>
     <body>
-        <form action="Index_Servlet" method="get">
+        <form action="Index_Servlet" method="post">
         <div id="login">
         <strong>Username:</strong><br>
-                <input type="text" name="username" placeholder="Type in your username">
+        <input type="text" name="username" placeholder="Type in your username" autofocus="">
                 <br>
                 <strong>Password:</strong><br>
-                <input type="text" name="password" placeholder="Type in your password">
+                <input type="password" name="password" placeholder="Type in your password">
                 <br>
                 <br>
                 <br>
