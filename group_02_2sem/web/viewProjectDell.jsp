@@ -18,37 +18,37 @@
         <style type="text/css"></style>
     </head>
     <body>
-        
-            <div class="topBox"> 
 
-                <a href="dellHome.jsp">
-                    <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Home</h3>
-                    </div>
-                </a>
+        <div class="topBox"> 
 
-                <a href="https://www.google.dk/">
-                    <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Dashboard</h3>
-                    </div>
-                </a>
-                <a href="${pageContext.request.contextPath}/View_Project_Servlet">
-                    <div class="menuButtons">
-                        <h3 class="menu" style="color: black">View Projects</h3>
-                    </div>
-                </a> 
-                <a href="https://www.google.dk/">
-                    <div class="menuButtons">
-                        <h3 class="menu" style="color: black">Budget</h3>
-                    </div>
-                </a> 
-                <a href="https://www.google.dk/">
-                    <div class="menuButtons">
-                        <h3 class="menu" style="color: black">#5</h3>
-                    </div>
-                </a>
-            </div>
-        
+            <a href="dellHome.jsp">
+                <div class="menuButtons">
+                    <h3 class="menu" style="color: black">Home</h3>
+                </div>
+            </a>
+
+            <a href="https://www.google.dk/">
+                <div class="menuButtons">
+                    <h3 class="menu" style="color: black">Dashboard</h3>
+                </div>
+            </a>
+            <a href="${pageContext.request.contextPath}/View_Project_Servlet">
+                <div class="menuButtons">
+                    <h3 class="menu" style="color: black">View Projects</h3>
+                </div>
+            </a> 
+            <a href="https://www.google.dk/">
+                <div class="menuButtons">
+                    <h3 class="menu" style="color: black">Budget</h3>
+                </div>
+            </a> 
+            <a href="https://www.google.dk/">
+                <div class="menuButtons">
+                    <h3 class="menu" style="color: black">#5</h3>
+                </div>
+            </a>
+        </div>
+
         <div class="centerBox" > 
 
             <table border="4" style="border-color: blue; margin: auto;">
@@ -59,6 +59,7 @@
                         <th>Status</th>
                         <th>Partner name</th>
                         <th>Country</th>
+                        <th>See info</th>
                     </tr>
                 </thead>          
                 <tbody>
@@ -70,6 +71,21 @@
                             <td><p class="tableText">${p.status}</p></td>
                             <td><p class="tableText">${p.partner.partnerName}</p></td>
                             <td><p class="tableText">${p.partner.country}</p></td>
+                            <td>
+                                <form action="View_Single_Project_Servlet" method="post">
+                                    <input type="hidden" name="choice" value="${p.startDate}">
+                                    <input type="hidden" name="choice1" value="${p.projectName}">
+                                    <input type="hidden" name="choice2" value="${p.cost}">
+                                    <input type="hidden" name="choice3" value="${p.status}">
+                                    <input type="hidden" name="choice4" value="${p.description}">
+                                    <input type="hidden" name="choice5" value="${p.goal}">,
+                                    <button type="submit">
+                                        <p>
+                                            Press here to see project details
+                                        </p>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
 

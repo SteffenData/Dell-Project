@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  * @author steffen
  */
 @WebServlet(name = "View_Project_Servlet", urlPatterns = {"/View_Project_Servlet"})
-public class View_Project_Servlet extends ManagerServlet {
+public class View_Projects_Servlet extends ManagerServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class View_Project_Servlet extends ManagerServlet {
             try {
                 request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
             } catch (SQLException ex) {
-                Logger.getLogger(View_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
             rd.forward(request, response);
@@ -44,7 +44,7 @@ public class View_Project_Servlet extends ManagerServlet {
             try {
                 request.setAttribute("projects", getDataValidator().getDellProjects());
             } catch (SQLException ex) {
-                Logger.getLogger(View_Project_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
