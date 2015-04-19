@@ -50,7 +50,7 @@
             </p>
 
             <p>
-                status is: ${status}
+                status is: <h4>${status}</h4><form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">eksempel: godkend</button> </form> <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">eksepel: afvis</button> </form>
             </p>
 
             <p>

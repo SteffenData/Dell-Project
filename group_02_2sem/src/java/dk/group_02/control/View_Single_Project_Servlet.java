@@ -52,7 +52,7 @@ public class View_Single_Project_Servlet extends ManagerServlet
         request.setAttribute("cost", cost);
         request.setAttribute("status", status);
         request.setAttribute("description", description);
-        request.setAttribute("startDgoalate", goal);
+        request.setAttribute("goal", goal);
 
         RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
         rd.forward(request, response);
