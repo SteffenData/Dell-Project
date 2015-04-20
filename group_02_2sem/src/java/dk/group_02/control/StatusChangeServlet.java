@@ -49,7 +49,7 @@ public class StatusChangeServlet extends ManagerServlet
             //Her skal status ændres til afvist på samme måde som 1.
         }
 
-        if (statusValue == 1)
+        if (request.getAttribute("statusBox") == "1")
         {
             double cost = (double) s.getAttribute("cost");
             try
