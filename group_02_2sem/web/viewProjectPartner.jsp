@@ -60,8 +60,7 @@
                         <th>Start date</th>
                         <th>Project name</th>
                         <th>Status</th>
-                        <th>Partner name</th>
-                        <th>Country</th>
+                        <th>See info</th>
                     </tr>
                 </thead>          
                 <tbody>
@@ -71,8 +70,6 @@
                             <td><p class="tableText">${p.startDate}</p></td>
                             <td><p class="tableText">${p.projectName}</p></td>
                             <td><p class="tableText">${p.status}</p></td>
-                            <td><p class="tableText">${p.partner.partnerName}</p></td>
-                            <td><p class="tableText">${p.partner.country}</p></td>
                             <td>
                                 <form action="View_Single_Project_Servlet" method="post">
                                     <input type="hidden" name="choice" value="${p.startDate}">
@@ -81,7 +78,6 @@
                                     <input type="hidden" name="choice3" value="${p.status}">
                                     <input type="hidden" name="choice4" value="${p.description}">
                                     <input type="hidden" name="choice5" value="${p.goal}">
-                                    
                                     <button type="submit">
                                         <p>
                                             Press here to see project details

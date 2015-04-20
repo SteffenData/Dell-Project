@@ -60,16 +60,12 @@
             <p>
                 Description of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="description" readonly="" style="text-align: left">
-                ${description}
-            </textarea>
+            <textarea type="text" cols="40" rows="6" name="description" readonly="" style="text-align: left">${description}</textarea>
 
             <p>
                 Goal of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">
-                ${goal}
-            </textarea>
+            <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">${goal}</textarea>
         </div>
     </body>
 </html>
