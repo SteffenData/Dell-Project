@@ -41,7 +41,7 @@ public class StatusChangeServlet extends ManagerServlet
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
-        int statusValue = (int) request.getAttribute("status");
+        int statusValue = Integer.parseInt("status");
         HttpSession s = request.getSession();
 
         if (statusValue == 0)
