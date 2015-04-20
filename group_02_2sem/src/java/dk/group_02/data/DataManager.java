@@ -153,6 +153,36 @@ public class DataManager implements Manager
         return finalProject;
 
     }
+    
+    public void approveProject(Project project) throws SQLException{
+        
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        
+        try
+        {
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+            int projectId = getProjectId(project);
+
+            String query = "UPDATE partners set status='Awaiting POE' where projectID = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, projectId);
+            rs = statement.executeQuery();
+            } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
+            statement.close();
+            connection.close();
+
+        }
+        
+    }
 
     public InputStream getUpload(Project project) throws SQLException
     {

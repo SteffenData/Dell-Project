@@ -87,5 +87,10 @@ public class DataValidator {
         Partner partner = manager.getPartnerByUserName(userName);
         return partner;
     }
+    
+    public void approveProject(Project project) throws SQLException{
+        
+        manager.approveProject(project);
+    }
 
 }

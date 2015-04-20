@@ -38,6 +38,8 @@ public interface Manager
     
     public Partner getPartnerByUserName(String userName) throws SQLException;
     
+    public void approveProject(Project project) throws SQLException;
+    
     
      
             
