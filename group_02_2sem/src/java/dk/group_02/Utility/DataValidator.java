@@ -75,6 +75,12 @@ public class DataValidator {
 
     }
     
+    public Project getSameProject(Project project) throws SQLException{
+       
+        Project sameProject = manager.getSameProject(project);
+        return sameProject;
+    }
+    
     public boolean getLogin(String usrName, String password) throws SQLException {
         if(usrName.isEmpty() || password.isEmpty())
             return false;
@@ -91,6 +97,11 @@ public class DataValidator {
     public void approveProject(Project project) throws SQLException{
         
         manager.approveProject(project);
+    }
+    
+    public void rejectProject(Project project) throws SQLException{
+        
+        manager.rejectProject(project);
     }
 
 }

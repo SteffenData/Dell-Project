@@ -43,12 +43,12 @@ public class TestofCreateProject {
     public void testOpretTrue() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
         
         manager.SaveProject(project);
-        assertTrue(project.getProjectName().equals(manager.getProject(project).getProjectName()));
-        assertTrue(project.getGoal().equals(manager.getProject(project).getGoal()));
-        assertTrue(project.getDescription().equals(manager.getProject(project).getDescription()));
-        assertTrue(project.getProjectName().equals(manager.getProject(project).getProjectName()));
-        assertTrue(project.getStartDate().equals(manager.getProject(project).getStartDate()));
-        assertTrue(project.getStatus().equals(manager.getProject(project).getStatus()));
+        assertTrue(project.getProjectName().equals(manager.getSameProject(project).getProjectName()));
+        assertTrue(project.getGoal().equals(manager.getSameProject(project).getGoal()));
+        assertTrue(project.getDescription().equals(manager.getSameProject(project).getDescription()));
+        assertTrue(project.getProjectName().equals(manager.getSameProject(project).getProjectName()));
+        assertTrue(project.getStartDate().equals(manager.getSameProject(project).getStartDate()));
+        assertTrue(project.getStatus().equals(manager.getSameProject(project).getStatus()));
         
         
     }

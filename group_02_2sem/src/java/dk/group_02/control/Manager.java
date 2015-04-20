@@ -19,6 +19,8 @@ public interface Manager
 {
 
     public Collection<Project> getDellProjects() throws SQLException;
+    
+    public Project getSameProject(Project project) throws SQLException;
 
     public Collection<Project> getPartnerProjects(Partner partner) throws SQLException;
 
@@ -39,6 +41,8 @@ public interface Manager
     public Partner getPartnerByUserName(String userName) throws SQLException;
     
     public void approveProject(Project project) throws SQLException;
+    
+    public void rejectProject(Project project) throws SQLException;
     
     
      

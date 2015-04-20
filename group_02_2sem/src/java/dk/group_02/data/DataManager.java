@@ -559,4 +559,45 @@ public class DataManager implements Manager
         }
 
     }
+    
+    public Project getSameProject(Project project) throws SQLException
+    {
+
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        Project finalProject = null;
+
+        try
+        {
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            String partnerID = getPartnerID(project.getPartner().getPartnerName(), project.getPartner().getCountry());
+
+            String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, project.getProjectName());
+            statement.setString(2, partnerID);
+            rs = statement.executeQuery();
+            if (rs.next())
+            {
+                String startDate = rs.getString("startDate");
+                finalProject = new Project(startDate.substring(0, 10), rs.getString("projectName"),
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId")));
+            }
+        } catch (ClassNotFoundException | SQLException ex)
+        {
+        } finally
+        {
+            statement.close();
+            connection.close();
+
+        }
+        return finalProject;
+
+    }
 }
