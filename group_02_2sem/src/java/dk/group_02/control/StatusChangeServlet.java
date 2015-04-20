@@ -5,8 +5,11 @@
  */
 package dk.group_02.control;
 
+import dk.group_02.Entity.Project;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,8 +51,17 @@ public class StatusChangeServlet extends ManagerServlet
 
         if (statusValue == 1)
         {
-            
-            getDataValidator().approveProject(s.getAttribute("startDate", "projectName", "cost"));
+            double cost = (double) s.getAttribute("cost");
+            try
+            {
+                Project project = getDataValidator().getProject("startDate", "projectName", cost);
+                getDataValidator().approveProject(project);
+            } catch (SQLException e)
+            {
+
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
+            rd.forward(request, response);
         }
     }
 
