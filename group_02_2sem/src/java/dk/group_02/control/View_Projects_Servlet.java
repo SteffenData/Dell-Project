@@ -6,8 +6,11 @@
 package dk.group_02.control;
 
 import dk.group_02.Entity.Partner;
+import dk.group_02.Entity.Project;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -23,36 +26,45 @@ import javax.servlet.http.HttpSession;
  *
  * @author steffen
  */
-@WebServlet(name = "View_Project_Servlet", urlPatterns = {"/View_Project_Servlet"})
-public class View_Projects_Servlet extends ManagerServlet {
+@WebServlet(name = "View_Project_Servlet", urlPatterns =
+{
+    "/View_Project_Servlet"
+})
+public class View_Projects_Servlet extends ManagerServlet
+{
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
 
-          Partner partner = (Partner) request.getSession().getAttribute("partner");
+        Partner partner = (Partner) request.getSession().getAttribute("partner");
 
-        if (partner != null) {
-            try {
+        if (partner != null)
+        {
+            try
+            {
                 request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
-            } catch (SQLException ex) {
+            } catch (SQLException ex)
+            {
                 Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
             rd.forward(request, response);
 
-        } else {
-            try {
+        } else
+        {
+            try
+            {
                 request.setAttribute("projects", getDataValidator().getDellProjects());
-            } catch (SQLException ex) {
+            } catch (SQLException ex)
+            {
                 Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
         }
- 
 
-        }
-   
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -65,11 +77,10 @@ public class View_Projects_Servlet extends ManagerServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
-    
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -81,7 +92,8 @@ public class View_Projects_Servlet extends ManagerServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -91,7 +103,8 @@ public class View_Projects_Servlet extends ManagerServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 
@@ -109,5 +122,4 @@ public class View_Projects_Servlet extends ManagerServlet {
 //        return ctrl;
 //        
 //    }
-    
 }

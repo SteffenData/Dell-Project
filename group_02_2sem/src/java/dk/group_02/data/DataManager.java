@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */ 
+ */
 package dk.group_02.data;
 
 import dk.group_02.Entity.Partner;
@@ -57,7 +57,7 @@ public class DataManager implements Manager
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 dellProjects.add(new Project(
                         subStartDate, rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId"))));
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId"))));
             }
         } catch (ClassNotFoundException ex)
         {
@@ -98,7 +98,7 @@ public class DataManager implements Manager
             {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 partnerProjects.add(new Project(subStartDate, rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId"))));
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId"))));
             }
         } catch (ClassNotFoundException | SQLException ex)
         {
@@ -140,7 +140,7 @@ public class DataManager implements Manager
             {
                 String startDate = rs.getString("startDate");
                 finalProject = new Project(startDate.substring(0, 10), rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartner(rs.getString("partnerId")));
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId")));
             }
         } catch (ClassNotFoundException | SQLException ex)
         {
@@ -273,7 +273,7 @@ public class DataManager implements Manager
 
     }
 
-    public Partner getPartner(String userName) throws SQLException
+    public Partner getPartnerByUserName(String userName) throws SQLException
     {
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -296,8 +296,46 @@ public class DataManager implements Manager
 
             if (rs.next())
             {
-                partner = new Partner(rs.getString("partnerName"),rs.getString("country"));
+                partner = new Partner(rs.getString("partnerName"), rs.getString("country"));
                 System.out.println("$$$$$$$$ partner - datamanager" + partner);
+            }
+        } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
+            statement.close();
+            connection.close();
+
+        }
+        return partner;
+
+    }
+
+    public Partner getPartnerById(String partnerId) throws SQLException
+    {
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        Partner partner = null;
+        try
+        {
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            String query = "SELECT partnername,country FROM partners where partnerid =?";
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, partnerId);
+            rs = statement.executeQuery();
+
+            if (rs.next())
+            {
+                partner = new Partner(rs.getString("partnername"), rs.getString("country"));
+                
             }
         } catch (ClassNotFoundException ex)
         {
@@ -394,7 +432,7 @@ public class DataManager implements Manager
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
-        boolean returnVariable  = false;
+        boolean returnVariable = false;
 
         try
         {
@@ -405,9 +443,7 @@ public class DataManager implements Manager
 
             Class.forName(DataOracleAccessor.DRIVER);
 
-
             String query = "SELECT * FROM USERS where username =? and password =?";
-            
 
             statement = connection.prepareStatement(query);
             statement.setString(1, usrName);
@@ -418,7 +454,7 @@ public class DataManager implements Manager
             {
                 returnVariable = true;
             }
-           
+
         } catch (ClassNotFoundException ex)
         {
         } finally

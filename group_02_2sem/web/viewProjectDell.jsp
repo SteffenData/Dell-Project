@@ -65,8 +65,9 @@
                 <tbody>
                     <tr></tr>
                     <c:forEach var="p" items="${projects}">
+                        
                         <tr>
-                            <td><p class="tableText">${p.startDate}</p></td>
+                            <td><p class="tableText">${p.startDate} </p></td>
                             <td><p class="tableText">${p.projectName}</p></td>
                             <td><p class="tableText">${p.status}</p></td>
                             <td><p class="tableText">${p.partner.partnerName}</p></td>

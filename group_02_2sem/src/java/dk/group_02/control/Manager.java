@@ -36,7 +36,7 @@ public interface Manager
 
     public void SaveLogin(String username, String password, int partnerOrDel) throws SQLException;
     
-    public Partner getPartner(String userName) throws SQLException;
+    public Partner getPartnerByUserName(String userName) throws SQLException;
     
     
      

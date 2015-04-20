@@ -84,7 +84,7 @@ public class DataValidator {
     }
     
     public Partner getPartner(String userName) throws SQLException{
-        Partner partner = manager.getPartner(userName);
+        Partner partner = manager.getPartnerByUserName(userName);
         return partner;
     }
 
