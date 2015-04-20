@@ -60,10 +60,14 @@ public class View_Single_Project_Servlet extends ManagerServlet
         request.setAttribute("goal", goal);
         request.setAttribute("partnerName", partnerName);
 
-        
-         Partner partner = (Partner) request.getSession().getAttribute("partner");
+        s.setAttribute("startDate", startDate);
+        s.setAttribute("projectName", projectName);
+        s.setAttribute("cost", cost);
 
-        if (partner != null) {
+        Partner partner = (Partner) request.getSession().getAttribute("partner");
+
+        if (partner != null)
+        {
 //            try {
 //                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
 //            } catch (SQLException ex) {
@@ -72,7 +76,8 @@ public class View_Single_Project_Servlet extends ManagerServlet
             RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectPartner.jsp");
             rd.forward(request, response);
 
-        } else {
+        } else
+        {
 //            try {
 //                request.setAttribute("projects", getDataValidator().getDellProjects());
 //            } catch (SQLException ex) {
@@ -81,11 +86,6 @@ public class View_Single_Project_Servlet extends ManagerServlet
             RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
             rd.forward(request, response);
         }
-        
-        
-        
-        
-        
 
     }
 

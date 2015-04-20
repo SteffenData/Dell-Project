@@ -72,8 +72,9 @@
             </p>
             <textarea type="text" cols="40" rows="6" name="goal" readonly="">${goal}</textarea><br><br><br>
             
-            <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">Approve</button></form><br>
-            <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">Reject</button></form>
+            <form action="StatusChangeServlet"> <button type="submmit" name="status" value="1">Approve</button></form>
+            <br>
+            <form action="StatusChangeServlet"> <input type="submit" name="status" value="0">Reject</button></form>
             
         </div>
     </body>

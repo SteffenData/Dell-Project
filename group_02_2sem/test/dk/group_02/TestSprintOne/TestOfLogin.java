@@ -20,7 +20,7 @@ import org.junit.Test;
  */
 public class TestOfLogin {
     
-    
+    //bestået (så fremt databasen ikke er hest
     @Test
     public void testAfLogInTrue()
     {  
@@ -35,7 +35,7 @@ public class TestOfLogin {
             Logger.getLogger(TestofCreateProject.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    //bestået
         @Test
     public void testAfLogInFalse()
     {  
