@@ -113,7 +113,7 @@ public class DataManager implements Manager
 
     }
 
-    public Project getProject(Project project) throws SQLException
+    public Project getProject(String startDate, String projectName, Double cost) throws SQLException
     {
 
         ResultSet rs = null;
@@ -128,18 +128,17 @@ public class DataManager implements Manager
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String partnerID = getPartnerID(project.getPartner().getPartnerName(), project.getPartner().getCountry());
-
-            String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
+            String query = "SELECT * FROM projects where startdate = ? and projectname = ? and cost = ?";
 
             statement = connection.prepareStatement(query);
-            statement.setString(1, project.getProjectName());
-            statement.setString(2, partnerID);
+            statement.setString(1, startDate);
+            statement.setString(2, projectName);
+            statement.setDouble(3, cost);
             rs = statement.executeQuery();
             if (rs.next())
             {
-                String startDate = rs.getString("startDate");
-                finalProject = new Project(startDate.substring(0, 10), rs.getString("projectName"),
+                
+                finalProject = new Project(rs.getString("startdate"), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId")));
             }
         } catch (ClassNotFoundException | SQLException ex)
@@ -169,6 +168,36 @@ public class DataManager implements Manager
             int projectId = getProjectId(project);
 
             String query = "UPDATE partners set status='Awaiting POE' where projectID = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, projectId);
+            rs = statement.executeQuery();
+            } catch (ClassNotFoundException ex)
+        {
+        } finally
+        {
+            statement.close();
+            connection.close();
+
+        }
+        
+    }
+    
+    public void rejectProject(Project project) throws SQLException{
+        
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        Connection connection = null;
+        
+        try
+        {
+
+            Class.forName(DataOracleAccessor.DRIVER);
+
+            connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
+            int projectId = getProjectId(project);
+
+            String query = "UPDATE partners set status='Project rejected' where projectID = ?";
 
             statement = connection.prepareStatement(query);
             statement.setInt(1, projectId);

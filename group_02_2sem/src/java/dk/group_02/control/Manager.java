@@ -22,7 +22,7 @@ public interface Manager
 
     public Collection<Project> getPartnerProjects(Partner partner) throws SQLException;
 
-    public Project getProject(Project project) throws SQLException;
+    public Project getProject(String startDate, String projectName, Double cost) throws SQLException;
 
     public InputStream getUpload(Project project) throws SQLException;
 

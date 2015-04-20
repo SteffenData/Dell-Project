@@ -68,9 +68,9 @@ public class DataValidator {
         return outPartner;
     }
 
-    public Project getProject(Project project) throws SQLException {
+    public Project getProject(String startDate, String projectName, Double cost) throws SQLException {
 
-        Project outproject = manager.getProject(project);
+        Project outproject = manager.getProject(startDate,projectName,cost);
         return outproject;
 
     }
