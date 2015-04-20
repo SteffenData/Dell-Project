@@ -35,7 +35,7 @@ public class Index_Servlet extends ManagerServlet {
             if (getDataValidator().getLogin(username, password)) {
 //              System.out.println("11111" + getDataValidator());
                 partner = getDataValidator().getPartner(username);
-                System.out.println("$$$$$$$$$  hej ----------$$$$$$$$$$" + partner);
+               
                
                 HttpSession s = request.getSession();
                 s.setMaxInactiveInterval(60 * 60);
