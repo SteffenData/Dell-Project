@@ -5,8 +5,12 @@
  */
 package dk.group_02.control;
 
+import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,6 +49,7 @@ public class View_Single_Project_Servlet extends ManagerServlet
         String status = request.getParameter("choice3");
         String description = request.getParameter("choice4");
         String goal = request.getParameter("choice5");
+        String partnerName = request.getParameter("choice6");
 
         HttpSession s = request.getSession();
         request.setAttribute("startDate", startDate);
@@ -53,9 +58,34 @@ public class View_Single_Project_Servlet extends ManagerServlet
         request.setAttribute("status", status);
         request.setAttribute("description", description);
         request.setAttribute("goal", goal);
+        request.setAttribute("partnerName", partnerName);
 
-        RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
-        rd.forward(request, response);
+        
+         Partner partner = (Partner) request.getSession().getAttribute("partner");
+
+        if (partner != null) {
+//            try {
+//                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
+//            } catch (SQLException ex) {
+//                Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectPartner.jsp");
+            rd.forward(request, response);
+
+        } else {
+//            try {
+//                request.setAttribute("projects", getDataValidator().getDellProjects());
+//            } catch (SQLException ex) {
+//                Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
+            rd.forward(request, response);
+        }
+        
+        
+        
+        
+        
 
     }
 

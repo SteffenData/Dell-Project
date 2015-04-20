@@ -46,15 +46,15 @@
             </h1>
 
             <p>
-                starting date: ${startDate}
+                Starting date: <strong>${startDate}</strong>
             </p>
 
             <p>
-                status is: <h4>${status}</h4><form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">eksempel: godkend</button> </form> <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">eksepel: afvis</button> </form>
+                Status is: <strong>${status}</strong> 
             </p>
 
             <p>
-                projected costs of the project: ${cost}
+                projected costs of the project: <strong>${cost}</strong>
             </p>
 
             <p>

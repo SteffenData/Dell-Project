@@ -78,7 +78,8 @@
                                     <input type="hidden" name="choice2" value="${p.cost}">
                                     <input type="hidden" name="choice3" value="${p.status}">
                                     <input type="hidden" name="choice4" value="${p.description}">
-                                    <input type="hidden" name="choice5" value="${p.goal}">,
+                                    <input type="hidden" name="choice5" value="${p.goal}">
+                                    <input type="hidden" name="choice6" value="${p.partner.partnerName}">
                                     <button type="submit">
                                         <p>
                                             Press here to see project details

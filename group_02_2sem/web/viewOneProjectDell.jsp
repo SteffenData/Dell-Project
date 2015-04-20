@@ -49,19 +49,19 @@
             <h1>
                 ${projectName}
             </h1>
-
+            
             <p>
-                starting date: ${startDate}
+                Partner: <strong>${partnerName}</strong>
             </p>
 
             <p>
-                status is: <h4>${status}</h4><form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">eksempel: godkend</button> </form> <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">eksepel: afvis</button> </form>
+                Starting date: <strong>${startDate}</strong>
             </p>
 
             <p>
-                projected costs of the project: ${cost}
+                Projected costs of the project: <strong>${cost}</strong>
             </p>
-
+            <p>Status is: <strong>${status}</strong></p>
             <p>
                 Description of the project: 
             </p>
@@ -70,7 +70,11 @@
             <p>
                 Goal of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="goal" readonly="">${goal}</textarea>
+            <textarea type="text" cols="40" rows="6" name="goal" readonly="">${goal}</textarea><br><br><br>
+            
+            <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">Approve</button></form><br>
+            <form action="Whatever servlet der rent faktisk skal ændre status"> <button type="submit">Reject</button></form>
+            
         </div>
     </body>
 </html>
