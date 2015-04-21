@@ -1,3 +1,5 @@
+package dk.group_02.Entity.tilEgetForbrug.SkalIkkeMedIEndeligeProgram;
+
 //package dk.group_02.Utility;
 //
 //import java.io.OutputStream;

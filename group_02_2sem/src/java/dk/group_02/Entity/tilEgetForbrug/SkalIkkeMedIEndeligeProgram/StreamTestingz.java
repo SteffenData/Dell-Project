@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.Utility;
+package dk.group_02.Entity.tilEgetForbrug.SkalIkkeMedIEndeligeProgram;
 
 import java.io.InputStream;
 import java.io.FileOutputStream;
