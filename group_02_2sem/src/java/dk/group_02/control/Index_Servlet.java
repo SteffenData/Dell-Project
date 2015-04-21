@@ -32,9 +32,9 @@ public class Index_Servlet extends ManagerServlet {
         Partner partner = null;
 
         try {
-            if (getDataValidator().getLogin(username, password)) {
-//              System.out.println("11111" + getDataValidator());
-                partner = getDataValidator().getPartner(username);
+            if (getController().getLogin(username, password)) {
+//              System.out.println("11111" + getController());
+                partner = getController().getPartner(username);
                
                
                 HttpSession s = request.getSession();

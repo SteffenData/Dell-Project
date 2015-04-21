@@ -8,7 +8,7 @@ package dk.group_02.TestSprintOne;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;
-import dk.group_02.Utility.DataValidator;
+import dk.group_02.Utility.Controller;
 import dk.group_02.control.Manager;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +27,7 @@ public class TestofCreateProject {
     Partner partner;
     Project project;
     Manager manager;
-    DataValidator validator;
+    Controller validator;
     
     @Before
     public void setUp() {
@@ -35,7 +35,7 @@ public class TestofCreateProject {
         partner = new Partner("Dell", "Denmark");
         project = new Project("1992-10-10", "huli", 1.0, "gold", "silver", "mikkel", partner);
         manager = new DataManager();
-        validator = new DataValidator();
+        validator = new Controller();
         
     }
     

@@ -20,11 +20,11 @@ import java.util.logging.Logger;
  *
  * @author steffen
  */
-public class DataValidator {
+public class Controller {
 
     Manager manager;
 
-    public DataValidator() {
+    public Controller() {
         this.manager = new DataManager();
     }
 

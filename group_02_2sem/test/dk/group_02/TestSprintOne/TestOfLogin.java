@@ -5,7 +5,7 @@
  */
 package dk.group_02.TestSprintOne;
 
-import dk.group_02.Utility.DataValidator;
+import dk.group_02.Utility.Controller;
 import dk.group_02.data.DataManager;
 import java.sql.SQLException;
 import java.util.logging.Level;

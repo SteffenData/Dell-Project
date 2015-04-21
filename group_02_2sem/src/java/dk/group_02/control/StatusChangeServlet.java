@@ -53,8 +53,8 @@ public class StatusChangeServlet extends ManagerServlet
             String startDate = (String) s.getAttribute("startDate");
             try
             {
-                Project project = getDataValidator().getProject(startDate, projectName, cost.doubleValue());
-                getDataValidator().rejectProject(project);
+                Project project = getController().getProject(startDate, projectName, cost.doubleValue());
+                getController().rejectProject(project);
             } catch (SQLException e)
             {
             }
@@ -69,8 +69,8 @@ public class StatusChangeServlet extends ManagerServlet
             String startDate = (String) s.getAttribute("startDate");
             try
             {
-                Project project = getDataValidator().getProject(startDate, projectName, cost.doubleValue());
-                getDataValidator().approveProject(project);
+                Project project = getController().getProject(startDate, projectName, cost.doubleValue());
+                getController().approveProject(project);
             } catch (SQLException e)
             {
             }
