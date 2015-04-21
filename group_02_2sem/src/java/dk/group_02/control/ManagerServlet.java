@@ -5,7 +5,7 @@
  */
 package dk.group_02.control;
 
-import dk.group_02.Utility.DataValidator;
+import dk.group_02.Utility.Controller;
 import dk.group_02.data.DataManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,26 +22,24 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public abstract class ManagerServlet extends HttpServlet {
-    private DataValidator validator;
+    private Controller ctrl;
 
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         
         ServletContext application = getServletContext();
-        validator = (DataValidator) application.getAttribute("validator");
-        if (validator == null)
+        ctrl = (Controller) application.getAttribute("validator");
+        if (ctrl == null)
         {
             // Start new session
-            validator = new DataValidator();
-            application.setAttribute("validator", validator);     
-        }
-        
-        
+            ctrl = new Controller();
+            application.setAttribute("validator", ctrl);     
+        }   
    }
 
-    protected DataValidator getDataValidator() {
-        return validator;
+    protected Controller getController() {
+        return ctrl;
     }
         
       

@@ -43,7 +43,7 @@ public class View_Projects_Servlet extends ManagerServlet
         {
             try
             {
-                request.setAttribute("projects", getDataValidator().getPartnerProjects(partner));
+                request.setAttribute("projects", getController().getPartnerProjects(partner));
             } catch (SQLException ex)
             {
                 Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +55,7 @@ public class View_Projects_Servlet extends ManagerServlet
         {
             try
             {
-                request.setAttribute("projects", getDataValidator().getDellProjects());
+                request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException ex)
             {
                 Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
