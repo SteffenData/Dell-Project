@@ -45,7 +45,7 @@ public class View_Single_Project_Servlet extends ManagerServlet
 
         String startDate = request.getParameter("choice");
         String projectName = request.getParameter("choice1");
-        String cost = request.getParameter("choice2");
+        double cost = Double.parseDouble(request.getParameter("choice2"));
         String status = request.getParameter("choice3");
         String description = request.getParameter("choice4");
         String goal = request.getParameter("choice5");

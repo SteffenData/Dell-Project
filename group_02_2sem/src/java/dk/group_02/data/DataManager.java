@@ -112,15 +112,12 @@ public class DataManager implements Manager
         return partnerProjects;
 
     }
-
-    public Project getProject(String startDate, String projectName, Double cost) throws SQLException
+    public Project getProject(String startDate, String projectName, double cost) throws SQLException
     {
-
         ResultSet rs = null;
         PreparedStatement statement = null;
         Connection connection = null;
         Project finalProject = null;
-
         try
         {
 
@@ -128,8 +125,8 @@ public class DataManager implements Manager
 
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
 
-            String query = "SELECT * FROM projects where startdate = ? and projectname = ? and cost = ?";
-
+            String query = "SELECT * FROM PROJECTS WHERE STARTDATE =to_date(?,'YYYY-MM-DD') AND PROJECTNAME = ? AND COST = ?";
+            
             statement = connection.prepareStatement(query);
             statement.setString(1, startDate);
             statement.setString(2, projectName);
@@ -137,11 +134,10 @@ public class DataManager implements Manager
             rs = statement.executeQuery();
             if (rs.next())
             {
-                
                 finalProject = new Project(rs.getString("startdate"), rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId")));
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId")));
             }
-        } catch (ClassNotFoundException | SQLException ex)
+        } catch (ClassNotFoundException ex)
         {
         } finally
         {
@@ -167,7 +163,7 @@ public class DataManager implements Manager
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
             int projectId = getProjectId(project);
 
-            String query = "UPDATE partners set status='Awaiting POE' where projectID = ?";
+            String query = "UPDATE projects SET status='Awaiting POE' WHERE projectId = ?";
 
             statement = connection.prepareStatement(query);
             statement.setInt(1, projectId);
