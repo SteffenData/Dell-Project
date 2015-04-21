@@ -8,6 +8,7 @@ package dk.group_02.TestSprintOne;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.Utility.Controller;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -22,16 +23,28 @@ import static org.junit.Assert.*;
  */
 public class TestOfStatusChange
 {
+
     Controller ctrl = new Controller();
-    
+
     @Test
     public void testStatusChangeTrue()
     {
-       String abekat = LocalDate.now().toString();
-       Partner part = null;
-       Project p = new Project(abekat, "TestProject", 22, "Awaiting approval", "busters verden", "gooooooaaaal", part);
-       ctrl.approveProject();
-        
+        String abekat = LocalDate.now().toString();
+        Partner part = null;
+        Project p = new Project(abekat, "TestProject", 22.0, "Awaiting approval", "busters verden", "gooooooaaaal", part);
+
+        try
+        {
+            ctrl.approveProject(p);
+            Project pro = ctrl.getProject(abekat, "TestProject", 22);
+            
+            assertTrue(pro.getStatus() == "Awaiting POE");
+            
+        } 
+        catch (SQLException e)
+        {
+
+        }
     }
-    
+
 }
