@@ -29,7 +29,7 @@
 
             <a href="https://www.google.dk/">
                 <div class="menuButtons">
-                    <h3 class="menu" style="color: black">Dashboard</h3>
+                    <h3 class="menu" style="color: black">Coming soon</h3>
                 </div>
             </a>
             <a href="${pageContext.request.contextPath}/View_Project_Servlet">
@@ -39,12 +39,12 @@
             </a> 
             <a href="https://www.google.dk/">
                 <div class="menuButtons">
-                    <h3 class="menu" style="color: black">Budget</h3>
+                    <h3 class="menu" style="color: black">Coming soon</h3>
                 </div>
             </a> 
             <a href="https://www.google.dk/">
                 <div class="menuButtons">
-                    <h3 class="menu" style="color: black">#5</h3>
+                    <h3 class="menu" style="color: black">Coming soon</h3>
                 </div>
             </a>
         </div>
