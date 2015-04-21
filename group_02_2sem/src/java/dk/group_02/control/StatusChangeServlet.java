@@ -42,13 +42,24 @@ public class StatusChangeServlet extends ManagerServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         String statusValue = request.getParameter("statusBox");
-       // int statusValue = Integer.parseInt(request.getAttribute("statusBox"));
+        // int statusValue = Integer.parseInt(request.getAttribute("statusBox"));
 
         HttpSession s = request.getSession();
 
         if (statusValue.equalsIgnoreCase("0"))
         {
-            //Her skal status ændres til afvist på samme måde som 1.
+            Double cost = (Double) s.getAttribute("cost");
+            String projectName = (String) s.getAttribute("projectName");
+            String startDate = (String) s.getAttribute("startDate");
+            try
+            {
+                Project project = getDataValidator().getProject(startDate, projectName, cost.doubleValue());
+                getDataValidator().rejectProject(project);
+            } catch (SQLException e)
+            {
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
+            rd.forward(request, response);
         }
 
         if (statusValue.equalsIgnoreCase("1"))
@@ -63,7 +74,7 @@ public class StatusChangeServlet extends ManagerServlet
             } catch (SQLException e)
             {
             }
-            RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
         }
     }

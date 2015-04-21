@@ -193,7 +193,7 @@ public class DataManager implements Manager
             connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD);
             int projectId = getProjectId(project);
 
-            String query = "UPDATE partners set status='Project rejected' where projectID = ?";
+            String query = "UPDATE Projects set status='Project rejected' where projectID = ?";
 
             statement = connection.prepareStatement(query);
             statement.setInt(1, projectId);
