@@ -55,6 +55,7 @@ public class StatusChangeServlet extends ManagerServlet
             {
                 Project project = getController().getProject(startDate, projectName, cost.doubleValue());
                 getController().rejectProject(project);
+                request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e)
             {
             }
@@ -71,6 +72,7 @@ public class StatusChangeServlet extends ManagerServlet
             {
                 Project project = getController().getProject(startDate, projectName, cost.doubleValue());
                 getController().approveProject(project);
+                request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e)
             {
             }
