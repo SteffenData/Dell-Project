@@ -49,7 +49,7 @@
             <h1>
                 ${projectName}
             </h1>
-            
+
             <p>
                 Partner: <strong>${partnerName}</strong>
             </p>
@@ -71,11 +71,13 @@
                 Goal of the project: 
             </p>
             <textarea type="text" cols="40" rows="6" name="goal" readonly="">${goal}</textarea><br><br><br>
-            
-            <form action="StatusChangeServlet"> <button type="submmit" name="statusBox" value="1">Approve</button></form>
-            <br>
-            <form action="StatusChangeServlet"> <input type="submit" name="statusBox" value="0">Reject</button></form>
-            
+
+            <form action="StatusChangeServlet"> 
+                <button type="submit" name="statusBox" value="1">Approve</button> <button type="submit" name="statusBox" value="0">Reject</button>
+            </form>
+
+            <form action="StatusChangeServlet"> </form>
+
         </div>
     </body>
 </html>

@@ -41,15 +41,17 @@ public class StatusChangeServlet extends ManagerServlet
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
-        int statusValue = (int) request.getAttribute("statusBox");
+        String statusValue = request.getParameter("statusBox");
+       // int statusValue = Integer.parseInt(request.getAttribute("statusBox"));
+   
         HttpSession s = request.getSession();
 
-        if (statusValue == 0)
+        if (statusValue.equalsIgnoreCase(statusValue))
         {
             //Her skal status ændres til afvist på samme måde som 1.
         }
 
-        if (request.getAttribute("statusBox") == "1")
+        if (request.getParameter("statusBox") == "1")
         {
             double cost = (double) s.getAttribute("cost");
             try
