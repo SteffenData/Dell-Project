@@ -88,7 +88,7 @@ public class Controller {
        return manager.getLogin(usrName, password);        
     }
     
-    public Partner getPartner(String userName) throws SQLException{
+    public Partner getPartnerByUserName(String userName) throws SQLException{
         Partner partner = manager.getPartnerByUserName(userName);
         return partner;
     }

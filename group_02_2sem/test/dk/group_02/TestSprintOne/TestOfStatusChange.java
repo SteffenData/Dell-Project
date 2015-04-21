@@ -31,6 +31,7 @@ public class TestOfStatusChange
     {
         String abekat = LocalDate.now().toString();
         Partner part = null;
+        ctrl.saveProject(abekat, "TestProject", 22.0, "Awaiting approval", "busters verden", part, "gooooooaaaal");
         Project p = new Project(abekat, "TestProject", 22.0, "Awaiting approval", "busters verden", "gooooooaaaal", part);
 
         try

@@ -34,7 +34,7 @@ public class Index_Servlet extends ManagerServlet {
         try {
             if (getController().getLogin(username, password)) {
 //              System.out.println("11111" + getController());
-                partner = getController().getPartner(username);
+                partner = getController().getPartnerByUserName(username);
                
                
                 HttpSession s = request.getSession();
