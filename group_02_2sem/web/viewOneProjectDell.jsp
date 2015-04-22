@@ -47,37 +47,36 @@
         <div class="centerBox"> 
             <div id="overskrift"><strong>View one project</strong></div>
             <h1>
-                ${projectName}
+                ${project.projectName}
             </h1>
 
             <p>
-                Partner: <strong>${partnerName}</strong>
+                Partner: <strong>${project.partner.partnerName}</strong>
             </p>
 
             <p>
-                Starting date: <strong>${startDate}</strong>
+                Starting date: <strong>${project.startDate}</strong>
             </p>
 
             <p>
-                Projected costs of the project: <strong>${cost}</strong>
+                Projected costs of the project: <strong>${project.cost}</strong>
             </p>
-            <p>Status is: <strong>${status}</strong></p>
+            <p>Status is: <strong>${project.status}</strong></p>
             <p>
                 Description of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="description" readonly="">${description}</textarea>
+            <textarea type="text" cols="40" rows="6" name="description" readonly="">${project.description}</textarea>
 
+           
             <p>
                 Goal of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="goal" readonly="">${goal}</textarea><br><br><br>
+            <textarea type="text" cols="40" rows="6" name="goal" readonly="">${project.goal}</textarea><br><br><br> 
 
             <form action="StatusChangeServlet"> 
+                  <input type ="hidden" name="projectId" value="${project.projectId}" >
                 <button type="submit" name="statusBox" value="1">Approve</button> <button type="submit" name="statusBox" value="0">Reject</button>
             </form>
-
-            <form action="StatusChangeServlet"> </form>
-
         </div>
     </body>
 </html>

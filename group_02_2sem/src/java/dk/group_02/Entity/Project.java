@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dk.group_02.Entity;
 
 import java.io.File;
@@ -14,6 +9,7 @@ import java.io.InputStream;
  * @author steffen
  */
 public class Project {
+    private int projectId;
     private String startDate;
     private String projectName;
     private Double cost;
@@ -35,7 +31,8 @@ public class Project {
 //        this.upload = upload;
 //        this.goal = goal;
 //    }
-    public Project(String startDate, String projectName, Double cost,String status, String description, String goal,Partner partner) {
+    public Project(int projectId, String startDate, String projectName, Double cost,String status, String description, String goal,Partner partner) {
+        this.projectId = projectId;
         this.startDate = startDate;
         this.projectName = projectName;
         this.cost = cost;
@@ -46,6 +43,14 @@ public class Project {
         this.partner = partner;
     }
 
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
     public String getStartDate() {
         return startDate;
     }
@@ -103,8 +108,7 @@ public class Project {
 
     public void setUpload(File upload) {
         this.upload = upload;
-    }
-    
+    }    
 
     public Partner getPartner() {
         return partner;
@@ -112,7 +116,6 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "startDate=" + startDate + ", projectName=" + projectName + ", cost=" + cost + ", status=" + status + ", description=" + description + ", upload=" + upload + ", goal=" + goal + ", partner=" + partner + '}';
+        return "Project{" + "projectId=" + projectId + ", startDate=" + startDate + ", projectName=" + projectName + ", cost=" + cost + ", status=" + status + ", description=" + description + ", upload=" + upload + ", goal=" + goal + ", partner=" + partner + '}';
     }
-    
 }

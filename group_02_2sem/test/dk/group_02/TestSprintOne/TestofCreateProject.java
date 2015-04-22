@@ -8,7 +8,7 @@ package dk.group_02.TestSprintOne;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;
-import dk.group_02.Utility.Controller;
+import dk.group_02.control.Controller;
 import dk.group_02.control.Manager;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,7 +56,8 @@ public class TestofCreateProject {
    
     @Test
     public void testOpretMedFileTrue() throws ClassNotFoundException, SQLException, FileNotFoundException {
-        File file = new File("C:\\Users\\steffen\\Documents\\NetBeansProjects\\eksamensProjectDell\\group_02_2sem\\task liste.jpg");
+        File file = new File("task liste.jpg");
+        
         project.setUpload(file);
         manager.SaveProject(project);
         

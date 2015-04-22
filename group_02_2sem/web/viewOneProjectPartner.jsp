@@ -42,30 +42,30 @@
         <div class="centerBox" > 
             <div id="overskrift"><strong>View one project</strong></div>
             <h1>
-                ${projectName}
+                ${project.projectName}
             </h1>
 
             <p>
-                Starting date: <strong>${startDate}</strong>
+                 Starting date: <strong>${project.startDate}</strong>
             </p>
 
             <p>
-                Status is: <strong>${status}</strong> 
+                Status is: <strong>${project.status}</strong> 
             </p>
 
             <p>
-                projected costs of the project: <strong>${cost}</strong>
+                projected costs of the project: <strong>${project.cost}</strong>
             </p>
 
             <p>
                 Description of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="description" readonly="" style="text-align: left">${description}</textarea>
+            <textarea type="text" cols="40" rows="6" name="description" readonly="" style="text-align: left">${project.description}</textarea>
 
             <p>
                 Goal of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">${goal}</textarea>
+            <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">${project.goal}</textarea>
         </div>
     </body>
 </html>

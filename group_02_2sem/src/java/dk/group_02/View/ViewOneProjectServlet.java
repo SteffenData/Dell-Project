@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.control;
+package dk.group_02.View;
 
 import dk.group_02.Entity.Partner;
+import dk.group_02.Entity.Project;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,48 +20,47 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author steffen
+ * @author Pagh
  */
-@WebServlet(name = "Index_Servlet", urlPatterns = {"/Index_Servlet"})
-public class Index_Servlet extends ManagerServlet {
+@WebServlet(name = "View_Single_Project_Servlet", urlPatterns
+        = {
+            "/View_Single_Project_Servlet"
+        })
+public class ViewOneProjectServlet extends ManagerServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Partner partner = null;
-
         try {
-            if (getController().getLogin(username, password)) {
-//              System.out.println("11111" + getController());
-                partner = getController().getPartnerByUserName(username);
-               
-               
-                HttpSession s = request.getSession();
-                s.setMaxInactiveInterval(60 * 60);
+            response.setContentType("text/html;charset=UTF-8");
+            int projectId = Integer.parseInt(request.getParameter("projectId"));
+            Project project = getController().getProject(projectId);
+            request.setAttribute("project", project);
 
-                if (partner != null) {
-                    s.setAttribute("partner", partner);
-                    RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
-                    rd.forward(request, response);
-
-                } else {
-                    s.setAttribute("partner", partner);
-                    RequestDispatcher rd = request.getRequestDispatcher("dellHome.jsp");
-                    rd.forward(request, response);
-                }
-
-            } else {
-                request.setAttribute("message", "Incorrect username or password.");
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.forward(request, response);
-            }
         } catch (SQLException ex) {
-            request.setAttribute("message", "Incorrect username or password.");
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            Logger.getLogger(ViewOneProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Partner partner = (Partner) request.getSession().getAttribute("partner");
+
+        if (partner != null) {
+
+            RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectPartner.jsp");
+            rd.forward(request, response);
+
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
             rd.forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

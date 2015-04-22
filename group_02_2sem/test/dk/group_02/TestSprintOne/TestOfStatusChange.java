@@ -7,7 +7,7 @@ package dk.group_02.TestSprintOne;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
-import dk.group_02.Utility.Controller;
+import dk.group_02.control.Controller;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import org.junit.After;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.control;
+package dk.group_02.View;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
@@ -26,39 +26,31 @@ import javax.servlet.http.HttpSession;
  *
  * @author steffen
  */
-@WebServlet(name = "View_Project_Servlet", urlPatterns =
-{
-    "/View_Project_Servlet"
-})
-public class View_Projects_Servlet extends ManagerServlet
-{
+@WebServlet(name = "View_Project_Servlet", urlPatterns
+        = {
+            "/View_Project_Servlet"
+        })
+public class ViewProjectsServlet extends ManagerServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
 
         Partner partner = (Partner) request.getSession().getAttribute("partner");
 
-        if (partner != null)
-        {
-            try
-            {
+        if (partner != null) {
+            try {
                 request.setAttribute("projects", getController().getPartnerProjects(partner));
-            } catch (SQLException ex)
-            {
-                Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewProjectsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
             rd.forward(request, response);
 
-        } else
-        {
-            try
-            {
+        } else {
+            try {
                 request.setAttribute("projects", getController().getDellProjects());
-            } catch (SQLException ex)
-            {
-                Logger.getLogger(View_Projects_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewProjectsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
@@ -77,8 +69,7 @@ public class View_Projects_Servlet extends ManagerServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -92,8 +83,7 @@ public class View_Projects_Servlet extends ManagerServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -103,23 +93,8 @@ public class View_Projects_Servlet extends ManagerServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
-//     private Controller setApplicationContext(HttpServletRequest request, HttpServletResponse response)
-//    {
-//        ServletContext application = getServletContext();
-//        Controller ctrl = (Controller) application.getAttribute("Controller");
-//        if (ctrl == null)
-//        {
-//            // Start new session
-//            ctrl = new Controller();
-//            application.setAttribute("Controller", ctrl);
-//            
-//        }
-//        return ctrl;
-//        
-//    }
 }

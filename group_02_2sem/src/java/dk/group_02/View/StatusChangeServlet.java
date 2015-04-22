@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.control;
+package dk.group_02.View;
 
 import dk.group_02.Entity.Project;
 import java.io.IOException;
@@ -21,63 +21,55 @@ import javax.servlet.http.HttpSession;
  *
  * @author pagh
  */
-@WebServlet(name = "StatusChangeServlet", urlPatterns =
-{
-    "/StatusChangeServlet"
-})
-public class StatusChangeServlet extends ManagerServlet
-{
+@WebServlet(name = "StatusChangeServlet", urlPatterns
+        = {
+            "/StatusChangeServlet"
+        })
+public class StatusChangeServlet extends ManagerServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
+        try {
+
+  response.setContentType("text/html;charset=UTF-8");
         String statusValue = request.getParameter("statusBox");
+       
         // int statusValue = Integer.parseInt(request.getAttribute("statusBox"));
 
-        HttpSession s = request.getSession();
+        
 
-        if (statusValue.equalsIgnoreCase("0"))
-        {
-            Double cost = (Double) s.getAttribute("cost");
-            String projectName = (String) s.getAttribute("projectName");
-            String startDate = (String) s.getAttribute("startDate");
-            try
-            {
-                Project project = getController().getProject(startDate, projectName, cost.doubleValue());
+        if (statusValue.equalsIgnoreCase("0")) {
+           
+            int projectId = Integer.parseInt(request.getParameter("projectId"));
+          
+            try {
+                Project project = getController().getProject(projectId);
                 getController().rejectProject(project);
                 request.setAttribute("projects", getController().getDellProjects());
-            } catch (SQLException e)
-            {
+            } catch (SQLException e) {
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
         }
 
-        if (statusValue.equalsIgnoreCase("1"))
-        {
-            Double cost = (Double) s.getAttribute("cost");
-            String projectName = (String) s.getAttribute("projectName");
-            String startDate = (String) s.getAttribute("startDate");
-            try
-            {
-                Project project = getController().getProject(startDate, projectName, cost.doubleValue());
+        if (statusValue.equalsIgnoreCase("1")) {
+            int projectId = Integer.parseInt(request.getParameter("projectId"));
+         
+            try {
+                Project project = getController().getProject(projectId);
                 getController().approveProject(project);
                 request.setAttribute("projects", getController().getDellProjects());
-            } catch (SQLException e)
-            {
+            } catch (SQLException e) {
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
+        }  
+        } catch (Exception e) {
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.print("<h2>"+ e + "</h2> <hr/> <pre>" );
+            e.printStackTrace(out);
+            out.println("</pre>");
         }
     }
 
@@ -92,8 +84,7 @@ public class StatusChangeServlet extends ManagerServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -107,8 +98,7 @@ public class StatusChangeServlet extends ManagerServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -118,8 +108,7 @@ public class StatusChangeServlet extends ManagerServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.group_02.Utility;
+package dk.group_02.control;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
@@ -35,7 +35,7 @@ public class Controller {
         }
          if (validateProjectInfo(projectName, cost, status, description, goal)) {
              try {
-                    Project project = new Project(startDate, projectName, cost, status, description, goal, partner);
+                    Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
                     manager.SaveProject(project);
                     return true;
                 } catch (SQLException ex) {
@@ -68,8 +68,8 @@ public class Controller {
         return outPartner;
     }
 
-    public Project getProject(String startDate, String projectName, double cost) throws SQLException {
-        Project outproject = manager.getProject(startDate,projectName,cost);
+    public Project getProject(int projectId) throws SQLException {
+        Project outproject = manager.getProject(projectId);
         return outproject;
 
     }
