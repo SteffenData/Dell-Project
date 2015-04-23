@@ -18,7 +18,6 @@ public class Project {
     private File upload;
     private String goal;
     private Partner partner;
-    private String dellDescription;
 
     
 
@@ -42,7 +41,6 @@ public class Project {
         this.upload = null;
         this.goal = goal;
         this.partner = partner;
-        this.dellDescription = "";
     }
 
 
