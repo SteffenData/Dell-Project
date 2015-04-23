@@ -94,7 +94,7 @@ public class DataManager implements Manager {
     public Project getProject(int projectId) {
         ResultSet rs = null;
         PreparedStatement statement = null;
-        Project finalProject = null;
+        Project finalProject = null;huggabugga
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
 
             String query = "SELECT * FROM PROJECTS WHERE projectId = ?";
