@@ -27,15 +27,15 @@ public class TestofCreateProject {
     Partner partner;
     Project project;
     Manager manager;
-    Controller validator;
+    Controller ctrl;
     
     @Before
     public void setUp() {
         
-        partner = new Partner("Dell", "Denmark");
-        project = new Project("1992-10-10", "huli", 1.0, "gold", "silver", "mikkel", partner);
+        partner = new Partner("elgiganten", "Denmark");
+        project = new Project(0,"1992-10-10", "TestProject", 1.0, "testing", "test", "test", partner);
         manager = new DataManager();
-        validator = new Controller();
+        ctrl = new Controller();
         
     }
     
@@ -43,12 +43,13 @@ public class TestofCreateProject {
     public void testOpretTrue() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
         
         manager.SaveProject(project);
-        assertTrue(project.getProjectName().equals(manager.getSameProject(project).getProjectName()));
-        assertTrue(project.getGoal().equals(manager.getSameProject(project).getGoal()));
-        assertTrue(project.getDescription().equals(manager.getSameProject(project).getDescription()));
-        assertTrue(project.getProjectName().equals(manager.getSameProject(project).getProjectName()));
-        assertTrue(project.getStartDate().equals(manager.getSameProject(project).getStartDate()));
-        assertTrue(project.getStatus().equals(manager.getSameProject(project).getStatus()));
+        int testId = manager.getProjectId(project);
+        assertTrue(project.getProjectName().equals(manager.getProject(testId).getProjectName()));
+        assertTrue(project.getGoal().equals(manager.getProject(testId).getGoal()));
+        assertTrue(project.getDescription().equals(manager.getProject(testId).getDescription()));
+        assertTrue(project.getProjectName().equals(manager.getProject(testId).getProjectName()));
+        assertTrue(project.getStartDate().equals(manager.getProject(testId).getStartDate()));
+        assertTrue(project.getStatus().equals(manager.getProject(testId).getStatus()));
         
         
     }
@@ -67,13 +68,13 @@ public class TestofCreateProject {
     
     @Test
     public void testOpretFalse() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
-        assertFalse(validator.saveProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
-        assertFalse(validator.saveProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
-        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
-        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
-        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
-        assertFalse(validator.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
-        assertFalse(validator.saveProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
+        assertFalse(ctrl.saveProject(null, "huli", 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(ctrl.saveProject("1992-10-10", null, 1.0, "gold", "silver",partner , "mikkel"));
+        assertFalse(ctrl.saveProject("1992-10-10", "huli", 1.0, null, "silver",partner , "mikkel"));
+        assertFalse(ctrl.saveProject("1992-10-10", "huli", 1.0, "gold", null,partner , "mikkel"));
+        assertFalse(ctrl.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",partner , null));
+        assertFalse(ctrl.saveProject("1992-10-10", "huli", 1.0, "gold", "silver",null , "Mikkel"));
+        assertFalse(ctrl.saveProject("1992-10-10", "huli", null, "gold", "silver",partner , "Mikkel"));
          
     }
     
