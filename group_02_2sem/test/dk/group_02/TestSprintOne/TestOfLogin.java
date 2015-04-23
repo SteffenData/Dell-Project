@@ -25,30 +25,16 @@ public class TestOfLogin {
     public void testAfLogInTrue()
     {  
         DataManager manager = new DataManager();
-        try
-        {
-            manager.SaveLogin("bubber", "kasper", 1);
-            assertTrue(manager.getLogin("bubber", "kasper"));            
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(TestofCreateProject.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        manager.SaveLogin("testUsername", "testPassword", 1);
+        assertTrue(manager.getLogin("testUsername", "testPassword"));
     }
     //bestået
         @Test
     public void testAfLogInFalse()
     {  
         DataManager manager = new DataManager();
-        try
-        {
-            manager.SaveLogin("simba", "jurgen", 1);
-            assertFalse(manager.getLogin("bimba", "burgen"));            
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(TestofCreateProject.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        manager.SaveLogin("simba", "jurgen", 1);
+        assertFalse(manager.getLogin("bimba", "burgen"));
     }
     
 }
