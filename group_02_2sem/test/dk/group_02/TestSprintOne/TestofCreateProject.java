@@ -5,6 +5,7 @@ package dk.group_02.TestSprintOne;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.sun.xml.internal.ws.util.StringUtils;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;
@@ -28,6 +29,7 @@ public class TestofCreateProject {
     Project project;
     Manager manager;
     Controller ctrl;
+
     
     @Before
     public void setUp() {
@@ -37,6 +39,22 @@ public class TestofCreateProject {
         manager = new DataManager();
         ctrl = new Controller();
         
+        
+    }
+    
+    @Test
+    public void testOfValidateProjectInfo() {
+        
+        String mikkel = new String(new char[251]).replace('\0', 'm');
+        
+        assertTrue(ctrl.validateProjectInfo("allGood", 1.0, "status", "des", "goal"));
+        
+        assertFalse(ctrl.validateProjectInfo("thisNameIsMoreThanThirtyCharacters", 1.0, "status", "des", "goal"));
+        assertFalse(ctrl.validateProjectInfo("Name", 90000000.0, "status", "des", "goal"));
+        assertFalse(ctrl.validateProjectInfo("Name", 1.0, "thisNameIsMoreThanThirtyCharacters", "des", "goal"));
+        
+        assertFalse(ctrl.validateProjectInfo("allGood", 1.0, "status", mikkel, "goal"));
+        assertFalse(ctrl.validateProjectInfo("allGood", 1.0, "status", "des", mikkel));
     }
     
     @Test
