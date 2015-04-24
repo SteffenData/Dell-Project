@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static sun.security.jgss.GSSUtil.login;
 
 public class DataManager implements Manager {
 
@@ -43,7 +42,7 @@ public class DataManager implements Manager {
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
 
-            String query = "SELECT * FROM projects order by projectName";
+            String query = "SELECT * FROM projects order by 'Awaiting approval','Awaiting POE','Project rejected' , startDate";
 
             statement = connection.prepareStatement(query);
             rs = statement.executeQuery();
@@ -81,7 +80,7 @@ public class DataManager implements Manager {
             while (rs.next()) {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 partnerProjects.add(new Project(rs.getInt("projectId"), subStartDate, rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId"))));
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById((rs.getString("partnerID")))));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,7 +102,7 @@ public class DataManager implements Manager {
             statement.setInt(1, projectId);
             rs = statement.executeQuery();
             if (rs.next()) {
-                finalProject = new Project(rs.getInt("projectId"), rs.getString("startdate"), rs.getString("projectName"),
+                finalProject = new Project(rs.getInt("projectId"), rs.getString("startdate").substring(0,10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId")));
             }
         } catch (SQLException ex) {

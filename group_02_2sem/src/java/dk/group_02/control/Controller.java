@@ -45,7 +45,7 @@ public class Controller {
     }
 
      // Her tjecker vi for om projektet er rigtigt oprettet.
-    private boolean validateProjectInfo(String projectName, Double cost, String status, String description, String goal) {
+    public boolean validateProjectInfo(String projectName, Double cost, String status, String description, String goal) {
 
         if (projectName.length() > 30 || status.length() > 30 || cost > 10000000 || description.length() > 250 || goal.length() > 250) {
             return false;

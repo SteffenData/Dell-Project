@@ -42,17 +42,37 @@ public class TestOfStatusChange
     }
 
     @Test
-    public void testStatusChangeTrue()
+    public void testStatusChangeApproved()
     {
         
 
         try
         {
-            ctrl.approveProject(project);
+            ctrl.approveProject(project); // her ændrer vi status til awaiting POE
             System.out.println(project.getStatus());
             int testId = manager.getProjectId(project);
             
-            assertTrue("Awaiting POE".equals(manager.getProject(testId).getStatus()));
+            assertTrue("Awaiting POE".equals(manager.getProject(testId).getStatus())); // her ser vi om projektet har ændret status i databasen
+            
+        } 
+        catch (SQLException e)
+        {
+
+        }
+    }
+    
+    @Test
+    public void testStatusChangeRejected()
+    {
+        
+
+        try
+        {
+            ctrl.rejectProject(project); // her ændrer vi status til project rejected
+            System.out.println(project.getStatus());
+            int testId = manager.getProjectId(project);
+            
+            assertTrue("Project rejected".equals(manager.getProject(testId).getStatus())); // her ser vi om projektet har ændret status i databasen
             
         } 
         catch (SQLException e)
