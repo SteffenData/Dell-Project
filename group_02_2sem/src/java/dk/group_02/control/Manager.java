@@ -18,33 +18,33 @@ import java.util.Collection;
 public interface Manager
 {
 
-    public Collection<Project> getDellProjects() throws SQLException;
+    public Collection<Project> getDellProjects();
     
-    public Project getSameProject(Project project) throws SQLException;
+//    public Project getSameProject(Project project);
 
-    public Collection<Project> getPartnerProjects(Partner partner) throws SQLException;
+    public Collection<Project> getPartnerProjects(Partner partner);
 
-    public Project getProject(int projectId) throws SQLException;
+    public Project getProject(int projectId);
 
-    public InputStream getUpload(Project project) throws SQLException;
+    public InputStream getUpload(Project project);
 
-    public int getProjectId(Project project) throws SQLException;
+    public int getProjectId(Project project);
 
-    public String getPartnerID(String partnerName, String country) throws SQLException;
+    public String getPartnerID(String partnerName, String country);
 
-    public void SaveProject(Project project) throws SQLException;
+    public void SaveProject(Project project);
 
-    public boolean getLogin(String usrName, String password) throws SQLException;
+    public boolean getLogin(String usrName, String password);
 
-    public void SaveLogin(String username, String password, int partnerOrDel) throws SQLException;
+    public void SaveLogin(String username, String password, int partnerOrDel);
     
-    public Partner getPartnerByUserName(String userName) throws SQLException;
+    public Partner getPartnerByUserName(String userName);
     
-    public void approveProject(Project project) throws SQLException;
+    public void approveProject(Project project);
     
-    public void rejectProject(Project project) throws SQLException;
+    public void rejectProject(Project project);
     
-    
+    public Partner getPartnerById(String partnerId);
      
             
 }

@@ -392,33 +392,33 @@ public class DataManager implements Manager {
 
     }
 
-    public Project getSameProject(Project project) {
-
-        ResultSet rs = null;
-        PreparedStatement statement = null;
-
-        Project finalProject = null;
-
-        try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
-
-            String partnerID = getPartnerID(project.getPartner().getPartnerName(), project.getPartner().getCountry());
-
-            String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
-
-            statement = connection.prepareStatement(query);
-            statement.setString(1, project.getProjectName());
-            statement.setString(2, partnerID);
-            rs = statement.executeQuery();
-            if (rs.next()) {
-                String startDate = rs.getString("startDate");
-                finalProject = new Project(rs.getInt("projectId"), startDate.substring(0, 10), rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId")));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return finalProject;
-
-    }
+//    public Project getSameProject(Project project) {
+//
+//        ResultSet rs = null;
+//        PreparedStatement statement = null;
+//
+//        Project finalProject = null;
+//
+//        try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
+//
+//            String partnerID = getPartnerID(project.getPartner().getPartnerName(), project.getPartner().getCountry());
+//
+//            String query = "SELECT * FROM projects where projectname = ? and partnerId = ?";
+//
+//            statement = connection.prepareStatement(query);
+//            statement.setString(1, project.getProjectName());
+//            statement.setString(2, partnerID);
+//            rs = statement.executeQuery();
+//            if (rs.next()) {
+//                String startDate = rs.getString("startDate");
+//                finalProject = new Project(rs.getInt("projectId"), startDate.substring(0, 10), rs.getString("projectName"),
+//                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerByUserName(rs.getString("partnerId")));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        return finalProject;
+//
+//    }
 }

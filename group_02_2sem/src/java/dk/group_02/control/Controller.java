@@ -34,12 +34,9 @@ public class Controller {
             return false;
         }
          if (validateProjectInfo(projectName, cost, status, description, goal)) {
-             try {
-                    Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
-                    manager.SaveProject(project);
-                    return true;
-                } catch (SQLException ex) {
-                }
+             Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
+             manager.SaveProject(project);
+             return true;
             }
         return false;
     }
@@ -74,11 +71,11 @@ public class Controller {
 
     }
     
-    public Project getSameProject(Project project) throws SQLException{
-       
-        Project sameProject = manager.getSameProject(project);
-        return sameProject;
-    }
+//    public Project getSameProject(Project project) throws SQLException{
+//       
+//        Project sameProject = manager.getSameProject(project);
+//        return sameProject;
+//    }
     
     public boolean getLogin(String usrName, String password) throws SQLException {
         if(usrName.isEmpty() || password.isEmpty())
