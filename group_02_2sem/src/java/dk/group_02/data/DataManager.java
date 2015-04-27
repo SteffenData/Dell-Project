@@ -328,9 +328,9 @@ public class DataManager implements Manager {
 //                }
 //            }
             String query = "insert into projects "
-                                        + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID)"
+                                        + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,statusdescription,PARTNERID)"
 
-                    + " values (seq_id_project.nextval,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,?)";
+                    + " values (seq_id_project.nextval,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,'',?)";
             statement = connection.prepareStatement(query);
 
             statement.setString(1, project.getStartDate());
