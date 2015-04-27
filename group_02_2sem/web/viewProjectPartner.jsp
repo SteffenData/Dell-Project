@@ -85,7 +85,10 @@
 
                 </tbody>
             </table>
+            <div id="msgDiv" style="display:inline-block">    
+                <p style="color: red; float: left;">${MSG}</p>
 
+            </div>
         </div>
     </body>
 </html>

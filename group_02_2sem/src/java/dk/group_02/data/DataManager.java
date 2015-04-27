@@ -9,6 +9,7 @@ import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 
 import dk.group_02.control.Manager;
+import dk.group_02.utility.DatabaseException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -33,7 +34,7 @@ public class DataManager implements Manager {
         }
     }
 
-    public Collection<Project> getDellProjects() {
+    public Collection<Project> getDellProjects() throws DatabaseException {
 
         Collection<Project> dellProjects = new ArrayList<>();
 
@@ -59,13 +60,15 @@ public class DataManager implements Manager {
 
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
         return dellProjects;
 
     }
 
-    public Collection<Project> getPartnerProjects(Partner partner) {
+    public Collection<Project> getPartnerProjects(Partner partner) throws DatabaseException {
 
         Collection<Project> partnerProjects = new ArrayList<>();
 
@@ -90,13 +93,15 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
         return partnerProjects;
 
     }
 
-    public Project getProject(int projectId) {
+    public Project getProject(int projectId) throws DatabaseException {
         ResultSet rs = null;
         PreparedStatement statement = null;
         Project finalProject = null;
@@ -114,13 +119,15 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
         return finalProject;
 
     }
 
-    public void approveProject(Project project) {
+    public void approveProject(Project project) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -137,11 +144,13 @@ public class DataManager implements Manager {
             rs = statement.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
     }
 
-    public void rejectProject(Project project) {
+    public void rejectProject(Project project) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -157,13 +166,15 @@ public class DataManager implements Manager {
             statement.setString(1, project.getRetard());
             statement.setInt(2, projectId);
             rs = statement.executeQuery();
-        } catch (SQLException ex) {
+        }   catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
     }
 
-    public InputStream getUpload(Project project) {
+    public InputStream getUpload(Project project) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -186,13 +197,15 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
         return upload;
 
     }
 
-    public int getProjectId(Project project) {
+    public int getProjectId(Project project) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -215,11 +228,13 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
         return projectId;
     }
 
-    public String getPartnerID(String partnerName, String country) {
+    public String getPartnerID(String partnerName, String country) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -238,13 +253,15 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
         return partnerId;
 
     }
 
-    public Partner getPartnerByUserName(String userName) {
+    public Partner getPartnerByUserName(String userName) throws DatabaseException {
         ResultSet rs = null;
         PreparedStatement statement = null;
         Partner partner = null;
@@ -260,12 +277,14 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
         return partner;
 
     }
 
-    public Partner getPartnerById(String partnerId) {
+    public Partner getPartnerById(String partnerId) throws DatabaseException  {
         ResultSet rs = null;
         PreparedStatement statement = null;
 
@@ -284,12 +303,14 @@ public class DataManager implements Manager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
         return partner;
 
     }
 
-    public void SaveProject(Project project) {
+    public void SaveProject(Project project) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -307,7 +328,7 @@ public class DataManager implements Manager {
 //                }
 //            }
             String query = "insert into projects "
-                    //                    + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID)"
+                                        + "(PROJECTID,STARTDATE,PROJECTNAME,COST,STATUS,DESCRIPTION,GOAL,PARTNERID)"
 
                     + " values (seq_id_project.nextval,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,?)";
             statement = connection.prepareStatement(query);
@@ -322,15 +343,15 @@ public class DataManager implements Manager {
 
             statement.executeUpdate();
 
-            if (project.getUpload() != null) {
-                FileInputStream file = new FileInputStream(project.getUpload());
-                String query2 = "insert into files values (seq_id_files.nextval,?,?)";
-                statement = connection.prepareStatement(query2);
-                statement.setBinaryStream(1, file, (int) project.getUpload().length());
-                statement.setInt(2, getProjectId(project));
+//            if (project.getUpload() != null) {
+//                FileInputStream file = new FileInputStream(project.getUpload());
+//                String query2 = "insert into files values (seq_id_files.nextval,?,?)";
+//                statement = connection.prepareStatement(query2);
+//                statement.setBinaryStream(1, file, (int) project.getUpload().length());
+//                statement.setInt(2, getProjectId(project));
 //                statement.setBinaryStream(2, project.getUpload());
-                statement.executeUpdate();
-            }
+//                statement.executeUpdate();
+//            }
 //                   -----til senere brug (mis)------
 //            FileInputStream in;
 //            try {
@@ -347,13 +368,15 @@ public class DataManager implements Manager {
 //            } catch (FileNotFoundException e) {
 //
 //            }
-        } catch (SQLException | FileNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
     }
 
-    public boolean getLogin(String usrName, String password) {
+    public boolean getLogin(String usrName, String password) throws DatabaseException {
         ResultSet rs = null;
         PreparedStatement statement = null;
 
@@ -374,12 +397,14 @@ public class DataManager implements Manager {
 
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
         return returnVariable;
 
     }
 
-    public void SaveLogin(String username, String password, int partnerOrDel) {
+    public void SaveLogin(String username, String password, int partnerOrDel) throws DatabaseException {
 
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -398,6 +423,8 @@ public class DataManager implements Manager {
 
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service"); 
+   
         }
 
     }

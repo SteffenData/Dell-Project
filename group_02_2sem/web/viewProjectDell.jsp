@@ -76,8 +76,6 @@
                             <td>
                                 <button type="submit" name="projectId" value="${p.projectId}">
                                     Press here to see project details
-                                    
-                                    
                                 </button>
                             </td>
                         </tr>
@@ -86,7 +84,11 @@
 
                 </tbody>
             </table>
+            <div id="msgDiv" style="display:inline-block">    
+                <p style="color: red; float: bottom;">${MSG}</p>
 
+            </div>
         </div>
+
     </body>
 </html>

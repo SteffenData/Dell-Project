@@ -9,6 +9,7 @@ import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.control.Manager;
 import dk.group_02.data.DataManager;
+import dk.group_02.utility.DatabaseException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class Controller {
     }
 
     //The cost is not controlled as any negative value means that Dell is being paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
-    public boolean saveProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) {
+    public boolean saveProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) throws DatabaseException {
         if (startDate == null || projectName == null || cost == null || description == null || goal == null || partner == null || status == null) {
             return false;
         }
@@ -51,21 +52,21 @@ public class Controller {
         }
     }
 
-    public Collection<Project> getDellProjects() throws SQLException {
+    public Collection<Project> getDellProjects() throws DatabaseException {
 
         Collection<Project> outDell = manager.getDellProjects();
 
         return outDell;
     }
 
-    public Collection<Project> getPartnerProjects(Partner partner) throws SQLException {
+    public Collection<Project> getPartnerProjects(Partner partner) throws DatabaseException {
 
         Collection<Project> outPartner = manager.getPartnerProjects(partner);
 
         return outPartner;
     }
 
-    public Project getProject(int projectId) throws SQLException {
+    public Project getProject(int projectId) throws DatabaseException {
         Project outproject = manager.getProject(projectId);
         return outproject;
 
@@ -77,7 +78,7 @@ public class Controller {
 //        return sameProject;
 //    }
     
-    public boolean getLogin(String usrName, String password) throws SQLException {
+    public boolean getLogin(String usrName, String password) throws DatabaseException {
         if(usrName.isEmpty() || password.isEmpty())
             return false;
         if(usrName == null|| password == null)
@@ -85,17 +86,17 @@ public class Controller {
        return manager.getLogin(usrName, password);        
     }
     
-    public Partner getPartnerByUserName(String userName) throws SQLException{
+    public Partner getPartnerByUserName(String userName) throws DatabaseException{
         Partner partner = manager.getPartnerByUserName(userName);
         return partner;
     }
     
-    public void approveProject(Project project) throws SQLException{
+    public void approveProject(Project project) throws DatabaseException{
         
         manager.approveProject(project);
     }
     
-    public void rejectProject(Project project) throws SQLException{
+    public void rejectProject(Project project) throws DatabaseException{
         
         manager.rejectProject(project);
     }
