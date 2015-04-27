@@ -54,7 +54,7 @@ public class DataManager implements Manager {
                         rs.getDouble("cost"), rs.getString("status"), 
                         rs.getString("description"), rs.getString("goal"),
                         getPartnerById(rs.getString("partnerId")));
-                p.setRetard(rs.getString("delldescription"));
+                p.setStatusDescription(rs.getString("delldescription"));
                 dellProjects.add(p);
             }
 
@@ -88,7 +88,7 @@ public class DataManager implements Manager {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 Project p = new Project(rs.getInt("projectId"), subStartDate, rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById((rs.getString("partnerID"))));
-                p.setRetard(rs.getString("delldescription"));
+                p.setStatusDescription(rs.getString("delldescription"));
                 partnerProjects.add(p);
             }
         } catch (SQLException ex) {
@@ -115,7 +115,7 @@ public class DataManager implements Manager {
             if (rs.next()) {
                 finalProject = new Project(rs.getInt("projectId"), rs.getString("startdate").substring(0,10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId")));
-            finalProject.setRetard(rs.getString("delldescription"));
+            finalProject.setStatusDescription(rs.getString("delldescription"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,7 +139,7 @@ public class DataManager implements Manager {
             String query = "UPDATE projects SET status='Awaiting POE', dellDescription=? WHERE projectId = ?";
 
             statement = connection.prepareStatement(query);
-            statement.setString(1, project.getRetard());
+            statement.setString(1, project.getStatusDescription());
             statement.setInt(2, projectId);
             rs = statement.executeQuery();
         } catch (SQLException ex) {
@@ -163,7 +163,7 @@ public class DataManager implements Manager {
 
             statement = connection.prepareStatement(query);
             
-            statement.setString(1, project.getRetard());
+            statement.setString(1, project.getStatusDescription());
             statement.setInt(2, projectId);
             rs = statement.executeQuery();
         }   catch (SQLException ex) {
