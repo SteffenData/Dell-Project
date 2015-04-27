@@ -48,9 +48,13 @@ public class DataManager implements Manager {
             rs = statement.executeQuery();
             while (rs.next()) {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
-                dellProjects.add(new Project(rs.getInt("projectId"),
+                Project p = new Project(rs.getInt("projectId"),
                         subStartDate, rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId"))));
+                        rs.getDouble("cost"), rs.getString("status"), 
+                        rs.getString("description"), rs.getString("goal"),
+                        getPartnerById(rs.getString("partnerId")));
+                p.setRetard(rs.getString("delldescription"));
+                dellProjects.add(p);
             }
 
         } catch (SQLException ex) {
@@ -79,8 +83,10 @@ public class DataManager implements Manager {
             rs = statement.executeQuery();
             while (rs.next()) {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
-                partnerProjects.add(new Project(rs.getInt("projectId"), subStartDate, rs.getString("projectName"),
-                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById((rs.getString("partnerID")))));
+                Project p = new Project(rs.getInt("projectId"), subStartDate, rs.getString("projectName"),
+                        rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById((rs.getString("partnerID"))));
+                p.setRetard(rs.getString("delldescription"));
+                partnerProjects.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,6 +110,7 @@ public class DataManager implements Manager {
             if (rs.next()) {
                 finalProject = new Project(rs.getInt("projectId"), rs.getString("startdate").substring(0,10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId")));
+            finalProject.setRetard(rs.getString("delldescription"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,10 +129,11 @@ public class DataManager implements Manager {
 
             int projectId = getProjectId(project);
 
-            String query = "UPDATE projects SET status='Awaiting POE' WHERE projectId = ?";
+            String query = "UPDATE projects SET status='Awaiting POE', dellDescription=? WHERE projectId = ?";
 
             statement = connection.prepareStatement(query);
-            statement.setInt(1, projectId);
+            statement.setString(1, project.getRetard());
+            statement.setInt(2, projectId);
             rs = statement.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,10 +150,12 @@ public class DataManager implements Manager {
 
             int projectId = getProjectId(project);
 
-            String query = "UPDATE Projects set status='Project rejected' where projectID = ?";
+            String query = "UPDATE Projects set status='Project rejected', dellDescription=? where projectID = ?";
 
             statement = connection.prepareStatement(query);
-            statement.setInt(1, projectId);
+            
+            statement.setString(1, project.getRetard());
+            statement.setInt(2, projectId);
             rs = statement.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);

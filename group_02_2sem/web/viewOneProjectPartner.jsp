@@ -66,6 +66,11 @@
                 Goal of the project: 
             </p>
             <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">${project.goal}</textarea>
+            <p>
+                Description of status: 
+            </p>
+            <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">${project.retard}</textarea>
+            <br><br><br><br><br><br><br>
         </div>
     </body>
 </html>

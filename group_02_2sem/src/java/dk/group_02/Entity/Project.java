@@ -18,6 +18,7 @@ public class Project {
     private File upload;
     private String goal;
     private Partner partner;
+    private String retard;
 
     
 
@@ -41,6 +42,7 @@ public class Project {
         this.upload = null;
         this.goal = goal;
         this.partner = partner;
+        this.retard = "";
     }
 
 
@@ -114,8 +116,16 @@ public class Project {
         return partner;
     }
 
+    public String getRetard() {
+        return retard;
+    }
+
+    public void setRetard(String retard) {
+        this.retard = retard;
+    }
+
     @Override
     public String toString() {
-        return "Project{" + "projectId=" + projectId + ", startDate=" + startDate + ", projectName=" + projectName + ", cost=" + cost + ", status=" + status + ", description=" + description + ", upload=" + upload + ", goal=" + goal + ", partner=" + partner + '}';
+        return "Project{" + "projectId=" + projectId + ", startDate=" + startDate + ", projectName=" + projectName + ", cost=" + cost + ", status=" + status + ", description=" + description + ", upload=" + upload + ", goal=" + goal + ", partner=" + partner + ", retard=" + retard + '}';
     }
 }

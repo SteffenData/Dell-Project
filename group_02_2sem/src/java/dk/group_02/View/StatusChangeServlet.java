@@ -44,6 +44,11 @@ public class StatusChangeServlet extends ManagerServlet {
           
             try {
                 Project project = getController().getProject(projectId);
+                String hej = request.getParameter("statusDescription");
+
+                project.setRetard(request.getParameter("statusDescription"));
+                System.out.println("hej" + hej);
+                System.out.println(project.getRetard());
                 getController().rejectProject(project);
                 request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e) {
@@ -57,6 +62,7 @@ public class StatusChangeServlet extends ManagerServlet {
          
             try {
                 Project project = getController().getProject(projectId);
+                project.setRetard(request.getParameter("statusDescription"));
                 getController().approveProject(project);
                 request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e) {
