@@ -54,7 +54,7 @@ public class DataManager implements Manager {
                         rs.getDouble("cost"), rs.getString("status"), 
                         rs.getString("description"), rs.getString("goal"),
                         getPartnerById(rs.getString("partnerId")));
-                p.setStatusDescription(rs.getString("delldescription"));
+                p.setStatusDescription(rs.getString("statusdescription"));
                 dellProjects.add(p);
             }
 
@@ -88,7 +88,7 @@ public class DataManager implements Manager {
                 String subStartDate = rs.getString("startDate").substring(0, 10);
                 Project p = new Project(rs.getInt("projectId"), subStartDate, rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById((rs.getString("partnerID"))));
-                p.setStatusDescription(rs.getString("delldescription"));
+                p.setStatusDescription(rs.getString("statusdescription"));
                 partnerProjects.add(p);
             }
         } catch (SQLException ex) {
@@ -115,7 +115,7 @@ public class DataManager implements Manager {
             if (rs.next()) {
                 finalProject = new Project(rs.getInt("projectId"), rs.getString("startdate").substring(0,10), rs.getString("projectName"),
                         rs.getDouble("cost"), rs.getString("status"), rs.getString("description"), rs.getString("goal"), getPartnerById(rs.getString("partnerId")));
-            finalProject.setStatusDescription(rs.getString("delldescription"));
+            finalProject.setStatusDescription(rs.getString("statusdescription"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,7 +136,7 @@ public class DataManager implements Manager {
 
             int projectId = getProjectId(project);
 
-            String query = "UPDATE projects SET status='Awaiting POE', dellDescription=? WHERE projectId = ?";
+            String query = "UPDATE projects SET status='Awaiting POE', statusDescription=? WHERE projectId = ?";
 
             statement = connection.prepareStatement(query);
             statement.setString(1, project.getStatusDescription());
@@ -159,7 +159,7 @@ public class DataManager implements Manager {
 
             int projectId = getProjectId(project);
 
-            String query = "UPDATE Projects set status='Project rejected', dellDescription=? where projectID = ?";
+            String query = "UPDATE Projects set status='Project rejected', statusDescription=? where projectID = ?";
 
             statement = connection.prepareStatement(query);
             
