@@ -69,6 +69,7 @@
                         <p style="color: red; float: left;">${MSG_NO}</p>
                         <p style="color: green; float: left; ">${MSG_YES}</p>
                     </div>
+                    
                 </form>
             </div>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

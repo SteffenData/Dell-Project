@@ -7,6 +7,7 @@ package dk.group_02.View;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
+import dk.group_02.utility.DatabaseException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -45,12 +46,18 @@ public class ViewOneProjectServlet extends ManagerServlet {
             Project project = getController().getProject(projectId);
             request.setAttribute("project", project);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewOneProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DatabaseException ex) {
+            Partner partner = (Partner) request.getSession().getAttribute("partner");
+            if (partner != null) {
+                request.setAttribute("MSG", ex.getMessage());
+                RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
+                rd.forward(request, response);
+            }
+
         }
-
         Partner partner = (Partner) request.getSession().getAttribute("partner");
-
         if (partner != null) {
 
             RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectPartner.jsp");

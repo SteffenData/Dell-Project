@@ -7,6 +7,7 @@ package dk.group_02.View;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
+import dk.group_02.utility.DatabaseException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -40,17 +41,20 @@ public class ViewProjectsServlet extends ManagerServlet {
         if (partner != null) {
             try {
                 request.setAttribute("projects", getController().getPartnerProjects(partner));
-            } catch (SQLException ex) {
-                Logger.getLogger(ViewProjectsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DatabaseException ex) {
+                 request.setAttribute("MSG", ex.getMessage());
+                 RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
             }
+            
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
             rd.forward(request, response);
 
         } else {
             try {
                 request.setAttribute("projects", getController().getDellProjects());
-            } catch (SQLException ex) {
-                Logger.getLogger(ViewProjectsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DatabaseException ex) {
+                 request.setAttribute("MSG", ex.getMessage());
+                 RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
