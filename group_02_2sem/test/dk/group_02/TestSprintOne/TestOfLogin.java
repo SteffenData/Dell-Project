@@ -10,6 +10,7 @@ import dk.group_02.Entity.Project;
 import dk.group_02.control.Controller;
 import dk.group_02.control.Manager;
 import dk.group_02.data.DataManager;
+import dk.group_02.utility.DatabaseException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,62 +42,113 @@ public class TestOfLogin {
     @Test
     public void testgetPartnerIdTrue() {
 
-        String testId = manager.getPartnerID("elgiganten", "Denmark");
-        assertTrue("2".equals(testId));
+        String testId;
+        try
+        {
+            testId = manager.getPartnerID("elgiganten", "Denmark");
+            assertTrue("2".equals(testId));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testgetPartnerIdFalse() {
 
-        String testId = manager.getPartnerID("elgiganten", "Denmark");
-        assertFalse("3".equals(testId));
+        String testId;
+        try
+        {
+            testId = manager.getPartnerID("elgiganten", "Denmark");
+            assertFalse("3".equals(testId));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
 
     public void testgetPartnerByIdTrue() {
 
-        Partner testPartner = manager.getPartnerById("2");
-        assertTrue(partner.getPartnerName().equals(testPartner.getPartnerName()));
-        assertTrue(partner.getCountry().equals(testPartner.getCountry()));
+        Partner testPartner;
+        try
+        {
+            testPartner = manager.getPartnerById("2");
+            assertTrue(partner.getPartnerName().equals(testPartner.getPartnerName()));
+            assertTrue(partner.getCountry().equals(testPartner.getCountry()));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testgetPartnerByIdFalse() {
 
-        Partner testPartner = manager.getPartnerById("3");
-        assertFalse(partner.getPartnerName().equals(testPartner.getPartnerName()));
-        assertFalse(partner.getCountry().equals(testPartner.getCountry()));
+        try
+        {
+            Partner testPartner = manager.getPartnerById("3");
+            assertFalse(partner.getPartnerName().equals(testPartner.getPartnerName()));
+            assertFalse(partner.getCountry().equals(testPartner.getCountry()));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testPartnerByUsernameTrue() {
 
-        Partner testPartner = manager.getPartnerByUserName("bubber");
-        assertTrue(partner.getPartnerName().equals(testPartner.getPartnerName()));
-        assertTrue(partner.getCountry().equals(testPartner.getCountry()));
+        try
+        {
+            Partner testPartner = manager.getPartnerByUserName("bubber");
+            assertTrue(partner.getPartnerName().equals(testPartner.getPartnerName()));
+            assertTrue(partner.getCountry().equals(testPartner.getCountry()));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testPartnerByUsernameFalse() {
 
-        Partner testPartner = manager.getPartnerByUserName("kasper");
-        assertFalse(partner.getPartnerName().equals(testPartner.getPartnerName()));
-        assertFalse(partner.getCountry().equals(testPartner.getCountry()));
+        try
+        {
+            Partner testPartner = manager.getPartnerByUserName("kasper");
+            assertFalse(partner.getPartnerName().equals(testPartner.getPartnerName()));
+            assertFalse(partner.getCountry().equals(testPartner.getCountry()));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testAfLogInTrue() {
 
-        manager.SaveLogin("testUsername", "testPassword", 1);
-        assertTrue(manager.getLogin("testUsername", "testPassword"));
+        try
+        {
+            manager.SaveLogin("testUsername", "testPassword", 1);
+            assertTrue(manager.getLogin("testUsername", "testPassword"));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
     public void testAfLogInFalse() {
 
-        manager.SaveLogin("simba", "jurgen", 1);
-        assertFalse(manager.getLogin("bimba", "burgen"));
+        try
+        {
+            manager.SaveLogin("simba", "jurgen", 1);
+            assertFalse(manager.getLogin("bimba", "burgen"));
+        } catch (DatabaseException ex)
+        {
+            Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
