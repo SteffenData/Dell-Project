@@ -1,20 +1,14 @@
 package dk.group_02.TestSprintOne;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-import com.sun.xml.internal.ws.util.StringUtils;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;
 import dk.group_02.control.Controller;
 import dk.group_02.control.Manager;
+import dk.group_02.utility.Validator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -29,6 +23,7 @@ public class TestofCreateProject {
     Project project;
     Manager manager;
     Controller ctrl;
+    Validator val;
 
     @Before
     public void setUp() {
@@ -37,36 +32,37 @@ public class TestofCreateProject {
         project = new Project(0, "1992-10-10", "TestProject", 1.0, "testing", "test", "test", partner);
         manager = new DataManager();
         ctrl = new Controller();
+        val = new Validator();
 
     }
 
     @Test
     public void testOfValidateProjectInfoAllGood() {
 
-        assertTrue(ctrl.validateProjectInfo("allGood", 1.0, "status", "des", "goal")); // her tester vi for alle begrænsninger i alle felter om det går godt
+        assertTrue(val.validateProjectInfo("allGood", 1.0, "status", "des", "goal")); // her tester vi for alle begrænsninger i alle felter om det går godt
     }
 
     @Test
     public void testOfValidateProjectInfoName() {
 
-        assertFalse(ctrl.validateProjectInfo("thisNameIsMoreThanThirtyCharacters", 1.0, "status", "des", "goal")); // her tester vi en String med over de tilladte 30 characters
-        assertTrue(ctrl.validateProjectInfo("thisNameIsMoreThanThirtyCharac", 1.0, "status", "des", "goal")); // her tester vi en String med 30 characters
+        assertFalse(val.validateProjectInfo("thisNameIsMoreThanThirtyCharacters", 1.0, "status", "des", "goal")); // her tester vi en String med over de tilladte 30 characters
+        assertTrue(val.validateProjectInfo("thisNameIsMoreThanThirtyCharac", 1.0, "status", "des", "goal")); // her tester vi en String med 30 characters
 
     }
 
     @Test
     public void testOfValidateProjectInfoCost() {
 
-        assertTrue(ctrl.validateProjectInfo("Name", 10000000.0, "status", "des", "goal")); // tester på budget lige på grænsen af det tilladte
-        assertFalse(ctrl.validateProjectInfo("Name", 10000000.1, "status", "des", "goal")); // tester på budget lige over grænsen af det tilladte
+        assertTrue(val.validateProjectInfo("Name", 10000000.0, "status", "des", "goal")); // tester på budget lige på grænsen af det tilladte
+        assertFalse(val.validateProjectInfo("Name", 10000000.1, "status", "des", "goal")); // tester på budget lige over grænsen af det tilladte
 
     }
 
     @Test
     public void testOfValidateProjectInfoStatus() {
 
-        assertTrue(ctrl.validateProjectInfo("Name", 1.0, "thisNameIsMoreThanThirtyCharac", "des", "goal")); // tester på status lige på grænsen af det tilladte
-        assertFalse(ctrl.validateProjectInfo("Name", 1.0, "thisNameIsMoreThanThirtyCharacters", "des", "goal")); // tester på status lidt over grænsen af det tilladte
+        assertTrue(val.validateProjectInfo("Name", 1.0, "thisNameIsMoreThanThirtyCharac", "des", "goal")); // tester på status lige på grænsen af det tilladte
+        assertFalse(val.validateProjectInfo("Name", 1.0, "thisNameIsMoreThanThirtyCharacters", "des", "goal")); // tester på status lidt over grænsen af det tilladte
 
     }
 
@@ -75,10 +71,10 @@ public class TestofCreateProject {
 
         String stringLong = new String(new char[250]).replace('\0', 'm');
         String stringTooLong = new String(new char[251]).replace('\0', 'm');
-        assertTrue(ctrl.validateProjectInfo("Name", 1.0, "status", stringLong, "goal")); // her tester vi Description lige på grænsen af det tilladte
-        assertFalse(ctrl.validateProjectInfo("Name", 1.0, "status", stringTooLong, "goal")); // her tester vi Description lige over grænsen af det tilladte
-        assertTrue(ctrl.validateProjectInfo("Name", 1.0, "status", "des", stringLong)); // her tester vi goal lige på grænsen af det tilladte
-        assertFalse(ctrl.validateProjectInfo("Name", 1.0, "status", "des", stringTooLong)); // her tester vi goal lige over grænsen af det tilladte
+        assertTrue(val.validateProjectInfo("Name", 1.0, "status", stringLong, "goal")); // her tester vi Description lige på grænsen af det tilladte
+        assertFalse(val.validateProjectInfo("Name", 1.0, "status", stringTooLong, "goal")); // her tester vi Description lige over grænsen af det tilladte
+        assertTrue(val.validateProjectInfo("Name", 1.0, "status", "des", stringLong)); // her tester vi goal lige på grænsen af det tilladte
+        assertFalse(val.validateProjectInfo("Name", 1.0, "status", "des", stringTooLong)); // her tester vi goal lige over grænsen af det tilladte
 
     }
 

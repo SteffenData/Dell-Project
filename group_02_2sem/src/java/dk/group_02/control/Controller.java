@@ -10,6 +10,7 @@ import dk.group_02.Entity.Project;
 import dk.group_02.control.Manager;
 import dk.group_02.data.DataManager;
 import dk.group_02.utility.DatabaseException;
+import dk.group_02.utility.Validator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -24,9 +25,11 @@ import java.util.logging.Logger;
 public class Controller {
 
     Manager manager;
+    Validator validator;
 
     public Controller() {
         this.manager = new DataManager();
+        this.validator = new Validator();
     }
 
     //The cost is not controlled as any negative value means that Dell is being paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
@@ -34,22 +37,12 @@ public class Controller {
         if (startDate == null || projectName == null || cost == null || description == null || goal == null || partner == null || status == null) {
             return false;
         }
-         if (validateProjectInfo(projectName, cost, status, description, goal)) {
-             Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
-             manager.SaveProject(project);
-             return true;
-            }
-        return false;
-    }
-
-     // Her tjecker vi for om projektet er rigtigt oprettet.
-    public boolean validateProjectInfo(String projectName, Double cost, String status, String description, String goal) {
-
-        if (projectName.length() > 30 || status.length() > 30 || cost > 10000000 || description.length() > 250 || goal.length() > 250) {
-            return false;
-        } else {
+        if (validator.validateProjectInfo(projectName, cost, status, description, goal)) {
+            Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
+            manager.SaveProject(project);
             return true;
         }
+        return false;
     }
 
     public Collection<Project> getDellProjects() throws DatabaseException {
@@ -71,33 +64,34 @@ public class Controller {
         return outproject;
 
     }
-    
+
 //    public Project getSameProject(Project project) throws SQLException{
 //       
 //        Project sameProject = manager.getSameProject(project);
 //        return sameProject;
 //    }
-    
     public boolean getLogin(String usrName, String password) throws DatabaseException {
-        if(usrName.isEmpty() || password.isEmpty())
+        if (usrName.isEmpty() || password.isEmpty()) {
             return false;
-        if(usrName == null|| password == null)
+        }
+        if (usrName == null || password == null) {
             return false;
-       return manager.getLogin(usrName, password);        
+        }
+        return manager.getLogin(usrName, password);
     }
-    
-    public Partner getPartnerByUserName(String userName) throws DatabaseException{
+
+    public Partner getPartnerByUserName(String userName) throws DatabaseException {
         Partner partner = manager.getPartnerByUserName(userName);
         return partner;
     }
-    
-    public void approveProject(Project project) throws DatabaseException{
-        
+
+    public void approveProject(Project project) throws DatabaseException {
+
         manager.approveProject(project);
     }
-    
-    public void rejectProject(Project project) throws DatabaseException{
-        
+
+    public void rejectProject(Project project) throws DatabaseException {
+
         manager.rejectProject(project);
     }
 
