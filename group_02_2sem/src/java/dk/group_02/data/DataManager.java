@@ -134,13 +134,12 @@ public class DataManager implements Manager {
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
 
-            int projectId = getProjectId(project);
+//            int projectId = getProjectId(project);
 
             String query = "UPDATE projects SET status='Awaiting POE', statusDescription=? WHERE projectId = ?";
-
             statement = connection.prepareStatement(query);
             statement.setString(1, project.getStatusDescription());
-            statement.setInt(2, projectId);
+            statement.setInt(2, project.getProjectId());
             rs = statement.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,14 +156,14 @@ public class DataManager implements Manager {
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
 
-            int projectId = getProjectId(project);
+//            int projectId = getProjectId(project);
 
             String query = "UPDATE Projects set status='Project rejected', statusDescription=? where projectID = ?";
 
             statement = connection.prepareStatement(query);
             
             statement.setString(1, project.getStatusDescription());
-            statement.setInt(2, projectId);
+            statement.setInt(2, project.getProjectId());
             rs = statement.executeQuery();
         }   catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);

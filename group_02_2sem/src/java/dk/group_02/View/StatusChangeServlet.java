@@ -41,17 +41,19 @@ public class StatusChangeServlet extends ManagerServlet {
         if (statusValue.equalsIgnoreCase("0")) {
            
             int projectId = Integer.parseInt(request.getParameter("projectId"));
+            System.out.println("hej");
           
             try {
                 Project project = getController().getProject(projectId);
                 String hej = request.getParameter("statusDescription");
 
                 project.setStatusDescription(request.getParameter("statusDescription"));
-                System.out.println("hej" + hej);
-                System.out.println(project.getStatusDescription());
+                System.out.println("Her er statusDescription" + hej);
+                System.out.println("her er status i project" + project.getStatusDescription());
                 getController().rejectProject(project);
                 request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e) {
+                System.out.println("sikke dog en sql exeption");
             }
             RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
             rd.forward(request, response);
@@ -62,6 +64,8 @@ public class StatusChangeServlet extends ManagerServlet {
          
             try {
                 Project project = getController().getProject(projectId);
+                
+                String hej = request.getParameter("statusDescription");
                 project.setStatusDescription(request.getParameter("statusDescription"));
                 getController().approveProject(project);
                 request.setAttribute("projects", getController().getDellProjects());
