@@ -158,12 +158,27 @@ public class DataManager implements Manager
         {
 
             int projectId = getProjectId(project);
-
-            String query = "UPDATE projects SET status='Awaiting POE', statusDescription=? WHERE projectId = ?";
-
+            String newStatus = "";
+            switch(project.getStatus()) {
+                case "Awaiting approval":
+                    newStatus = "Awaiting POE";
+                    break;
+                case "Awaiting approval on POE":
+                    newStatus = "Awaiting inVoice";
+                    break;
+                case "Project rejected":
+                    newStatus = "Awaiting POE";
+                    break;
+                case "Awaiting inVoice":
+                    newStatus = "Awaiting inVoice";
+                    break;
+            }
+            String query = "UPDATE projects SET status=?, statusDescription=? WHERE projectId = ?";
+            
             statement = connection.prepareStatement(query);
-            statement.setString(1, project.getStatusDescription());
-            statement.setInt(2, projectId);
+            statement.setString(1, newStatus);
+            statement.setString(2, project.getStatusDescription());
+            statement.setInt(3, projectId);
             rs = statement.executeQuery();
         } catch (SQLException ex)
         {
@@ -184,6 +199,21 @@ public class DataManager implements Manager
         {
 
             int projectId = getProjectId(project);
+            String newStatus = "";
+            switch(project.getStatus()) {
+                case "Awaiting approval":
+                    newStatus = "Project rejected";
+                    break;
+                case "Awaiting approval on POE":
+                    newStatus = "Awaiting POE";
+                    break;
+                case "Project rejected":
+                    newStatus = "Project rejected";
+                    break;
+                case "Awaiting inVoice":
+                    newStatus = "Awaiting POE";
+                    break;
+            }
 
             String query = "UPDATE Projects set status='Project rejected', statusDescription=? where projectID = ?";
 
