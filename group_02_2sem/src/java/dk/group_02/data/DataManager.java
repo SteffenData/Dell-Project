@@ -172,6 +172,10 @@ public class DataManager implements Manager
                 case "Awaiting inVoice":
                     newStatus = "Awaiting inVoice";
                     break;
+                case "Awaiting POE":
+                    newStatus = "Awaiting POE";
+                    break;
+                    
             }
             String query = "UPDATE projects SET status=?, statusDescription=? WHERE projectId = ?";
             
