@@ -81,6 +81,13 @@
                   <input type ="hidden" name="projectId" value="${project.projectId}" >
                 <button type="submit" name="statusBox" value="1">Approve</button> <button type="submit" name="statusBox" value="0">Reject</button>
             </form>
+                
+                <form action="PoeServlet">
+                    <input type ="hidden" name="projectId" value="${project.projectId}" >
+                    <button type="submit">Download POE</button>
+                </form>
+                
+                
                 <br>
                 <br>
                 <br>
