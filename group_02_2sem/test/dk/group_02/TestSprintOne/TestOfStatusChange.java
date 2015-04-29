@@ -48,7 +48,7 @@ public class TestOfStatusChange
 
         try
         {
-            ctrl.approveProject(project); // her ændrer vi status til awaiting POE
+            ctrl.approveStatus(project); // her ændrer vi status til awaiting POE
             System.out.println(project.getStatus());
             int testId = manager.getProjectId(project);
             
@@ -68,7 +68,7 @@ public class TestOfStatusChange
 
         try
         {
-            ctrl.rejectProject(project); // her ændrer vi status til project rejected
+            ctrl.rejectStatus(project); // her ændrer vi status til project rejected
             System.out.println(project.getStatus());
             int testId = manager.getProjectId(project);
             

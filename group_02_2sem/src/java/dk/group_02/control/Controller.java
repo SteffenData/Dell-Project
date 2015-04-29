@@ -87,14 +87,14 @@ public class Controller {
         return partner;
     }
 
-    public void approveProject(Project project) throws DatabaseException {
+    public void approveStatus(Project project) throws DatabaseException {
 
-        manager.approveProject(project);
+        manager.approveStatus(project);
     }
 
-    public void rejectProject(Project project) throws DatabaseException {
+    public void rejectStatus(Project project) throws DatabaseException {
 
-        manager.rejectProject(project);
+        manager.rejectStatus(project);
     }
     
     

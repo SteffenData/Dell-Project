@@ -40,9 +40,9 @@ public interface Manager
     
     public Partner getPartnerByUserName(String userName)throws DatabaseException;
     
-    public void approveProject(Project project)throws DatabaseException;
+    public void approveStatus(Project project)throws DatabaseException;
     
-    public void rejectProject(Project project)throws DatabaseException;
+    public void rejectStatus(Project project)throws DatabaseException;
     
     public Partner getPartnerById(String partnerId)throws DatabaseException;
      

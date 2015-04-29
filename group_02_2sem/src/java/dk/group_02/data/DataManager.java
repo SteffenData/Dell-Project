@@ -148,10 +148,9 @@ public class DataManager implements Manager
 
     }
 
-    public void approveProject(Project project) throws DatabaseException
+    public void approveStatus(Project project) throws DatabaseException
     {
 
-        ResultSet rs = null;
         PreparedStatement statement = null;
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD))
@@ -183,7 +182,7 @@ public class DataManager implements Manager
             statement.setString(1, newStatus);
             statement.setString(2, project.getStatusDescription());
             statement.setInt(3, projectId);
-            rs = statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException ex)
         {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,10 +192,9 @@ public class DataManager implements Manager
 
     }
 
-    public void rejectProject(Project project) throws DatabaseException
+    public void rejectStatus(Project project) throws DatabaseException
     {
 
-        ResultSet rs = null;
         PreparedStatement statement = null;
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD))
@@ -217,6 +215,10 @@ public class DataManager implements Manager
                 case "Awaiting inVoice":
                     newStatus = "Awaiting POE";
                     break;
+                case "Awaiting POE":
+                    newStatus = "Project rejected";
+                    break;
+                    
             }
 
             String query = "UPDATE Projects set status='Project rejected', statusDescription=? where projectID = ?";
@@ -225,7 +227,7 @@ public class DataManager implements Manager
 
             statement.setString(1, project.getStatusDescription());
             statement.setInt(2, projectId);
-            rs = statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException ex)
         {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -494,7 +496,6 @@ public class DataManager implements Manager
     public void SaveLogin(String username, String password, int partnerOrDel) throws DatabaseException
     {
 
-        ResultSet rs = null;
         PreparedStatement statement = null;
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD))
@@ -573,5 +574,18 @@ public class DataManager implements Manager
 
         }
         return poe;
+    }
+    public void statusChangePOE (Connection connection, int projectId){
+        PreparedStatement statement = null;
+        String query = "UPDATE Projects set status=? where projectID = ?";
+        try{
+            statement = connection.prepareStatement(query);
+            statement.setString(1, "Awaiting approval on POE");
+            statement.setInt(2, projectId);
+            statement.executeUpdate();
+        }catch(SQLException e)
+        {
+        }
+    
     }
 }

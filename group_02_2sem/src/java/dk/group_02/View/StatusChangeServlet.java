@@ -49,7 +49,7 @@ public class StatusChangeServlet extends ManagerServlet {
                 project.setStatusDescription(request.getParameter("statusDescription"));
                 System.out.println("hej" + hej);
                 System.out.println(project.getStatusDescription());
-                getController().rejectProject(project);
+                getController().rejectStatus(project);
                 request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e) {
             }
@@ -63,7 +63,7 @@ public class StatusChangeServlet extends ManagerServlet {
             try {
                 Project project = getController().getProject(projectId);
                 project.setStatusDescription(request.getParameter("statusDescription"));
-                getController().approveProject(project);
+                getController().approveStatus(project);
                 request.setAttribute("projects", getController().getDellProjects());
             } catch (SQLException e) {
             }
