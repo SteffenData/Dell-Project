@@ -532,13 +532,11 @@ public class DataManager implements Manager
                 poe.setFilename(rs.getString("filename"));
                 //st.streamToFile("\\NetBeansProjects\\eksamensProjectDell\\testFile2.zip", input);
             }
-        } catch (SQLException ex)
+        } catch (SQLException | IOException ex)
         {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
 
-        } catch (IOException ex) {
-            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return poe;
     }
