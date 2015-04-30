@@ -17,10 +17,7 @@ import dk.group_02.utility.DatabaseException;
  */
 public interface Manager
 {
-
     public Collection<Project> getDellProjects() throws DatabaseException;
-    
-//    public Project getSameProject(Project project);
 
     public Collection<Project> getPartnerProjects(Partner partner) throws DatabaseException;
 
@@ -47,4 +44,6 @@ public interface Manager
     public Partner getPartnerById(String partnerId)throws DatabaseException;
      
     public Poe getPOE(int projectId) throws DatabaseException;
+    
+    public void savePOE(InputStream iStream, int projectId, String fileName) throws DatabaseException;
 }

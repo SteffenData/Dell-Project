@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -24,22 +24,27 @@ import java.util.logging.Logger;
  *
  * @author steffen
  */
-public class Controller {
+public class Controller
+{
 
     Manager manager;
     Validator validator;
 
-    public Controller() {
+    public Controller()
+    {
         this.manager = new DataManager();
         this.validator = new Validator();
     }
 
     //The cost is not controlled as any negative value means that Dell is being paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
-    public boolean saveProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) throws DatabaseException {
-        if (startDate == null || projectName == null || cost == null || description == null || goal == null || partner == null || status == null) {
+    public boolean saveProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) throws DatabaseException
+    {
+        if (startDate == null || projectName == null || cost == null || description == null || goal == null || partner == null || status == null)
+        {
             return false;
         }
-        if (validator.validateProjectInfo(projectName, cost, status, description, goal)) {
+        if (validator.validateProjectInfo(projectName, cost, status, description, goal))
+        {
             Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
             manager.SaveProject(project);
             return true;
@@ -47,21 +52,24 @@ public class Controller {
         return false;
     }
 
-    public Collection<Project> getDellProjects() throws DatabaseException {
+    public Collection<Project> getDellProjects() throws DatabaseException
+    {
 
         Collection<Project> outDell = manager.getDellProjects();
 
         return outDell;
     }
 
-    public Collection<Project> getPartnerProjects(Partner partner) throws DatabaseException {
+    public Collection<Project> getPartnerProjects(Partner partner) throws DatabaseException
+    {
 
         Collection<Project> outPartner = manager.getPartnerProjects(partner);
 
         return outPartner;
     }
 
-    public Project getProject(int projectId) throws DatabaseException {
+    public Project getProject(int projectId) throws DatabaseException
+    {
         Project outproject = manager.getProject(projectId);
         return outproject;
 
@@ -72,35 +80,45 @@ public class Controller {
 //        Project sameProject = manager.getSameProject(project);
 //        return sameProject;
 //    }
-    public boolean getLogin(String usrName, String password) throws DatabaseException {
-        if (usrName.isEmpty() || password.isEmpty()) {
+    public boolean getLogin(String usrName, String password) throws DatabaseException
+    {
+        if (usrName.isEmpty() || password.isEmpty())
+        {
             return false;
         }
-        if (usrName == null || password == null) {
+        if (usrName == null || password == null)
+        {
             return false;
         }
         return manager.getLogin(usrName, password);
     }
 
-    public Partner getPartnerByUserName(String userName) throws DatabaseException {
+    public Partner getPartnerByUserName(String userName) throws DatabaseException
+    {
         Partner partner = manager.getPartnerByUserName(userName);
         return partner;
     }
 
-    public void approveStatus(Project project) throws DatabaseException {
+    public void approveStatus(Project project) throws DatabaseException
+    {
 
         manager.approveStatus(project);
     }
 
-    public void rejectStatus(Project project) throws DatabaseException {
+    public void rejectStatus(Project project) throws DatabaseException
+    {
 
         manager.rejectStatus(project);
     }
-    
-    
+
     public Poe getPOE(int projectId) throws DatabaseException
     {
         return manager.getPOE(projectId);
     }
 
+
+    public void savePOE(InputStream iStream, int projectId, String fileName) throws DatabaseException
+    {
+        manager.savePOE(iStream, projectId, fileName);
+    }
 }

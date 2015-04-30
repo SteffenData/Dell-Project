@@ -46,7 +46,7 @@
             </h1>
 
             <p>
-                 Starting date: <strong>${project.startDate}</strong>
+                Starting date: <strong>${project.startDate}</strong>
             </p>
 
             <p>
@@ -71,6 +71,13 @@
             </p>
             <textarea type="text" cols="40" rows="6" name="goal" readonly="" style="text-align: left">${project.statusDescription}</textarea>
             <br><br><br><br><br><br><br>
+            <form action="PoeServlet" method="POST" enctype="multipart/form-data">
+                <input type ="hidden" name="projectId" value="${project.projectId}" >
+                <p>Upload POE</p>
+
+                <input type="file" name="poe"> 
+                <button type="submit">Upload</button>
+            </form>
         </div>
     </body>
 </html>
