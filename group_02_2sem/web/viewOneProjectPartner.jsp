@@ -1,5 +1,5 @@
 <%-- 
-    Author     : Mikkel/Bente
+    Author     : Mikkel/Bente/Steffen
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -73,7 +73,11 @@
                 <p>Upload POE</p>
                 <input type="file" name="poe"> 
                 <button type="submit">Upload</button>
+                <br>
+                 <p style="color: red; float: left;">${MSG_NO}</p>
+                 <p style="color: green; float: left; ">${MSG_YES}</p>
             </form>
+                
         </div>
     </body>
 </html>

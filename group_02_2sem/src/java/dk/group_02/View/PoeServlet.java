@@ -1,14 +1,14 @@
 /**
  *
- * @author steffen/Kasper/Pelle
+ * @author steffen/Kasper/Pelle/Mikkel/Bente
  */
 package dk.group_02.View;
 
 import dk.group_02.Entity.Poe;
+import dk.group_02.Entity.Project;
 import dk.group_02.utility.DatabaseException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -46,19 +46,32 @@ public class PoeServlet extends ManagerServlet
                 //Skriver indeholdet af array'en til streamen  
                 out.write(poe.getBuffer());
                 out.close();
-            }
-         
-            
-            if (s.getAttribute("partner") != null)
-            {
-                int projectId = Integer.parseInt(request.getParameter("projectId"));
-                Part part = request.getPart("poe");
-
-                getController().savePOE(part.getInputStream(), projectId, part.getSubmittedFileName());
-                RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
                 rd.forward(request, response);
             }
-
+            if (s.getAttribute("partner") != null)
+            {
+                try {
+                    
+                
+                int projectId = Integer.parseInt(request.getParameter("projectId"));
+                Project p = getController().getProject(projectId);
+                Part part = request.getPart("poe");
+                getController().approveStatus(p);
+                getController().savePOE(part.getInputStream(), projectId, part.getSubmittedFileName());
+                } 
+                
+                catch (DatabaseException e) 
+                {
+                request.setAttribute("MSG_NO", "Your file has not been saved");    
+                RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectPartner.jsp");
+                rd.forward(request, response); 
+                }
+               request.setAttribute("MSG_YES", "Your file has been saved!");
+                RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectPartner.jsp");
+                rd.forward(request, response);
+                
+            }
         } catch (NumberFormatException | IOException | DatabaseException e)
         {  }
     }

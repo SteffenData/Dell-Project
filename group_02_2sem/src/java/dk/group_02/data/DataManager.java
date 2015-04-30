@@ -127,6 +127,9 @@ public class DataManager implements Manager {
                 case "Awaiting approval":
                     newStatus = "Awaiting POE";
                     break;
+                case "Awaiting POE":
+                    newStatus = "Awaiting approval on POE";
+                    break;
                 case "Awaiting approval on POE":
                     newStatus = "Awaiting inVoice";
                     break;

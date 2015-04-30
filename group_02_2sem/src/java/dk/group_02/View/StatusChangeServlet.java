@@ -24,51 +24,50 @@ public class StatusChangeServlet extends ManagerServlet {
             throws ServletException, IOException {
         try {
 
-  response.setContentType("text/html;charset=UTF-8");
-        String statusValue = request.getParameter("statusBox");
-       
-        if (statusValue.equalsIgnoreCase("0")) {
-           
-            int projectId = Integer.parseInt(request.getParameter("projectId"));
-          
-            try {
-                Project project = getController().getProject(projectId);
-                String hej = request.getParameter("statusDescription");
+            response.setContentType("text/html;charset=UTF-8");
+            String statusValue = request.getParameter("statusBox");
 
-                project.setStatusDescription(request.getParameter("statusDescription"));
-                System.out.println("hej" + hej);
-                System.out.println(project.getStatusDescription());
-                getController().rejectStatus(project);
-                request.setAttribute("projects", getController().getDellProjects());
-            } catch (SQLException e) {
-            }
-            RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
-            rd.forward(request, response);
-        }
+            if (statusValue.equalsIgnoreCase("0")) {
 
-        if (statusValue.equalsIgnoreCase("1")) {
-            int projectId = Integer.parseInt(request.getParameter("projectId"));
-         
-            try {
-                Project project = getController().getProject(projectId);
-                project.setStatusDescription(request.getParameter("statusDescription"));
-                getController().approveStatus(project);
-                request.setAttribute("projects", getController().getDellProjects());
-            } catch (SQLException e) {
+                int projectId = Integer.parseInt(request.getParameter("projectId"));
+
+                try {
+                    Project project = getController().getProject(projectId);
+
+                    project.setStatusDescription(request.getParameter("statusDescription"));
+                    getController().rejectStatus(project);
+                    request.setAttribute("projects", getController().getDellProjects());
+                } catch (SQLException e) {
+                }
+                RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
+                rd.forward(request, response);
             }
-            RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
-            rd.forward(request, response);
-        }  
+
+            if (statusValue.equalsIgnoreCase("1")) {
+                int projectId = Integer.parseInt(request.getParameter("projectId"));
+
+                try {
+                    Project project = getController().getProject(projectId);
+                    project.setStatusDescription(request.getParameter("statusDescription"));
+                    getController().approveStatus(project);
+                    request.setAttribute("projects", getController().getDellProjects());
+                } catch (SQLException e) {
+                }
+                RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
+                rd.forward(request, response);
+            }
         } catch (Exception e) {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
-            out.print("<h2>"+ e + "</h2> <hr/> <pre>" );
+            out.print("<h2>" + e + "</h2> <hr/> <pre>");
             e.printStackTrace(out);
             out.println("</pre>");
         }
     }
+
     //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

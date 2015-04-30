@@ -28,7 +28,7 @@ public class TestOfLogin {
     @Before
     public void setUp() {
 
-        partner = new Partner("elgiganten", "Denmark");
+        partner = new Partner("Elgiganten", "Denmark");
         manager = new DataManager();
         ctrl = new Controller();
     }
@@ -39,8 +39,8 @@ public class TestOfLogin {
         String testId;
         try
         {
-            testId = manager.getPartnerID("elgiganten", "Denmark");
-            assertTrue("2".equals(testId));
+            testId = manager.getPartnerID("Elgiganten", "Denmark");
+            assertTrue("4".equals(testId));
         } catch (DatabaseException ex)
         {
             Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,8 +53,8 @@ public class TestOfLogin {
         String testId;
         try
         {
-            testId = manager.getPartnerID("elgiganten", "Denmark");
-            assertFalse("3".equals(testId));
+            testId = manager.getPartnerID("Elgiganten", "Denmark");
+            assertFalse("2".equals(testId));
         } catch (DatabaseException ex)
         {
             Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,7 +68,7 @@ public class TestOfLogin {
         Partner testPartner;
         try
         {
-            testPartner = manager.getPartnerById("2");
+            testPartner = manager.getPartnerById("4");
             assertTrue(partner.getPartnerName().equals(testPartner.getPartnerName()));
             assertTrue(partner.getCountry().equals(testPartner.getCountry()));
         } catch (DatabaseException ex)
