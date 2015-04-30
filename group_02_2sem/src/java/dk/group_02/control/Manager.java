@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
 package dk.group_02.control;
 import dk.group_02.Entity.Poe;
@@ -11,10 +10,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Collection;
 import dk.group_02.utility.DatabaseException;
-/**
- *
- * @author steffen
- */
+
 public interface Manager
 {
     public Collection<Project> getDellProjects() throws DatabaseException;

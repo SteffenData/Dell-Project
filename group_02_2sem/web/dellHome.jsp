@@ -1,7 +1,5 @@
 <%-- 
-    Document   : dellHome
-    Created on : 16-04-2015, 09:17:58
-    Author     : Mikkel
+    Author     : Mikkel/Kasper/Bente/Steffen
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,8 +10,7 @@
         <link rel="stylesheet" href="css/css.css">
         <title>Dell homepage</title>
     </head>
-    <body>
-        
+    <body>        
             <div class="topBox"> 
 
                 <a href="dellHome.jsp">
@@ -42,8 +39,7 @@
                         <h3 class="menu" style="color: black">Coming soon</h3>
                     </div>
                 </a>
-            </div>
-        
+            </div>      
         
         <div class="centerBox" > 
             <br><br>

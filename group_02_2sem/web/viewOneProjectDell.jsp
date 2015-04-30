@@ -1,7 +1,5 @@
 <%-- 
-    Document   : viewOneProjectDell.jsp
-    Created on : 17-04-2015, 20:16:15
-    Author     : Bente
+    Author     : Mikkel/Kasper/Bente/Steffen
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -65,14 +63,11 @@
             <p>
                 Description of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="description" readonly="">${project.description}</textarea>
-
-           
+            <textarea type="text" cols="40" rows="6" name="description" readonly="">${project.description}</textarea>           
             <p>
                 Goal of the project: 
             </p>
-            <textarea type="text" cols="40" rows="6" name="goal" readonly="">${project.goal}</textarea><br><br><br> 
-            
+            <textarea type="text" cols="40" rows="6" name="goal" readonly="">${project.goal}</textarea><br><br><br>             
             <p>
                 Description of status: 
             </p>

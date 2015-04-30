@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
 package dk.group_02.View;
 
@@ -17,10 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author pagh
- */
 @WebServlet(name = "StatusChangeServlet", urlPatterns
         = {
             "/StatusChangeServlet"
@@ -34,10 +29,6 @@ public class StatusChangeServlet extends ManagerServlet {
   response.setContentType("text/html;charset=UTF-8");
         String statusValue = request.getParameter("statusBox");
        
-        // int statusValue = Integer.parseInt(request.getAttribute("statusBox"));
-
-        
-
         if (statusValue.equalsIgnoreCase("0")) {
            
             int projectId = Integer.parseInt(request.getParameter("projectId"));
@@ -78,7 +69,7 @@ public class StatusChangeServlet extends ManagerServlet {
             out.println("</pre>");
         }
     }
-
+    //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

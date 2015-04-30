@@ -1,3 +1,7 @@
+<%-- 
+    Author     : Mikkel/Kasper/Bente/Steffen
+--%>
+
 <html>
     <head>
         <link rel="stylesheet" href="css/skabelonCSS.css">
@@ -21,6 +25,5 @@
                 <p style="color:red">${message}</p>
         </div>
         </form>
-
 </body>
 </html>

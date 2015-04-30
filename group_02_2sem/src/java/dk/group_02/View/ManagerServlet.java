@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
 package dk.group_02.View;
 
@@ -18,12 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author steffen
+ * Dette er en abstract klasse som ALLE vores servlets arver fra (i stedet for at arve fra HttpServlet som de plejer, det klarer denne klasse i stedet). Denne løsning er lavet for at undgå for meget boilerplate code
  */
 public abstract class ManagerServlet extends HttpServlet {
-
     private Controller ctrl;
-
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
@@ -36,7 +33,7 @@ public abstract class ManagerServlet extends HttpServlet {
             application.setAttribute("validator", ctrl);
         }
     }
-
+    
     protected Controller getController() {
         return ctrl;
     }

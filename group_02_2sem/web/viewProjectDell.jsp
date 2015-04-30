@@ -1,7 +1,5 @@
 <%-- 
-    Document   : view
-    Created on : 09-04-2015, 09:45:26
-    Author     : steffen
+    Author     : Mikkel/Kasper/Bente/Steffen
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,9 +16,7 @@
         <style type="text/css"></style>
     </head>
     <body>
-
         <div class="topBox"> 
-
             <a href="dellHome.jsp">
                 <div class="menuButtons">
                     <h3 class="menu" style="color: black">Home</h3>
@@ -86,7 +82,6 @@
             </table>
             <div id="msgDiv" style="display:inline-block">    
                 <p style="color: red; float: bottom;">${MSG}</p>
-
             </div>
                 <br>
                 <br>
@@ -96,8 +91,7 @@
                 <br>
                 <br>
                 <br>
-                <br>
-                
+                <br>                
         </div>
 
     </body>

@@ -1,3 +1,7 @@
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
+ */
 package dk.group_02.View;
 
 import dk.group_02.Entity.Poe;
@@ -14,10 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-/**
- *
- * @author pagh
- */
 @WebServlet(name = "PoeServlet", urlPatterns
         =
         {
@@ -42,7 +42,7 @@ public class PoeServlet extends ManagerServlet
                 response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", poe.getFilename()));
 
                 OutputStream out = response.getOutputStream();
-                // Copy the contents of the file to the output stream             
+                //Skriver indeholdet af array'en til streamen  
                 out.write(poe.getBuffer());
                 out.close();
             }
@@ -67,7 +67,7 @@ public class PoeServlet extends ManagerServlet
             out.println("</pre>");
         }
     }
-
+    //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

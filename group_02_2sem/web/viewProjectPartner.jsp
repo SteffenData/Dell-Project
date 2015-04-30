@@ -1,16 +1,11 @@
 <%-- 
-    Document   : view
-    Created on : 09-04-2015, 09:45:26
-    Author     : steffen
+    Author     : Mikkel/Kasper/Bente/Steffen
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page import = "javax.servlet.RequestDispatcher" %>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -75,19 +70,15 @@
                             <td>
                                 <button type="submit" name="projectId" value="${p.projectId}">
                                     Press here to see project details
-
-
                                 </button>
                             </td>
                         </tr>
                     </c:forEach>
                 </form>
-
                 </tbody>
             </table>
             <div id="msgDiv" style="display:inline-block">    
                 <p style="color: red; float: left;">${MSG}</p>
-
             </div>
                 <br>
                 <br>

@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
 package dk.group_02.control;
 
@@ -20,10 +19,6 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author steffen
- */
 public class Controller
 {
 
@@ -75,11 +70,6 @@ public class Controller
 
     }
 
-//    public Project getSameProject(Project project) throws SQLException{
-//       
-//        Project sameProject = manager.getSameProject(project);
-//        return sameProject;
-//    }
     public boolean getLogin(String usrName, String password) throws DatabaseException
     {
         if (usrName.isEmpty() || password.isEmpty())

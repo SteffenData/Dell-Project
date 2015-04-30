@@ -1,3 +1,7 @@
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
+ */
 package dk.group_02.View;
 
 import dk.group_02.Entity.Partner;
@@ -36,25 +40,25 @@ public class CreateProjectServlet extends ManagerServlet {
         String description = request.getParameter("description");
         File upload = null;
         String goal = request.getParameter("goal");
-        
+
         try {
             if (getController().saveProject(startDate, projectName,
                     cost, status, description, partner,
                     goal)) {
-                request.setAttribute("MSG_YES", "Your project has been saved!");
-                RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
-                rd.forward(request, response);
+                request.setAttribute("MSG_YES", "Your project has been saved!");                
             } else {
                 request.setAttribute("MSG_NO", "Please type in the required fields");
-                RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
-                rd.forward(request, response);
             }
+            RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
+            rd.forward(request, response);
         } catch (DatabaseException ex) {
             Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

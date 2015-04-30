@@ -1,13 +1,14 @@
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
+ */
+
 package dk.group_02.Entity;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-/**
- *
- * @author steffen
- */
 public class Project {
     private int projectId;
     private String startDate;
@@ -20,18 +21,6 @@ public class Project {
     private Partner partner;
     private String statusDescription;
 
-    
-
-  /**** Til senere brug når fil er lavet færdigt, ***/
-//    public Project(String startDate, String projectName, Double cost,String status, String description, File upload, String goal) {
-//        this.startDate = startDate;
-//        this.projectName = projectName;
-//        this.cost = cost;
-//        this.status = status;
-//        this.description = description;
-//        this.upload = upload;
-//        this.goal = goal;
-//    }
     public Project(int projectId, String startDate, String projectName, Double cost,String status, String description, String goal,Partner partner) {
         this.projectId = projectId;
         this.startDate = startDate;
@@ -45,7 +34,6 @@ public class Project {
         this.statusDescription = "";
     }
 
-
     public int getProjectId() {
         return projectId;
     }
@@ -56,13 +44,6 @@ public class Project {
     public String getStartDate() {
         return startDate;
     }
-//    public String getPROJECT_ID() {
-//        return PROJECT_ID;
-//    }
-
-//    public void setId(String PROJECT_ID) {
-//        this.PROJECT_ID = PROJECT_ID;
-//    }
 
     public String getProjectName() {
         return projectName;

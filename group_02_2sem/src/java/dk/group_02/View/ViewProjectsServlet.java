@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
 package dk.group_02.View;
 
@@ -23,10 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author steffen
- */
 @WebServlet(name = "View_Project_Servlet", urlPatterns
         = {
             "/View_Project_Servlet"
@@ -61,7 +56,7 @@ public class ViewProjectsServlet extends ManagerServlet {
         }
 
     }
-
+    //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

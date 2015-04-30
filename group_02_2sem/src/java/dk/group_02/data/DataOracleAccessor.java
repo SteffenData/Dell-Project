@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package dk.group_02.data;
-
 /**
  *
- * @author steffen
+ * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
+package dk.group_02.data;
 
     public class DataOracleAccessor {
 
