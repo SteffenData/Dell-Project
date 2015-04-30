@@ -3,7 +3,7 @@
  * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
 
-package dk.group_02.TestSprintOne;
+package dk.group_02.Test;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.data.DataManager;

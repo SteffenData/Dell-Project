@@ -2,7 +2,7 @@
  *
  * @author steffen/Kasper
  */
-package dk.group_02.TestSprintOne;
+package dk.group_02.Test;
 
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
