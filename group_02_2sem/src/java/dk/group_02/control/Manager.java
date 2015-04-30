@@ -7,7 +7,6 @@ import dk.group_02.Entity.Poe;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Collection;
 import dk.group_02.utility.DatabaseException;
 

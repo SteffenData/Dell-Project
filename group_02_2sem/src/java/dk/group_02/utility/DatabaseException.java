@@ -1,6 +1,6 @@
 /**
  *
- * @author steffen/Bente/Mikkel/Kasper/Pelle
+ * @author steffen/Bente/Mikkel/Kasper
  */
 package dk.group_02.utility;
 
@@ -13,8 +13,5 @@ public class DatabaseException extends SQLException {
         super(message);
 
     }
-
-    
-    
 }
 

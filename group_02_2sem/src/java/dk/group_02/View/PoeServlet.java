@@ -1,6 +1,6 @@
 /**
  *
- * @author steffen/Bente/Mikkel/Kasper/Pelle
+ * @author steffen/Kasper/Pelle
  */
 package dk.group_02.View;
 
@@ -33,6 +33,7 @@ public class PoeServlet extends ManagerServlet
         try
         {
             HttpSession s = request.getSession();
+            
             if (s.getAttribute("partner") == null)
             {
                 int projectId = Integer.parseInt(request.getParameter("projectId"));
@@ -46,26 +47,20 @@ public class PoeServlet extends ManagerServlet
                 out.write(poe.getBuffer());
                 out.close();
             }
-            //////////////////////////////////////////////////
+         
+            
             if (s.getAttribute("partner") != null)
             {
                 int projectId = Integer.parseInt(request.getParameter("projectId"));
                 Part part = request.getPart("poe");
 
-                System.out.println("--------------------------------------" + part);
                 getController().savePOE(part.getInputStream(), projectId, part.getSubmittedFileName());
                 RequestDispatcher rd = request.getRequestDispatcher("partnerHome.jsp");
                 rd.forward(request, response);
             }
 
         } catch (NumberFormatException | IOException | DatabaseException e)
-        {
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.print("<h2>" + e + "</h2> <hr/> <pre>");
-            e.printStackTrace(out);
-            out.println("</pre>");
-        }
+        {  }
     }
     //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

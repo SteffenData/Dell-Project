@@ -2,11 +2,8 @@
     Author     : Mikkel/Kasper/Bente/Steffen
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page import = "javax.servlet.RequestDispatcher" %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +22,6 @@
                     <h3 class="menu" style="color: black">Home</h3>
                 </div>
             </a>
-
             <a href="${pageContext.request.contextPath}/View_Project_Servlet">
                 <div class="menuButtons">
                     <h3 class="menu" style="color: black">View Projects</h3>
@@ -48,7 +44,6 @@
             </a>
         </div>
         <div class="centerBox" > 
-
             <table border="4" style="border-color: blue; margin: auto;">
                 <thead>
                     <tr>
@@ -62,7 +57,6 @@
                     <tr></tr>
                 <form action="View_Single_Project_Servlet" method="post">
                     <c:forEach var="p" items="${projects}">
-
                         <tr>
                             <td><p class="tableText">${p.startDate} </p></td>
                             <td><p class="tableText">${p.projectName}</p></td>

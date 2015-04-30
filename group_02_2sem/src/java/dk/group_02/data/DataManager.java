@@ -7,12 +7,8 @@ package dk.group_02.data;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Poe;
 import dk.group_02.Entity.Project;
-import dk.group_02.Entity.tilEgetForbrug.SkalIkkeMedIEndeligeProgram.StreamTestingz;
 import dk.group_02.control.Manager;
 import dk.group_02.utility.DatabaseException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -94,11 +90,8 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
-
         return partnerProjects;
-
     }
 
     public Project getProject(int projectId) throws DatabaseException {
@@ -120,11 +113,8 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
-
         return finalProject;
-
     }
 
     public void approveStatus(Project project) throws DatabaseException {
@@ -158,9 +148,7 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
-
     }
 
     public void rejectStatus(Project project) throws DatabaseException {
@@ -250,7 +238,6 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
         return projectId;
     }
@@ -275,11 +262,8 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
-
         return partnerId;
-
     }
 
     public Partner getPartnerByUserName(String userName) throws DatabaseException {
@@ -299,10 +283,8 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
         return partner;
-
     }
 
     public Partner getPartnerById(String partnerId) throws DatabaseException {
@@ -325,10 +307,8 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
         return partner;
-
     }
 
     public void SaveProject(Project project) throws DatabaseException {
@@ -353,9 +333,7 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
-
     }
 
     public boolean getLogin(String usrName, String password) throws DatabaseException {
@@ -380,10 +358,8 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
         return returnVariable;
-
     }
 
     public void SaveLogin(String username, String password, int partnerOrDel) throws DatabaseException {
@@ -404,9 +380,7 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
-
     }
 
     public Poe getPOE(int projectId) throws DatabaseException {
@@ -426,7 +400,6 @@ public class DataManager implements Manager {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
         return poe;
     }
@@ -448,7 +421,6 @@ public class DataManager implements Manager {
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");
-
         }
     }
 }

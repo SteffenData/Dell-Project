@@ -5,7 +5,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "javax.servlet.RequestDispatcher" %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,7 +48,6 @@
                 <p>Type in the required information (fields marked with *) and click Submit</p>
                 <br>
                 <form action="Create_Project_Servlet" method="post">
-
                     <strong>Name of the Project: *</strong><br>
                     <input type="text" name="projectName" required="" autofocus>
                     <br><br>
@@ -65,8 +63,6 @@
                     <strong>Goal of the Project: *</strong><br>
                     <textarea type="text" cols="40" rows="6" name="goal" required=""></textarea>
                     <br>                
-                    <p><strong>Attach file:</strong></p>
-                    <input type="file" name="upload"><br>
                     <br>   
                     <div id="msgDiv" style="display:inline-block">    
                         <button type="submit" style="float: left;" onclick="break"><strong>Submit</strong></button>   

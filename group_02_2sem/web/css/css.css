@@ -1,6 +1,9 @@
+/*   
+ *
+ * @author Kasper/Mikkel/Bente
+*/
 .topBox
 {
-
     position: fixed;
     top: 8.5%;
     left: 50%;
@@ -10,7 +13,6 @@
     alignment-baseline: central;
     background-color: transparent;
     float: top;
-
 }
 
 .centerBox
@@ -21,8 +23,6 @@
     width: 85%;
     height: 100%;
     transform: translate(-50%, -50%);
-/*    opacity: 0.85;
-    background-color: white;*/
     background-repeat: repeat;
     alignment-baseline: central;
     overflow: auto;
@@ -31,10 +31,8 @@
 
 p
 {
-    
     color: black;
 }
-
 
 .menuButtons
 {    
@@ -53,19 +51,15 @@ p
     border-bottom-width: 2px;
     border-bottom-color: black;
     border-bottom-style: solid;   
-  
 }
+
 body
 {
     background-image: url(../resources/delllogogennemsigtig.png);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-attachment: fixed;
-    
-
 }
-
-
 
 #overskrift 
 {

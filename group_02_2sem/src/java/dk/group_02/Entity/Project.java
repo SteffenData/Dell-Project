@@ -6,8 +6,6 @@
 package dk.group_02.Entity;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 public class Project {
     private int projectId;

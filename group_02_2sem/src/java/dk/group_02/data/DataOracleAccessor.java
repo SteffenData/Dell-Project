@@ -10,5 +10,4 @@ package dk.group_02.data;
         public static final String DB_URL = "jdbc:oracle:thin:@datdb.cphbusiness.dk:1521:DAT";
         public static final String USERNAME = "cphsm182";
         public static final String PASSWORD = "cphsm182";
-
     }

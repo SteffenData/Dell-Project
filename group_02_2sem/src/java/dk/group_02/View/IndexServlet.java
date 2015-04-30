@@ -7,9 +7,6 @@ package dk.group_02.View;
 import dk.group_02.Entity.Partner;
 import dk.group_02.utility.DatabaseException;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,13 +49,15 @@ public class IndexServlet extends ManagerServlet {
             }
         } catch (DatabaseException ex) {
             System.out.println("jeg har fanget en excp.");
-            request.setAttribute("message","No connection to the database, please try again later or contact admin");
+            request.setAttribute("message", "No connection to the database, please try again later or contact admin");
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
     }
+
     //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

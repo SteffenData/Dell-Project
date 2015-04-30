@@ -7,20 +7,15 @@ package dk.group_02.View;
 import dk.group_02.Entity.Partner;
 import dk.group_02.utility.DatabaseException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "Create_Project_Servlet", urlPatterns
         = {
@@ -45,7 +40,7 @@ public class CreateProjectServlet extends ManagerServlet {
             if (getController().saveProject(startDate, projectName,
                     cost, status, description, partner,
                     goal)) {
-                request.setAttribute("MSG_YES", "Your project has been saved!");                
+                request.setAttribute("MSG_YES", "Your project has been saved!");
             } else {
                 request.setAttribute("MSG_NO", "Please type in the required fields");
             }
@@ -58,7 +53,6 @@ public class CreateProjectServlet extends ManagerServlet {
 
     //Autogenereret netbeans kode herunder!
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

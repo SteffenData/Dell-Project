@@ -1,5 +1,5 @@
 <%-- 
-    Author     : Mikkel/Kasper/Bente/Steffen
+    Author     : Mikkel/Kasper/Bente
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

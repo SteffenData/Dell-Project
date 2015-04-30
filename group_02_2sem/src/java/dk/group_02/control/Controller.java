@@ -7,17 +7,11 @@ package dk.group_02.control;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Poe;
 import dk.group_02.Entity.Project;
-import dk.group_02.control.Manager;
 import dk.group_02.data.DataManager;
 import dk.group_02.utility.DatabaseException;
 import dk.group_02.utility.Validator;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Controller
 {
@@ -31,7 +25,6 @@ public class Controller
         this.validator = new Validator();
     }
 
-    //The cost is not controlled as any negative value means that Dell is being paid money (which is nice). --- cost may have to be limited relative to the budget of Dell ----
     public boolean saveProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) throws DatabaseException
     {
         if (startDate == null || projectName == null || cost == null || description == null || goal == null || partner == null || status == null)

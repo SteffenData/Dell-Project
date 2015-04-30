@@ -1,11 +1,9 @@
 <%-- 
-    Author     : Mikkel/Kasper/Bente/Steffen
+    Author     : Mikkel/Kasper/Bente/Pelle
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "javax.servlet.RequestDispatcher" %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,15 +45,12 @@
             <h1>
                 ${project.projectName}
             </h1>
-
             <p>
                 Partner: <strong>${project.partner.partnerName}</strong>
             </p>
-
             <p>
                 Starting date: <strong>${project.startDate}</strong>
             </p>
-
             <p>
                 Projected costs of the project: <strong>${project.cost}</strong>
             </p>
@@ -81,8 +76,6 @@
                     <input type ="hidden" name="projectId" value="${project.projectId}" >
                     <button type="submit">Download POE</button>
                 </form>
-                
-                
                 <br>
                 <br>
                 <br>

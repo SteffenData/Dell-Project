@@ -1,7 +1,6 @@
 <%-- 
-    Author     : Mikkel/Kasper/Bente/Steffen
+    Author     : Mikkel/Bente
 --%>
-
 <html>
     <head>
         <link rel="stylesheet" href="css/skabelonCSS.css">

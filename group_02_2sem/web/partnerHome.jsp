@@ -1,5 +1,6 @@
-<%-- Author : Mikkel/Kasper/Bente/Steffen --%>
-
+<%-- 
+Author : Mikkel/Kasper/Bente
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- PAGE IMPORT OG OBJECT IMPORT --%>
 <!DOCTYPE html>

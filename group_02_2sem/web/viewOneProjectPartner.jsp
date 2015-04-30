@@ -1,10 +1,9 @@
 <%-- 
-    Author     : Mikkel/Kasper/Bente/Steffen
+    Author     : Mikkel/Bente
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "javax.servlet.RequestDispatcher" %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,24 +46,19 @@
             <h1>
                 ${project.projectName}
             </h1>
-
             <p>
                 Starting date: <strong>${project.startDate}</strong>
             </p>
-
             <p>
                 Status is: <strong>${project.status}</strong> 
             </p>
-
             <p>
                 projected costs of the project: <strong>${project.cost}</strong>
             </p>
-
             <p>
                 Description of the project: 
             </p>
             <textarea type="text" cols="40" rows="6" name="description" readonly="" style="text-align: left">${project.description}</textarea>
-
             <p>
                 Goal of the project: 
             </p>
@@ -77,7 +71,6 @@
             <form action="PoeServlet" method="POST" enctype="multipart/form-data">
                 <input type ="hidden" name="projectId" value="${project.projectId}" >
                 <p>Upload POE</p>
-
                 <input type="file" name="poe"> 
                 <button type="submit">Upload</button>
             </form>

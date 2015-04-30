@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author steffen/Kasper
  */
 package dk.group_02.TestSprintOne;
 
@@ -19,10 +18,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author steffen
- */
 public class TestOfLogin {
 
     Partner partner;
@@ -36,7 +31,6 @@ public class TestOfLogin {
         partner = new Partner("elgiganten", "Denmark");
         manager = new DataManager();
         ctrl = new Controller();
-
     }
 
     @Test
@@ -150,5 +144,4 @@ public class TestOfLogin {
             Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
