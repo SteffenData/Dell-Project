@@ -44,7 +44,7 @@ public class TestofCreateProject {
     @Test
     public void testValidateProjectInfoName() {
         assertTrue(val.validateProjectInfo("1992-10-10", "thisNameIsThirtyCharactersLong", 1.0, "status", "des", "goal")); // her tester vi en String med 30 characters
-        assertFalse(val.validateProjectInfo("1992-10-10", "thisNameIsMoreThanThirtyCharacters", 1.0, "status", "des", "goal")); // her tester vi en String med over de tilladte 30 characters
+        assertFalse(val.validateProjectInfo("1992-10-10", "thisNameIsThirtyCharactersLong.", 1.0, "status", "des", "goal")); // her tester vi en String med over de tilladte 30 characters
     }
     
     @Test
@@ -72,7 +72,7 @@ public class TestofCreateProject {
     @Test
     public void testValidateProjectInfoStatus() {
         assertTrue(val.validateProjectInfo("1992-10-10", "Name", 1.0, "thisNameIsThirtyCharactersLong", "des", "goal")); // tester på status lige på grænsen af det tilladte
-        assertFalse(val.validateProjectInfo("1992-10-10", "Name", 1.0, "thisNameIsMoreThanThirtyCharacters", "des", "goal")); // tester på status lidt over grænsen af det tilladte
+        assertFalse(val.validateProjectInfo("1992-10-10", "Name", 1.0, "thisNameIsThirtyCharactersLong.", "des", "goal")); // tester på status lidt over grænsen af det tilladte
     }
 
     @Test
