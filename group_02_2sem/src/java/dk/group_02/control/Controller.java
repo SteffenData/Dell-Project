@@ -76,9 +76,9 @@ public class Controller
         return manager.getLogin(usrName, password);
     }
 
-    public Partner getPartnerByUserName(String userName) throws DatabaseException
+    public Partner getPartnerByUsername(String userName) throws DatabaseException
     {
-        Partner partner = manager.getPartnerByUserName(userName);
+        Partner partner = manager.getPartnerByUsername(userName);
         return partner;
     }
 

@@ -28,9 +28,9 @@ public interface Manager
 
     public boolean getLogin(String usrName, String password)throws DatabaseException;
 
-    public void SaveLogin(String username, String password, int partnerOrDel)throws DatabaseException;
+//    public void SaveLogin(String username, String password, int partnerOrDel)throws DatabaseException;
     
-    public Partner getPartnerByUserName(String userName)throws DatabaseException;
+    public Partner getPartnerByUsername(String userName)throws DatabaseException;
     
     public void approveStatus(Project project)throws DatabaseException;
     

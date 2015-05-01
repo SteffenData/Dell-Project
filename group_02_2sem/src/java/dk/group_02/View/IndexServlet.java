@@ -26,7 +26,7 @@ public class IndexServlet extends ManagerServlet {
 
         try {
             if (getController().getLogin(username, password)) {
-                partner = getController().getPartnerByUserName(username);
+                partner = getController().getPartnerByUsername(username);
 
                 HttpSession s = request.getSession();
                 s.setMaxInactiveInterval(60 * 60);

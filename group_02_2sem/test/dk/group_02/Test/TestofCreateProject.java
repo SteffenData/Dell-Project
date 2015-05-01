@@ -38,41 +38,41 @@ public class TestofCreateProject {
     }
 
     @Test
-    public void testOfValidateProjectInfoAllGood() {
+    public void testValidateProjectInfo() {
         assertTrue(val.validateProjectInfo("allGood", 1.0, "status", "des", "goal")); // her tester vi for alle begrænsninger i alle felter om det går godt
     }
 
     @Test
-    public void testOfValidateProjectInfoName() {
+    public void testValidateProjectInfoName() {
         assertTrue(val.validateProjectInfo("thisNameIsThirtyCharactersLong", 1.0, "status", "des", "goal")); // her tester vi en String med 30 characters
         assertFalse(val.validateProjectInfo("thisNameIsMoreThanThirtyCharacters", 1.0, "status", "des", "goal")); // her tester vi en String med over de tilladte 30 characters
     }
 
     @Test
-    public void testOfValidateProjectInfoCost() {
+    public void testValidateProjectInfoCost() {
         assertTrue(val.validateProjectInfo("Name", 10000000.0, "status", "des", "goal")); // tester på budget lige på grænsen af det tilladte
         assertFalse(val.validateProjectInfo("Name", 10000000.1, "status", "des", "goal")); // tester på budget lige over grænsen af det tilladte
     }
 
     @Test
-    public void testOfValidateProjectInfoStatus() {
+    public void testValidateProjectInfoStatus() {
         assertTrue(val.validateProjectInfo("Name", 1.0, "thisNameIsThirtyCharactersLong", "des", "goal")); // tester på status lige på grænsen af det tilladte
         assertFalse(val.validateProjectInfo("Name", 1.0, "thisNameIsMoreThanThirtyCharacters", "des", "goal")); // tester på status lidt over grænsen af det tilladte
     }
 
     @Test
-    public void testOfValidateProjectInfoDescription() {
+    public void testValidateProjectInfoDescription() {
         assertTrue(val.validateProjectInfo("Name", 1.0, "status", stringLong, "goal")); // her tester vi Description lige på grænsen af det tilladte
         assertFalse(val.validateProjectInfo("Name", 1.0, "status", stringTooLong, "goal")); // her tester vi Description lige over grænsen af det tilladte
     }
 
      @Test
-    public void testOfValidateProjectInfoGoal() {
+    public void testValidateProjectInfoGoal() {
         assertTrue(val.validateProjectInfo("Name", 1.0, "status", "des", stringLong)); // her tester vi goal lige på grænsen af det tilladte
         assertFalse(val.validateProjectInfo("Name", 1.0, "status", "des", stringTooLong)); // her tester vi goal lige over grænsen af det tilladte
     }
     @Test
-    public void testOpretTrue() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
+    public void testSaveProject() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
         manager.SaveProject(project);
         Project project2 = manager.getProject(project.getProjectId());
 
@@ -86,7 +86,7 @@ public class TestofCreateProject {
     }
 
     @Test
-    public void testOpretMedAttibutNull() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
+    public void testSaveProjectWithAttributeNull() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
         assertFalse(ctrl.saveProject(null, "bronze", 1.0, "gold", "silver", partner, "titanium")); // her tester vi de enkelte værdier ikke er null
         assertFalse(ctrl.saveProject("1992-10-10", null, 1.0, "gold", "silver", partner, "titanium"));
         assertFalse(ctrl.saveProject("1992-10-10", "bronze", null, "gold", "silver", partner, "titanium"));

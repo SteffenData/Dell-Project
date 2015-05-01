@@ -10,7 +10,6 @@ import dk.group_02.control.Controller;
 import dk.group_02.control.Manager;
 import dk.group_02.data.DataManager;
 import dk.group_02.utility.DatabaseException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertFalse;
@@ -34,7 +33,7 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testgetPartnerIdTrue() {
+    public void testgetPartnerId() {
 
         String testId;
         try
@@ -48,7 +47,7 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testgetPartnerIdFalse() {
+    public void testgetPartnerIdWrongId() {
 
         String testId;
         try
@@ -63,7 +62,7 @@ public class TestOfLogin {
 
     @Test
 
-    public void testgetPartnerByIdTrue() {
+    public void testgetPartnerById() {
 
         Partner testPartner;
         try
@@ -78,7 +77,7 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testgetPartnerByIdFalse() {
+    public void testgetPartnerByIdWrongId() {
 
         try
         {
@@ -92,11 +91,11 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testPartnerByUsernameTrue() {
+    public void testGetPartnerByUsername() {
 
         try
         {
-            Partner testPartner = manager.getPartnerByUserName("bubber");
+            Partner testPartner = manager.getPartnerByUsername("bubber");
             assertTrue(partner.getPartnerName().equals(testPartner.getPartnerName()));
             assertTrue(partner.getCountry().equals(testPartner.getCountry()));
         } catch (DatabaseException ex)
@@ -106,11 +105,11 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testPartnerByUsernameFalse() {
+    public void testGetPartnerByUsernameWrongUsername() {
 
         try
         {
-            Partner testPartner = manager.getPartnerByUserName("kasper");
+            Partner testPartner = manager.getPartnerByUsername("kasper");
             assertFalse(partner.getPartnerName().equals(testPartner.getPartnerName()));
             assertFalse(partner.getCountry().equals(testPartner.getCountry()));
         } catch (DatabaseException ex)
@@ -120,11 +119,11 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testAfLogInTrue() {
+    public void testGetLogin() {
 
         try
         {
-            manager.SaveLogin("testUsername", "testPassword", 1);
+//            manager.SaveLogin("testUsername", "testPassword", 1);
             assertTrue(manager.getLogin("testUsername", "testPassword"));
         } catch (DatabaseException ex)
         {
@@ -133,12 +132,12 @@ public class TestOfLogin {
     }
 
     @Test
-    public void testAfLogInFalse() {
+    public void testGetLoginNotInDatabase() {
 
         try
         {
-            manager.SaveLogin("simba", "jurgen", 1);
-            assertFalse(manager.getLogin("bimba", "burgen"));
+//            manager.SaveLogin("simba", "jurgen", 1);
+            assertFalse(manager.getLogin("notInDatabase", "notInDatabase"));
         } catch (DatabaseException ex)
         {
             Logger.getLogger(TestOfLogin.class.getName()).log(Level.SEVERE, null, ex);

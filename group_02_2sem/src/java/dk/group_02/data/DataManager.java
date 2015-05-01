@@ -269,7 +269,7 @@ public class DataManager implements Manager {
         return partnerId;
     }
 
-    public Partner getPartnerByUserName(String userName) throws DatabaseException {
+    public Partner getPartnerByUsername(String username) throws DatabaseException {
         ResultSet rs = null;
         PreparedStatement statement = null;
         Partner partner = null;
@@ -277,7 +277,7 @@ public class DataManager implements Manager {
             String query = "SELECT partnername,country FROM partners where username =?";
 
             statement = connection.prepareStatement(query);
-            statement.setString(1, userName);
+            statement.setString(1, username);
             rs = statement.executeQuery();
 
             if (rs.next()) {
@@ -339,7 +339,7 @@ public class DataManager implements Manager {
         }
     }
 
-    public boolean getLogin(String usrName, String password) throws DatabaseException {
+    public boolean getLogin(String username, String password) throws DatabaseException {
         ResultSet rs = null;
         PreparedStatement statement = null;
 
@@ -350,7 +350,7 @@ public class DataManager implements Manager {
             String query = "SELECT * FROM USERS where username =? and password =?";
 
             statement = connection.prepareStatement(query);
-            statement.setString(1, usrName);
+            statement.setString(1, username);
             statement.setString(2, password);
             rs = statement.executeQuery();
 
@@ -365,26 +365,26 @@ public class DataManager implements Manager {
         return returnVariable;
     }
 
-    public void SaveLogin(String username, String password, int partnerOrDel) throws DatabaseException {
-        PreparedStatement statement = null;
-
-        try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
-
-            String query = "insert into users values (?,?,?)";
-
-            statement = connection.prepareStatement(query);
-
-            statement.setString(1, username);
-            statement.setString(2, password);
-            statement.setDouble(3, partnerOrDel);
-
-            statement.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
-            throw new DatabaseException("Sorry, the Database is out of service");
-        }
-    }
+//    public void SaveLogin(String username, String password, int partnerOrDel) throws DatabaseException {
+//        PreparedStatement statement = null;
+//
+//        try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
+//
+//            String query = "insert into users values (?,?,?)";
+//
+//            statement = connection.prepareStatement(query);
+//
+//            statement.setString(1, username);
+//            statement.setString(2, password);
+//            statement.setDouble(3, partnerOrDel);
+//
+//            statement.executeUpdate();
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new DatabaseException("Sorry, the Database is out of service");
+//        }
+//    }
 
     public Poe getPOE(int projectId) throws DatabaseException {
         ResultSet rs = null;
