@@ -14,7 +14,7 @@ public class Validator {
             return false;
         }
         
-        if (projectName.length() > 30 || projectName == "" || status.length() > 30 || cost > 10000000 || cost < -10000000 || description.length() > 250 || goal.length() > 250) {
+        if (projectName.length() > 30 || projectName == "" || status.length() > 30 || cost > 10000000 || cost < -10000000 || description.length() > 250 || description == "" || goal.length() > 250 || goal == "") {
             return false;
         } else {
             return true;

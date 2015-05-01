@@ -108,7 +108,6 @@ public class TestofCreateProject {
         assertFalse(ctrl.saveProject("1992-10-10", "bronze", null, "gold", "silver", partner, "titanium"));
         assertFalse(ctrl.saveProject("1992-10-10", "bronze", 1.0, null, "silver", partner, "titanium"));
         assertFalse(ctrl.saveProject("1992-10-10", "bronze", 1.0, "gold", null, partner, "titanium"));
-        assertFalse(ctrl.saveProject("1992-10-10", "bronze", 1.0, "gold", "silver", null, "titanium"));
         assertFalse(ctrl.saveProject("1992-10-10", "bronze", 1.0, "gold", "silver", partner, null));
     }
 }
