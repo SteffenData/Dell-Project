@@ -27,11 +27,7 @@ public class Controller
 
     public boolean saveProject(String startDate, String projectName, Double cost, String status, String description, Partner partner, String goal) throws DatabaseException
     {
-        if (startDate == null || projectName == null || cost == null || description == null || goal == null || partner == null || status == null)
-        {
-            return false;
-        }
-        if (validator.validateProjectInfo(projectName, cost, status, description, goal))
+        if (validator.validateProjectInfo(startDate, projectName, cost, status, description, goal))
         {
             Project project = new Project(0, startDate, projectName, cost, status, description, goal, partner);
             manager.SaveProject(project);

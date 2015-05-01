@@ -39,7 +39,7 @@ public class TestOfStatusChange
             ctrl.approveStatus(project); // her ændrer vi status til awaiting POE
             int testId = manager.getProjectId(project);
             
-            assertTrue("Awaiting POE".equals(project.getStatus())); // her ser vi om projektet har ændret status i databasen
+            assertTrue("Awaiting POE".equals(manager.getProject(testId).getStatus())); // her ser vi om projektet har ændret status i databasen
         } 
         catch (SQLException e)
         {
