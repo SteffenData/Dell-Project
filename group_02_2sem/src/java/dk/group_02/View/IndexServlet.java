@@ -48,7 +48,6 @@ public class IndexServlet extends ManagerServlet {
                 rd.forward(request, response);
             }
         } catch (DatabaseException ex) {
-            System.out.println("jeg har fanget en excp.");
             request.setAttribute("message", "No connection to the database, please try again later or contact admin");
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);

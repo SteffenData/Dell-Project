@@ -5,6 +5,7 @@
 package dk.group_02.View;
 
 import dk.group_02.Entity.Project;
+import dk.group_02.utility.DatabaseException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class StatusChangeServlet extends ManagerServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+//        try {
 
             response.setContentType("text/html;charset=UTF-8");
             String statusValue = request.getParameter("statusBox");
@@ -51,18 +52,22 @@ public class StatusChangeServlet extends ManagerServlet {
                     project.setStatusDescription(request.getParameter("statusDescription"));
                     getController().approveStatus(project);
                     request.setAttribute("projects", getController().getDellProjects());
-                } catch (SQLException e) {
+                } catch (DatabaseException ex) {
+                    request.setAttribute("message", "No connection to the database, please try again later or contact admin");
+                     RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");
+                     rd.forward(request, response);
+                    
                 }
                 RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
                 rd.forward(request, response);
             }
-        } catch (Exception e) {
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.print("<h2>" + e + "</h2> <hr/> <pre>");
-            e.printStackTrace(out);
-            out.println("</pre>");
-        }
+//        } catch (Exception e) {
+//            response.setContentType("text/html");
+//            PrintWriter out = response.getWriter();
+//            out.print("<h2>" + e + "</h2> <hr/> <pre>");
+//            e.printStackTrace(out);
+//            out.println("</pre>");
+//        }
     }
 
     //Autogenereret netbeans kode herunder!

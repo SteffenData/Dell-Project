@@ -73,8 +73,10 @@
             </form>
                 <form action="PoeServlet">
                     <input type ="hidden" name="projectId" value="${project.projectId}" >
-                    <button type="submit">Download POE</button>
+                    <button type="submit">Download POE</button><br><br>
+                    <p style="color: red; float: left;">${message}</p>
                 </form>
+                    
                 <br>
                 <br>
                 <br>
