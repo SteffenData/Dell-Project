@@ -178,7 +178,8 @@ public class DataManager implements Manager {
                     break;
 
             }
-            String query = "UPDATE Projects set status='Project rejected', statusDescription=? where projectID = ?";
+            String query = "UPDATE Projects set status = ? , statusDescription=? where projectID = ?";
+//            String query = "UPDATE Projects set status='Project rejected', statusDescription=? where projectID = ?";
 
             statement = connection.prepareStatement(query);
             statement.setString(1, newStatus);

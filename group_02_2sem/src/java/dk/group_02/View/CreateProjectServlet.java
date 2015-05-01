@@ -35,7 +35,7 @@ public class CreateProjectServlet extends ManagerServlet {
         String description = request.getParameter("description");
         File upload = null;
         String goal = request.getParameter("goal");
-
+      
         try {
             if (getController().saveProject(startDate, projectName,
                     cost, status, description, partner,
@@ -44,7 +44,7 @@ public class CreateProjectServlet extends ManagerServlet {
             } else {
                 request.setAttribute("MSG_NO", "Please type in the required fields");
             }
-            RequestDispatcher rd = request.getRequestDispatcher("create_project.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("createProject.jsp");
             rd.forward(request, response);
         } catch (DatabaseException ex) {
             Logger.getLogger(CreateProjectServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -28,7 +28,7 @@ public class TestofCreateProject {
     
     @Before
     public void setUp() {
-        partner = new Partner("elgiganten", "Denmark");
+        partner = new Partner("Elgiganten", "Denmark");
         project = new Project(0, "1992-10-10", "TestProject", 1.0, "testing", "test", "test", partner);
         manager = new DataManager();
         ctrl = new Controller();
@@ -41,7 +41,6 @@ public class TestofCreateProject {
     public void testValidateProjectInfo() {
         assertTrue(val.validateProjectInfo("allGood", 1.0, "status", "des", "goal")); // her tester vi for alle begrænsninger i alle felter om det går godt
     }
-
     @Test
     public void testValidateProjectInfoName() {
         assertTrue(val.validateProjectInfo("thisNameIsThirtyCharactersLong", 1.0, "status", "des", "goal")); // her tester vi en String med 30 characters
@@ -54,6 +53,11 @@ public class TestofCreateProject {
         assertFalse(val.validateProjectInfo("Name", 10000000.1, "status", "des", "goal")); // tester på budget lige over grænsen af det tilladte
     }
 
+    @Test
+    public void testValidateProjectInfoCostWithoutDecimal() {
+        assertTrue(val.validateProjectInfo("allGood", 1., "status", "des", "goal")); // her tester vi om cost kan oprettes uden decimal.
+    }
+    
     @Test
     public void testValidateProjectInfoStatus() {
         assertTrue(val.validateProjectInfo("Name", 1.0, "thisNameIsThirtyCharactersLong", "des", "goal")); // tester på status lige på grænsen af det tilladte
@@ -74,14 +78,15 @@ public class TestofCreateProject {
     @Test
     public void testSaveProject() throws ClassNotFoundException, SQLException, NullPointerException, FileNotFoundException {
         manager.SaveProject(project);
-        Project project2 = manager.getProject(project.getProjectId());
+        Project project2 = manager.getProject(manager.getProjectId(project));
 
         assertTrue(project.getStartDate().equals(project2.getStartDate()));
         assertTrue(project.getProjectName().equals(project2.getProjectName()));
         assertTrue(Double.valueOf(project.getCost()).equals(project2.getCost()));
         assertTrue(project.getDescription().equals(project2.getDescription()));
         assertTrue(project.getGoal().equals(project2.getGoal()));
-        assertTrue(project.getPartner().equals(project2.getPartner()));
+        assertTrue(project.getPartner().getPartnerName().equals(project2.getPartner().getPartnerName()));
+        assertTrue(project.getPartner().getCountry().equals(project2.getPartner().getCountry()));
         assertTrue(project.getStatus().equals(project2.getStatus()));
     }
 

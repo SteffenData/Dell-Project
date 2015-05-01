@@ -25,7 +25,7 @@ Author : Mikkel/Kasper/Bente
                         <h3 class="menu" style="color: black">View Projects</h3>
                     </div>
                 </a>
-                <a href="create_project.jsp">
+                <a href="createProject.jsp">
                     <div class="menuButtons">
                         <h3 class="menu" style="color: black">Create Project</h3>
                     </div>
