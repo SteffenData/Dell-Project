@@ -25,7 +25,7 @@ public class TestOfStatusChange
     public void setUp() {
         
         partner = new Partner("elgiganten", "Denmark");
-        project = new Project(0,"1992-10-10", "TestProject", 1.0, "testingigenigenigen", "test", "test", partner);
+        project = new Project(0,"1992-10-10", "TestProject", 1.0, "Awaiting approval", "test", "test", partner);
         manager = new DataManager();
         ctrl = new Controller();
     }
@@ -35,11 +35,11 @@ public class TestOfStatusChange
     {
         try
         {
+            manager.SaveProject(project);
             ctrl.approveStatus(project); // her ændrer vi status til awaiting POE
-            System.out.println(project.getStatus());
             int testId = manager.getProjectId(project);
             
-            assertTrue("Awaiting POE".equals(manager.getProject(testId).getStatus())); // her ser vi om projektet har ændret status i databasen
+            assertTrue("Awaiting POE".equals(project.getStatus())); // her ser vi om projektet har ændret status i databasen
         } 
         catch (SQLException e)
         {
@@ -51,11 +51,11 @@ public class TestOfStatusChange
     {
         try
         {
+            manager.SaveProject(project);
             ctrl.rejectStatus(project); // her ændrer vi status til project rejected
-            System.out.println(project.getStatus());
             int testId = manager.getProjectId(project);
             
-            assertTrue("Project rejected".equals(manager.getProject(testId).getStatus())); // her ser vi om projektet har ændret status i databasen
+            assertTrue("Project rejected".equals(project.getStatus())); // her ser vi om projektet har ændret status i databasen
         } 
         catch (SQLException e)
         {
