@@ -365,27 +365,6 @@ public class DataManager implements Manager {
         return returnVariable;
     }
 
-//    public void SaveLogin(String username, String password, int partnerOrDel) throws DatabaseException {
-//        PreparedStatement statement = null;
-//
-//        try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
-//
-//            String query = "insert into users values (?,?,?)";
-//
-//            statement = connection.prepareStatement(query);
-//
-//            statement.setString(1, username);
-//            statement.setString(2, password);
-//            statement.setDouble(3, partnerOrDel);
-//
-//            statement.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
-//            throw new DatabaseException("Sorry, the Database is out of service");
-//        }
-//    }
-
     public Poe getPOE(int projectId) throws DatabaseException {
         ResultSet rs = null;
         PreparedStatement statement = null;
