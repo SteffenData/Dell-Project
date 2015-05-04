@@ -7,7 +7,6 @@ package dk.group_02.data;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Poe;
 import dk.group_02.Entity.Project;
-import dk.group_02.control.Manager;
 import dk.group_02.utility.DatabaseException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -128,7 +127,7 @@ public class DataManager implements Manager {
                     newStatus = "Awaiting POE";
                     break;
                 case "Awaiting POE":
-                    newStatus = "Awaiting approval on POE";
+                    newStatus = "Awaiting POE";
                     break;
                 case "Awaiting approval on POE":
                     newStatus = "Awaiting inVoice";
@@ -408,6 +407,24 @@ public class DataManager implements Manager {
         return poe;
     }
 
+    public void POEStatusChange (int projectId) throws DatabaseException
+    {
+         PreparedStatement statement = null;
+
+        try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
+            String query = "UPDATE projects SET status=?, statusDescription=? WHERE projectId = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, "Awaiting Approval on POE");
+            statement.setString(2, "");
+            statement.setInt(3, projectId);
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DatabaseException("Sorry, the Database is out of service");
+        }
+    }
     public void savePOE(InputStream iStream, int projectId, String fileName) throws DatabaseException {
         PreparedStatement statement = null;
 
@@ -421,7 +438,7 @@ public class DataManager implements Manager {
             statement.setString(3, fileName);
 
             statement.executeUpdate();
-
+            POEStatusChange(projectId);
         } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseException("Sorry, the Database is out of service");

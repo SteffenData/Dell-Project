@@ -4,6 +4,7 @@
  */
 package dk.group_02.control;
 
+import dk.group_02.data.Manager;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Poe;
 import dk.group_02.Entity.Project;

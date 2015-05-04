@@ -7,7 +7,7 @@ package dk.group_02.Test;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
 import dk.group_02.control.Controller;
-import dk.group_02.control.Manager;
+import dk.group_02.data.Manager;
 import dk.group_02.data.DataManager;
 import java.sql.SQLException;
 import org.junit.Before;

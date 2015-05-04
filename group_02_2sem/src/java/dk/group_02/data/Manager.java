@@ -2,7 +2,7 @@
  *
  * @author steffen/Bente/Mikkel/Kasper/Pelle
  */
-package dk.group_02.control;
+package dk.group_02.data;
 import dk.group_02.Entity.Poe;
 import dk.group_02.Entity.Partner;
 import dk.group_02.Entity.Project;
@@ -39,6 +39,8 @@ public interface Manager
     public Partner getPartnerById(String partnerId)throws DatabaseException;
      
     public Poe getPOE(int projectId) throws DatabaseException;
+    
+    public void POEStatusChange (int projectId) throws DatabaseException;
     
     public void savePOE(InputStream iStream, int projectId, String fileName) throws DatabaseException;
 }
