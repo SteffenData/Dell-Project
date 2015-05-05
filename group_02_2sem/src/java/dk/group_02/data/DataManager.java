@@ -415,7 +415,7 @@ public class DataManager implements Manager {
             String query = "UPDATE projects SET status=?, statusDescription=? WHERE projectId = ?";
 
             statement = connection.prepareStatement(query);
-            statement.setString(1, "Awaiting Approval on POE");
+            statement.setString(1, "Awaiting approval on POE");
             statement.setString(2, "");
             statement.setInt(3, projectId);
             statement.executeUpdate();

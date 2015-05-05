@@ -33,11 +33,11 @@ public class StatusChangeServlet extends ManagerServlet {
                 int projectId = Integer.parseInt(request.getParameter("projectId"));
 
                 try {
-                    Project project = getController().getProject(projectId);
+                    Project project = getController(request).getProject(projectId);
 
                     project.setStatusDescription(request.getParameter("statusDescription"));
-                    getController().rejectStatus(project);
-                    request.setAttribute("projects", getController().getDellProjects());
+                    getController(request).rejectStatus(project);
+                    request.setAttribute("projects", getController(request).getDellProjects());
                 } catch (SQLException e) {
                 }
                 RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");
@@ -48,10 +48,10 @@ public class StatusChangeServlet extends ManagerServlet {
                 int projectId = Integer.parseInt(request.getParameter("projectId"));
 
                 try {
-                    Project project = getController().getProject(projectId);
+                    Project project = getController(request).getProject(projectId);
                     project.setStatusDescription(request.getParameter("statusDescription"));
-                    getController().approveStatus(project);
-                    request.setAttribute("projects", getController().getDellProjects());
+                    getController(request).approveStatus(project);
+                    request.setAttribute("projects", getController(request).getDellProjects());
                 } catch (DatabaseException ex) {
                     request.setAttribute("message", "No connection to the database, please try again later or contact admin");
                      RequestDispatcher rd = request.getRequestDispatcher("viewOneProjectDell.jsp");

@@ -37,7 +37,7 @@ public class PoeServlet extends ManagerServlet
             if (s.getAttribute("partner") == null)
             {
                 int projectId = Integer.parseInt(request.getParameter("projectId"));
-                Poe poe = getController().getPOE(projectId);
+                Poe poe = getController(request).getPOE(projectId);
                 // broweseren kommer med en gem fil som dialog ved contenttype application/octet-stream
                 response.setContentType("application/octet-stream");
                 response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", poe.getFilename()));
@@ -55,10 +55,10 @@ public class PoeServlet extends ManagerServlet
                     
                 
                 int projectId = Integer.parseInt(request.getParameter("projectId"));
-                Project p = getController().getProject(projectId);
+                Project p = getController(request).getProject(projectId);
                 Part part = request.getPart("poe");
-                getController().approveStatus(p);
-                getController().savePOE(part.getInputStream(), projectId, part.getSubmittedFileName());
+                getController(request).approveStatus(p);
+                getController(request).savePOE(part.getInputStream(), projectId, part.getSubmittedFileName());
                 } 
                 
                 catch (DatabaseException e) 

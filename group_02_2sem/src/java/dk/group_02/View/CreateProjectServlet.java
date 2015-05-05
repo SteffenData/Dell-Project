@@ -37,7 +37,7 @@ public class CreateProjectServlet extends ManagerServlet {
         String goal = request.getParameter("goal");
       
         try {
-            if (getController().saveProject(startDate, projectName,
+            if (getController(request).saveProject(startDate, projectName,
                     cost, status, description, partner,
                     goal)) {
                 request.setAttribute("MSG_YES", "Your project has been saved!");

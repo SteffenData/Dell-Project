@@ -26,7 +26,7 @@ public class ViewProjectsServlet extends ManagerServlet {
 
         if (partner != null) {
             try {
-                request.setAttribute("projects", getController().getPartnerProjects(partner));
+                request.setAttribute("projects", getController(request).getPartnerProjects(partner));
             } catch (DatabaseException ex) {
                  request.setAttribute("MSG", ex.getMessage());
                  RequestDispatcher rd = request.getRequestDispatcher("viewProjectPartner.jsp");
@@ -37,7 +37,7 @@ public class ViewProjectsServlet extends ManagerServlet {
 
         } else {
             try {
-                request.setAttribute("projects", getController().getDellProjects());
+                request.setAttribute("projects", getController(request).getDellProjects());
             } catch (DatabaseException ex) {
                  request.setAttribute("MSG", ex.getMessage());
                  RequestDispatcher rd = request.getRequestDispatcher("viewProjectDell.jsp");

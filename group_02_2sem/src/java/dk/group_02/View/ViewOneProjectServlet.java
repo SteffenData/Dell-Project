@@ -25,7 +25,7 @@ public class ViewOneProjectServlet extends ManagerServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             int projectId = Integer.parseInt(request.getParameter("projectId"));
-            Project project = getController().getProject(projectId);
+            Project project = getController(request).getProject(projectId);
             request.setAttribute("project", project);
         } catch (DatabaseException ex) {
             Partner partner = (Partner) request.getSession().getAttribute("partner");
