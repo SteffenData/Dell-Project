@@ -20,5 +20,15 @@ public class Validator {
             return true;
         }
     }
-    
+    public boolean validateUserInfo(String userName,String password){
+        if (userName.isEmpty() || password.isEmpty())
+        {
+            return false;
+        }
+        if (userName == null || password == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

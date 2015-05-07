@@ -41,7 +41,7 @@ public class DataManager implements Manager {
 
         try (Connection connection = DriverManager.getConnection(DataOracleAccessor.DB_URL, DataOracleAccessor.USERNAME, DataOracleAccessor.PASSWORD)) {
 
-            String query = "SELECT * FROM projects order by 'Awaiting approval','Awaiting POE','Project rejected' , startDate";
+            String query = "SELECT * FROM projects order by startDate";
 
             statement = connection.prepareStatement(query);
             rs = statement.executeQuery();
@@ -74,7 +74,7 @@ public class DataManager implements Manager {
 
             String partnerID = getPartnerID(partner.getPartnerName(), partner.getCountry());
 
-            String query = "SELECT * FROM projects where partnerId = ? order by projectName";
+            String query = "SELECT * FROM projects where partnerId = ? order by StartDate";
 
             statement = connection.prepareStatement(query);
             statement.setString(1, partnerID);
